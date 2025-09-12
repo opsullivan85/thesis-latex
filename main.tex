@@ -1,0 +1,150 @@
+\documentclass{report}
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{setspace}   %Allows double spacing with the \doublespacing command
+\usepackage{float}
+\usepackage{gensymb}   % gives \degree symbol
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{courier}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}  % Code formatting
+\usepackage{etoolbox}
+\usepackage{comment}
+\usepackage[most]{tcolorbox}
+\usepackage{import}
+
+\usepackage{subfiles}
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{1em}{}
+
+\newtoggle{outline_toggle}
+\toggletrue{outline_toggle}  % Enable
+\togglefalse{outline_toggle}  % Disable
+
+\newtoggle{todo_toggle}
+\toggletrue{todo_toggle}  % Enable
+\togglefalse{todo_toggle}  % Disable
+
+\newtcolorbox{emphasis}{
+  colback=gray!10,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=4pt,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt
+}
+
+\newtcolorbox{todo_box}{
+  colback=yellow!20,
+  colframe=yellow!70,
+  boxrule=0.5pt,
+  arc=4pt,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt
+}
+
+\iftoggle{todo_toggle}{
+  \newenvironment{todo}
+  {
+  \begin{todo_box}\noindent\textbf{TODO:}}
+    {
+  \end{todo_box}\par}
+}{
+  \excludecomment{todo}
+}
+
+\iftoggle{outline_toggle}{
+  \newenvironment{outline}
+  {
+  \begin{emphasis}\noindent\textbf{Outline:}}
+    {
+  \end{emphasis}\par}
+}{
+  \excludecomment{outline}
+}
+
+\begin{document}
+
+% Cover Page
+\begin{titlepage}
+  \centering
+  \vspace*{1cm}
+
+  \includegraphics[width=0.4\textwidth]{images/wpi-logo.png}\par\vspace{1cm} % Adjust the width as needed
+
+  \Huge
+  \textbf{GaitNet: Greedy, Dynamic Quadruped Gait Generation}
+
+  \vspace{0.5cm}
+  \LARGE
+
+  \vspace{1.5cm}
+
+  \textbf{Owen Sullivan}
+
+  \vfill
+
+  \Large
+  Supervisors: \\
+  Dr. Mohammad Mahdi Agheli Hajiabadi
+
+  \vspace{0.8cm}
+
+  \Large
+  Worcester Polytechnic Institute \\
+  {\small \today}
+
+\end{titlepage}
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+\newpage
+% \begin{doublespacing}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\newpage
+\subfile{introduction/.introduction}
+
+\newpage
+\subfile{background/.background}
+
+\newpage
+\subfile{methodology/.methodology}
+
+\newpage
+\subfile{results/.results}
+
+\newpage
+\subfile{conclusions/.conclusions}
+
+% \end{doublespacing}
+
+\addcontentsline{toc}{chapter}{References}
+\renewcommand{\bibname}{References}
+\bibliographystyle{ieeetr}
+\bibliography{refs}
+
+\end{document}
