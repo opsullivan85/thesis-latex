@@ -3,9 +3,33 @@
 \begin{table}[h!]
   \centering
   \begin{tabular}{lll}
-    x & Machine Learning Model Input & - \\
-    &       &   \\
-    &       &   \\
-    &       &
+    $\mathbf x$ & Machine learning model input & - \\
+    $\mathbf y$ & Machine learning model output & - \\
+    & & \\
+
+    % $\mathbf s$ & Robot root state & - \\
+    $\mathbf r_w$ & COM position in world frame & m \\
+    $\mathbf q_{rw}$ & Root orientation (quaternion) in world frame & - \\
+    $\mathbf v_b$ & Root linear velocity in base frame &
+    $\text{m}\,\text{s}^{-1}$ \\
+    $\mathbf \omega_b$ & Root angular velocity in base frame &
+    $\text{rad}\,\text{s}^{-1}$ \\
+    $\mathbf p_{ib}$ & End-effector $i$ position in base frame & m \\
+    & & \\
+
+    $\mathbf q$ & Joint positions & - \\
+    $\mathbf{\dot q}$ & Joint velocities & - \\
+    $\mathbf{\ddot q}$ & Joint accelerations & - \\
+    $\mathbf \tau$ & Joint torques & N\,m \\
+    & & \\
+
+    $\mathbf u$ & Control Input $
+    \begin{bmatrix}
+      v_x & v_y & \omega
+    \end{bmatrix}^T$ & $
+    \begin{bmatrix}
+      \text{m}\,\text{s}^{-1} & \text{m}\,\text{s}^{-1} &
+      \text{rad}\,\text{s}^{-1}
+    \end{bmatrix}^T$ \\
   \end{tabular}
 \end{table}

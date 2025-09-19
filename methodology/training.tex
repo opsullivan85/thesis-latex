@@ -5,25 +5,30 @@
   used to train the CNN models.
 \end{outline}
 
-\[
-  \mathbf{s} =
-  \begin{bmatrix}
-    \mathbf{p} \\
-    \mathbf{q_r} \\
-    \mathbf{v} \\
-    \mathbf{\omega} \\
-  \end{bmatrix} \in \mathbb{R}^{12}
-\]
+Below is the equation used as the input to the contact model
+(\autoref{fig:data-training-model-data-comparison}).
 
 \[
   \mathbf{x} =
   \begin{bmatrix}
-    \mathbf{q} \\
-    \mathbf{\dot q} \\
-    \mathbf{s} \\
-    \mathbf{u}
+    \mathbf p_{b,xy} \\
+    \mathbf r_{w,z} \\
+    \mathbf v_b \\
+    \mathbf \omega_b \\
+    \mathbf u
   \end{bmatrix}
 \]
+
+where
+$\mathbf p_{b,xy}$ is the $x$ and $y$ position all end effectors in
+the base frame as a single vector,
+$\mathbf r_{w,z}$ is the height of the robot's COM in the world frame.
+
+The model is trained on $y$, the heuristically calculated footstep
+cost maps (\autoref{fig:data-footstep-cost-map}).
+
+Here, the inclusion of $\mathbf \omega_b$ differs from
+\cite{bratta_contactnet_2024}
 
 \begin{figure}
   \centering
@@ -40,5 +45,5 @@
 
   \caption{Training data samples showing calculated (left) and
   expected (right) quadruped images.}
-  \label{fig:data-training-data-samples}
+  \label{fig:data-training-model-data-comparison}
 \end{figure}
