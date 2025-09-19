@@ -16,11 +16,12 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
-\usepackage{minted}  % Code formatting
+% \usepackage{minted}  % Code formatting
 \usepackage{etoolbox}
 \usepackage{comment}
 \usepackage[most]{tcolorbox}
 \usepackage{import}
+\usepackage{amssymb}
 
 \usepackage{subfiles}
 \usepackage{titlesec}
@@ -116,9 +117,13 @@
 \newpage
 \tableofcontents
 \newpage
+\listoffigures
+\newpage
 \listoftables
 \newpage
-\listoffigures
+\include{list-of-abbreviations}
+\newpage
+\include{list-of-symbols}
 
 \newpage
 % \begin{doublespacing}
