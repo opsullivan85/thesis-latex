@@ -47,3 +47,24 @@ Here, the inclusion of $\mathbf \omega_b$ differs from
   expected (right) quadruped images.}
   \label{fig:data-training-model-data-comparison}
 \end{figure}
+
+As in \cite{bratta_contactnet_2024}, the cost maps are normalized
+to improve training performance.
+
+\begin{figure}
+  \centering
+  \begin{minipage}[T]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/cost-map-normalization/un-normalized.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[T]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/cost-map-normalization/normalized.png}
+  \end{minipage}
+  \hfill
+
+  \caption{Cost map normalization showing un-normalized (left) and
+  normalized (right) cost maps.}
+  \label{fig:data-cost-map-normalization}
+\end{figure}
