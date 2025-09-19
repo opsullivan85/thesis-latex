@@ -1,7 +1,28 @@
 \section{Learning-Based Locomotion Strategies}
 
 \begin{outline}
-  Review recent advances in deep learning for locomotion control, highlighting the works of Shi et al., Xie et al., and others. Discuss how they often rely on fixed or implicit gaits.
+  Review recent advances in deep learning for locomotion control,
+  highlighting the works of Shi et al., Xie et al., and others.
+  Discuss how they often rely on fixed or implicit gaits.
 \end{outline}
 
-Recent work has shown the potential of deep learning to generate agile, robust locomotion policies, often without explicit footstep planning. Shi et al. \cite{shi_terrain-aware_2023} use a neural network to modulate trajectory generator parameters in real time for energy-efficient walking. Xie et al. \cite{xie_glide_2023} train reinforcement learning policies on centroidal dynamics models to output desired body accelerations, assuming a fixed foot-placement heuristic and gait pattern. Duan et al. \cite{duan_sim--real_2022} learn step-to-step transitions using proprioception, generating joint targets and varying step frequency for terrain-adaptive behaviors. Siekmann et al. \cite{siekmann_blind_2021} focus on blind locomotion by training an LSTM policy to handle randomized stairs using only proprioceptive feedback. Lee et al. \cite{lee_learning_2020} employ a temporal convolutional network to infer terrain structure from proprioceptive history, using an automated curriculum to adapt to progressively harder environments. While these approaches enable robust locomotion across diverse terrains, they generally rely on fixed or implicit gait patterns and lack explicit control over individual footstep selection, making them less suitable for non-gaited or footstep-specific planning.
+Recent work has shown the potential of deep learning to generate
+agile, robust locomotion policies, often without explicit footstep
+planning. Shi et al. \cite{shi_terrain-aware_2023} use a neural
+network to modulate trajectory generator parameters in real time for
+energy-efficient walking. Xie et al. \cite{xie_glide_2023} train
+reinforcement learning policies on centroidal dynamics models to
+output desired body accelerations, assuming a fixed foot-placement
+heuristic and gait pattern. Duan et al. \cite{duan_sim--real_2022}
+learn step-to-step transitions using proprioception, generating joint
+targets and varying step frequency for terrain-adaptive behaviors.
+Siekmann et al. \cite{siekmann_blind_2021} focus on blind locomotion
+by training an LSTM policy to handle randomized stairs using only
+proprioceptive feedback. Lee et al. \cite{lee_learning_2020} employ a
+temporal convolutional network to infer terrain structure from
+proprioceptive history, using an automated curriculum to adapt to
+progressively harder environments. While these approaches enable
+robust locomotion across diverse terrains, they generally rely on
+fixed or implicit gait patterns and lack explicit control over
+individual footstep selection, making them less suitable for
+non-gaited or footstep-specific planning.

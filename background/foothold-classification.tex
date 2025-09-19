@@ -1,7 +1,26 @@
 \section{Foothold Classification Algorithms}
 
 \begin{outline}
-  Summarize the role of perception-based methods for identifying safe stepping regions, such as those by Asselmeier et al. and Omar et al., and explain how these are often separate from the full motion planning process.
+  Summarize the role of perception-based methods for identifying safe
+  stepping regions, such as those by Asselmeier et al. and Omar et
+  al., and explain how these are often separate from the full motion
+  planning process.
 \end{outline}
 
-Foothold classification algorithms focus on determining safe stepping regions, often using learned terrain models to support downstream planners that enforce safety constraints. Asselmeier et al. \cite{asselmeier_steppability-informed_2024} generate steppability maps from visual inputs to guide a trajectory-optimization-based planner, validating their perception-to-control pipeline in simulation. Omar et al. \cite{omar_safesteps_2023} propose a two-stage classifier that first identifies steppable regions before selecting footholds, emphasizing safety over expressiveness by evaluating only candidate swing-foot locations. Similarly, Omar et al. \cite{omar_fast_2022} use a CNN to identify safe footholds, which are grouped into convex clusters and passed to an MPC for real-time planning, but the approach relies on fixed gait sequences. These methods provide robust terrain understanding but are typically designed as standalone perception modules, separate from the full footstep generation process, and thus are not directly applicable to dynamic or non-gaited motion planning.
+Foothold classification algorithms focus on determining safe stepping
+regions, often using learned terrain models to support downstream
+planners that enforce safety constraints. Asselmeier et al.
+\cite{asselmeier_steppability-informed_2024} generate steppability
+maps from visual inputs to guide a trajectory-optimization-based
+planner, validating their perception-to-control pipeline in
+simulation. Omar et al. \cite{omar_safesteps_2023} propose a
+two-stage classifier that first identifies steppable regions before
+selecting footholds, emphasizing safety over expressiveness by
+evaluating only candidate swing-foot locations. Similarly, Omar et
+al. \cite{omar_fast_2022} use a CNN to identify safe footholds, which
+are grouped into convex clusters and passed to an MPC for real-time
+planning, but the approach relies on fixed gait sequences. These
+methods provide robust terrain understanding but are typically
+designed as standalone perception modules, separate from the full
+footstep generation process, and thus are not directly applicable to
+dynamic or non-gaited motion planning.

@@ -1,7 +1,27 @@
 \section{Greedy and Heuristic Footstep Planners}
 
 \begin{outline}
-  Explore the use of greedy and heuristic methods in locomotion, referencing works like those by Gao et al. and Zucker et al. Explain their benefits (computational efficiency) and how your work extends them.
+  Explore the use of greedy and heuristic methods in locomotion,
+  referencing works like those by Gao et al. and Zucker et al.
+  Explain their benefits (computational efficiency) and how your work
+  extends them.
 \end{outline}
 
-Greedy planners offer computationally efficient alternatives to exhaustive search, often prioritizing goal-directed heuristics or local stability metrics. Gao et al. \cite{gao_global_2024} propose GH-QP, a greedy-heuristic hybrid that incorporates expected robot speed into a footstep planning heuristic, though it is limited to bipedal systems and lacks support for dynamic footstep plans. Zucker et al. \cite{zucker_optimization_2011} use A* with a learned terrain cost and Dubins car heuristic for footstep planning, enabling effective search in SE(2) but restricted to static, gated locomotion. Kalakrishnan et al. \cite{kalakrishnan_learning_2012} combine greedy terrain-cost search with a coarse-to-fine pose optimization pipeline, but rely on fixed gait patterns and struggle with highly constrained environments. While these works demonstrate the potential of greedy methods, none support both dynamically unstable and non-gaited footstep generation. Notably, some prior methods already discussed—such as ContactNet \cite{bratta_contactnet_2024}, DeepLoco \cite{peng_deeploco_2017}, and Villarreal et al. \cite{villarreal_fast_2019}—also incorporate greedy elements in their pipelines.
+Greedy planners offer computationally efficient alternatives to
+exhaustive search, often prioritizing goal-directed heuristics or
+local stability metrics. Gao et al. \cite{gao_global_2024} propose
+GH-QP, a greedy-heuristic hybrid that incorporates expected robot
+speed into a footstep planning heuristic, though it is limited to
+bipedal systems and lacks support for dynamic footstep plans. Zucker
+et al. \cite{zucker_optimization_2011} use A* with a learned terrain
+cost and Dubins car heuristic for footstep planning, enabling
+effective search in SE(2) but restricted to static, gated locomotion.
+Kalakrishnan et al. \cite{kalakrishnan_learning_2012} combine greedy
+terrain-cost search with a coarse-to-fine pose optimization pipeline,
+but rely on fixed gait patterns and struggle with highly constrained
+environments. While these works demonstrate the potential of greedy
+methods, none support both dynamically unstable and non-gaited
+footstep generation. Notably, some prior methods already
+discussed—such as ContactNet \cite{bratta_contactnet_2024}, DeepLoco
+\cite{peng_deeploco_2017}, and Villarreal et al.
+\cite{villarreal_fast_2019}—also incorporate greedy elements in their pipelines.
