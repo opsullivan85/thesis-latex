@@ -5,6 +5,46 @@
   used to train the CNN models.
 \end{outline}
 
+The factors that make up the footstep cost maps in the training data
+are shown in \ref{fig:costmap-composition-elements}, while the
+combined cost map is shown in \ref{fig:costmap-composition-combined}.
+The most significant factors are the support polygon stability,
+measured as the distance from the COM to the nearest edge of the
+support polygon (\textit{inscribed\_circle\_radius}), and the
+distance from the nominal foot position
+(\textit{foot\_hip\_distance}). Other factors make up a small, but
+still important part of the cost map. These include
+\textit{lin\_vel\_z\_l2} which penalizes high vertical velocity,
+\textit{ang\_vel\_xy\_l2} which penalizes high angular velocity in
+the horizontal plane, \textit{joint\_torques\_l2} which penalizes
+high joint torques, \textit{joint\_acc\_l2} which penalizes high
+joint accelerations, and \textit{control\_error}, which penalizes
+errors in the swing duration between the requested and actual values.
+Some of these factors are balanced to have a lower spread, mitigating
+factors that consistently prefer one leg over another.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[T]{0.65\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/training/costmap-composition/elements.png}
+    \caption{Factors influencing footstep cost maps. \textit{(bal)}
+      indicates that the values for each leg were balanced to have a
+      lower spread, mitigating factors that consistently prefer one leg
+      over another. The last number in parenthesis indicates the total
+    range of the data, the most important factor for the combined cost map.}
+    \label{fig:costmap-composition-elements}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[T]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/training/costmap-composition/combined.png}
+    \caption{Combined cost map from factors in (a).}
+    \label{fig:costmap-composition-combined}
+  \end{subfigure}
+  \hfill
+\end{figure}
+
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{images/data/training/training-fl-sweep.png}
@@ -29,24 +69,6 @@ the range $[0, 1]$, whereas \cite{bratta_contactnet_2024} normalizes
 to $[0,1]$ in such a way that only the relative ordering of costs are
 preserved. This difference is critical to our system to provide the
 upstream GaitNet model with as much information as possible.
-
-% \begin{figure}
-%   \centering
-%   \begin{minipage}[T]{0.45\textwidth}
-%     \centering
-%     \includegraphics[width=\textwidth]{images/data/cost-map-normalization/un-normalized.png}
-%   \end{minipage}
-%   \hfill
-%   \begin{minipage}[T]{0.45\textwidth}
-%     \centering
-%     \includegraphics[width=\textwidth]{images/data/cost-map-normalization/normalized.png}
-%   \end{minipage}
-%   \hfill
-
-%   \caption{Cost map normalization showing un-normalized (left) and
-%   normalized (right) cost maps.}
-%   \label{fig:data-cn-cost-map-normalization}
-% \end{figure}
 
 Below is the equation used as the input to the contact model.
 
