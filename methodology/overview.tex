@@ -6,11 +6,19 @@
   proposal) and a description of each component.
 \end{outline}
 
-This work aims to take ContactNet \cite{bratta_contactnet_2024} and
-extend it to provide dynamic gait generation capabilities. ContactNet
-is able to generate acyclic gaits, and this work builds on top of
-that to enable moving multiple feet simultaneously. The proposed
+This work aims to take a footstep evaluation network, like ContactNet
+from \cite{bratta_contactnet_2024}, and
+extend it to provide dynamic gait generation capabilities. A footstep
+evaluation network
+ranks the cost of different footstep locations,
+
+is able to generate acyclic gaits, which this work builds on top of
+that to allow for moving multiple feet simultaneously. The proposed
 framework is shown in \autoref{fig:diagram-control-system}.
+
+\begin{todo}
+  update the caption for \autoref{fig:diagram-control-system}
+\end{todo}
 
 \begin{figure}
   \centering

@@ -19,6 +19,10 @@ NVIDIA Isaac Lab uses a declarative system of python dataclasses to
 define the simulation environment. For this work, a custom
 environment is used (\autoref{fig:figure-terrain-raycast}), including:
 
+\begin{todo}
+  update the terrain description
+\end{todo}
+
 \begin{itemize}
   \item Unitree Go 1\textemdash Configured to use force control for each joint.
   \item Terrain raycasts\textemdash Measure the height of the terrain
@@ -27,9 +31,18 @@ environment is used (\autoref{fig:figure-terrain-raycast}), including:
   \item Custom terrain\textemdash Planar terrain with sections
     missing on a grid pattern. The underlying grid is 8cm square, and
     the void density is tuned to create a challenging but possible
-    environment. The terrain is designed to mirror that used in
+    environment. Multiple difficulty levels of the terrain are generated
+    for the robots to progress through as they learn.
+    The terrain is designed to mirror that used in
     \cite{bratta_contactnet_2024}
+    through as they learn.
 \end{itemize}
+
+\begin{todo}
+  update figure \autoref{fig:diagram-control-system} for the new
+  terrain and footstep points.
+  Add figure of terrain?
+\end{todo}
 
 \begin{figure}
   \centering

@@ -22,7 +22,8 @@
 \usepackage[most]{tcolorbox}
 \usepackage{import}
 \usepackage{amssymb}
-% \usepackage{refcheck}
+% \usepackage{refcheck}  % uncomment and check log for "Unused label"
+\usepackage{changepage} % provides adjustwidth
 
 \usepackage{subfiles}
 \usepackage{titlesec}
@@ -34,7 +35,7 @@
 
 \newtoggle{todo_toggle}
 \toggletrue{todo_toggle}  % Enable
-\togglefalse{todo_toggle}  % Disable
+% \togglefalse{todo_toggle}  % Disable
 
 \newtcolorbox{emphasis}{
   colback=gray!10,
@@ -59,11 +60,18 @@
 }
 
 \iftoggle{todo_toggle}{
+  \newlength{\todoshift}%
+  \setlength{\todoshift}{2cm} % change this to control how far into
+  % the margin it sticks
   \newenvironment{todo}
-  {
-  \begin{todo_box}\noindent\textbf{TODO:}}
-    {
-  \end{todo_box}\par}
+  {%
+    \begin{adjustwidth}{-\todoshift}{0pt}%
+      \begin{todo_box}\noindent\textbf{TODO:}\quad
+      }
+      {%
+      \end{todo_box}
+    \end{adjustwidth}\par
+  }
 }{
   \excludecomment{todo}
 }
