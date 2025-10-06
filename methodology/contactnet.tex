@@ -62,21 +62,21 @@ factors that consistently prefer one leg over another.
       lower spread, mitigating factors that consistently prefer one leg
       over another. The last number in parenthesis indicates the total
     range of the data, the most important factor for the combined cost map.}
-    \label{fig:costmap-composition-elements}
+    \label{fig:data-costmap-composition-elements}
   \end{subfigure}
   \hfill
   \begin{subfigure}[T]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/training/costmap-composition/combined.png}
     \caption{Combined cost map from factors in (a).}
-    \label{fig:costmap-composition-combined}
+    \label{fig:data-costmap-composition-combined}
   \end{subfigure}
   \hfill
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{images/data/training/training-fl-sweep.png}
+  \includegraphics[width=0.5\textwidth]{images/data/training/training-fl-sweep.png}
   \caption{Snapshot showing 25 robots testing different footstep
     positions in parallel. For real data generation, 100 are run in
   parallel, testing 25 footstep positions for each foot at a time.}
@@ -84,7 +84,7 @@ factors that consistently prefer one leg over another.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{images/data/foot-placement-heatmaps.png}
+  \includegraphics[width=0.5\textwidth]{images/data/foot-placement-heatmaps.png}
   \caption{Foot placement heatmaps showing distribution of foot
     positions in the GaitNet training data. Note that the histograms
   are overlaid in some places, obscuring data underneath.}
@@ -122,7 +122,7 @@ cost maps (\autoref{fig:data-footstep-cost-map}).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.75\linewidth]{images/data/footstep-cost-map.png}
+  \includegraphics[width=0.5\linewidth]{images/data/footstep-cost-map.png}
   \caption{Footstep cost map. Shows the heuristic cost for each
   possible footstep location.}
   \label{fig:data-footstep-cost-map}
@@ -130,3 +130,81 @@ cost maps (\autoref{fig:data-footstep-cost-map}).
 
 Here, the inclusion of $\mathbf \omega_b$ differs from
 \cite{bratta_contactnet_2024}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Post-Processing}
+
+Ultimately, the purpose of the footstep evaluation network is to
+provide candidate footstep positions to the GaitNet model.
+\autoref{fig:diagram-costmap-processing} shows the processing pipeline.
+The raw cost map output (\autoref{fig:diagram-costmap-processing-raw})
+from the footstep evaluation network is first upsampled
+(\autoref{fig:diagram-costmap-processing-upsample}) to increase the
+resolution of possible footstep positions, and to match the resolution of
+the terrain data. Next, noise is added
+(\autoref{fig:diagram-costmap-processing-noise}) to
+encourage exploration of more varied footstep positions. Without noise,
+all of the candidate footstep positions would be right next to each other.
+The cost map is then filtered based on the robot state and terrain data
+(\autoref{fig:diagram-costmap-processing-cspace}) to mask out
+invalid actions, including positions that are too close to terrain edges,
+and actions which would attempt to move a leg already in the swing state
+(seen in the Front Right leg in this figure). Finally, the top 4
+candidates from each leg are selected
+(\autoref{fig:diagram-costmap-processing-topk})
+to be processed by GaitNet.
+
+% === Define layout constants ===
+\def\imgwidth{0.16\textwidth}
+\def\xgap{2em}          % horizontal gap between images
+\def\arrowwidth{1.2em}  % controls arrow length
+\def\arrowshift{0.5em} % vertical offset of arrows
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[node distance=\xgap, baseline=(current bounding
+    box.center)]
+
+    % === Style for image blocks ===
+    \tikzset{
+      imgblock/.style={inner sep=0pt, outer sep=0pt, align=center}
+    }
+
+    % === Subfigure nodes ===
+    \node[imgblock] (a)
+    {\subcaptionbox{Raw\label{fig:diagram-costmap-processing-raw}}%
+    {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/1-default.png}}};
+
+    \node[imgblock, right=of a]
+    (b)
+    {\subcaptionbox{Upsample\label{fig:diagram-costmap-processing-upsample}}%
+    {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/2-upscale.png}}};
+
+    \node[imgblock, right=of b]
+    (c)
+    {\subcaptionbox{Noise\label{fig:diagram-costmap-processing-noise}}%
+    {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/3-noise.png}}};
+
+    \node[imgblock, right=of c]
+    (d)
+    {\subcaptionbox{C-space\label{fig:diagram-costmap-processing-cspace}}%
+    {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/4-masked.png}}};
+
+    \node[imgblock, right=of d]
+    (e)
+    {\subcaptionbox{TopK (green)\label{fig:diagram-costmap-processing-topk}}%
+    {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/5-selected.png}}};
+
+    % === Arrows ===
+    \foreach \src/\dst in {a/b, b/c, c/d, d/e}{
+      \draw[->, thick] ([yshift=\arrowshift]\src.east) --
+      ++(\arrowwidth,0) --
+      ([yshift=\arrowshift]\dst.west);
+    }
+
+  \end{tikzpicture}
+
+  \caption{Cost map processing pipeline. Shows how the raw cost map
+  is processed to produce the final footstep candidates.}
+  \label{fig:diagram-costmap-processing}
+\end{figure}
