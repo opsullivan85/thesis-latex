@@ -11,10 +11,11 @@ can generate dynamic, acyclic gaits in challenging environments. The
 framework is hierarchal, taking in robot state and terrain data and
 outputting footstep commands to the robot controller. The first stage of
 the framework is a footstep evaluation network, similar to ContactNet
-from \cite{bratta_contactnet_2024}, which estimates footstep costs $f_c$.
+from \cite{bratta_contactnet_2024}, which estimates footstep costs
+$\mathbf f_c$.
 The second stage is a gait generation
-network (ContactNet), which takes in candidate footstep costs $f_c$,
-ranks them, and finally sends the best footstep action $f_a$ to the
+network (ContactNet), which takes in candidate footstep costs $\mathbf f_c$,
+ranks them, and finally sends the best footstep action $\mathbf f_a$ to the
 robot controller.
 
 This hierarchal framework allows for strict control over the possible

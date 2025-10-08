@@ -32,6 +32,13 @@
 \usepackage{titlesec}
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{1em}{}
 
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 \newtoggle{outline_toggle}
 \toggletrue{outline_toggle}  % Enable
 \togglefalse{outline_toggle}  % Disable

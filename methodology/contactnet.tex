@@ -11,12 +11,13 @@ detailed below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
+\label{sec:contactnet-architecture}
 
 The footstep evaluation network is tasked with generating a set of
-footstep costs $\mathbf f_c$ based on $\mathbf x$:
+footstep costs $\mathbf f_c$ based on $\mathbf x_c$:
 
 \[
-  \mathbf{x} =
+  \mathbf{x_c} =
   \begin{bmatrix}
     \mathbf p_{b,xy} \\
     \mathbf r_{w,z} \\
@@ -118,7 +119,7 @@ positions because it was just moved there.
 \end{figure}
 
 The purpose of this data collection is to generate the associated cost of
-moving a foot to a specific position, a set of $f_c$. The \textit{cost}
+moving a foot to a specific position, a set of $\mathbf f_c$. The \textit{cost}
 of each footstep position is calculated heuristically from the simulations.
 The heuristic was designed to encourage a balance of stability and efficiency.
 The specific factors that make up the footstep cost maps in the training data
@@ -199,7 +200,9 @@ and actions which would attempt to move a leg already in the swing state
 (seen in the Front Right leg in this figure). Finally, the top 8
 candidates from each leg are selected
 (\autoref{fig:diagram-costmap-processing-topk})
-to be processed by GaitNet.
+to be processed by GaitNet. In the case where there are fewer than 8 valid
+candidates for a leg, no-action candidates are added to the set to maintain
+the size of the tensors.
 
 % === Define layout constants ===
 \def\imgwidth{0.16\textwidth}

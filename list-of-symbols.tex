@@ -1,10 +1,16 @@
 \chapter*{List of Symbols}
 
+\blfootnote{Note: A symbol defined with a subscript $i$, but displayed without
+  it indicates the concatenation of all $i$ elements, e.g.
+  $\mathbf c =
+  \begin{bmatrix} \mathbf c_1 & \mathbf c_2 & \mathbf c_3 & \mathbf c_4
+\end{bmatrix}^T$}
+
 \begin{table}[h!]
   \centering
   \begin{tabular}{lll}
-    $\mathbf x_f$ & Footstep evaluation model input & - \\
-    $\mathbf x_c$ & ContactNet input & - \\
+    % $\mathbf x_f$ & Footstep evaluation model input & - \\
+    % $\mathbf x_c$ & ContactNet input & - \\
     $\mathbf f_c$ & Footstep cost & $
     \begin{bmatrix}
       \text{-} & \text{m} & \text{m} & \text{-}
@@ -33,6 +39,8 @@
     $\mathbf \omega_b$ & Root angular velocity in base frame &
     $\text{rad}\,\text{s}^{-1}$ \\
     $\mathbf p_{ib}$ & End-effector $i$ position in base frame & m \\
+    $\mathbf g$ & Gravity vector in base frame & $\text{m}\,\text{s}^{-2}$ \\
+    $\mathbf c_{i}$ & End-effector $i$ contact state & - \\
     & & \\
 
     $\mathbf q$ & Joint positions & - \\
