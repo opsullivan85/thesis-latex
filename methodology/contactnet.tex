@@ -12,9 +12,8 @@ detailed below.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
 
-Below is the equation used as the input to the contact model.
-The Footstep Evaluation Network is tasked with predicting the cost
-of many footstep actions
+The footstep evaluation network is tasked with generating a set of
+footstep costs $\mathbf f_c$ based on $\mathbf x$:
 
 \[
   \mathbf{x} =
@@ -29,24 +28,21 @@ of many footstep actions
 
 where
 $\mathbf p_{b,xy}$ is the $x$ and $y$ position all end effectors in
-the base frame stacked into a single vector,
+the base frame stacked into a single vector, and
 $\mathbf r_{w,z}$ is the height of the robot's COM in the world frame.
-
 Here, the inclusion of $\mathbf \omega_b$ differs from
-\cite{bratta_contactnet_2024}
+\cite{bratta_contactnet_2024}.
 
-The model is trained on $y$, the heuristically calculated footstep
+The model is trained on heuristically calculated footstep
 cost maps (\autoref{fig:data-costmap-composition-combined}), which estimate
 the cost associated with moving each foot to certain positions based on the
 robot state.
 
-The footstep evaluation neural network architecture, shown in
-\autoref{fig:diagram-contactnet-architecture}, accomplishes a similar
-task to ContactNet \cite{bratta_contactnet_2024}. It takes in robot state
-information and ranks each of the possible footstep
-positions. The architecture consists of a feedforward neural
+The footstep evaluation network architecture is shown in
+\autoref{fig:diagram-contactnet-architecture}. It consists of a
+feedforward neural
 network that first maps the input through two fully connected layers
-of 64 units each, with ReLU activations. The resulting 64-dimensional
+of 64 nodes each, both with ReLU activations. The resulting 64-dimensional
 feature vector is reshaped into an 8x8 spatial representation and
 processed by a convolutional layer with two output channels, a
 3x3 kernel, with stride 1, and padding 1, followed by a ReLU
@@ -79,7 +75,7 @@ During the training sessions, 100 robots are run in parallel, being split
 up into 4 groups of 25. Each group tests a grid of different footstep
 positions for one foot at a time; the front left group is shown in
 \autoref{fig:figure-training-fl-sweep}.
-After every robot has finished (or failed) it's motion, the
+After every robot has finished (or failed) it's motion, an
 \textit{iteration} is complete.
 It is important to note that all robots start each iteration from the
 same state.
@@ -106,14 +102,11 @@ To avoid collecting poor data, iterations which result in more than
 over are discarded, as well as their 2 parents up the tree. This
 method ensures that a diverse
 set of data is collected, while still focusing on the more successful
-actions. This is shown
-in \autoref{fig:data-cn-training-distribution}, which shows
-relatively dense coverage of
-foot distributions. The darker spots are the discrete points which
-are used as candidate
+actions. \autoref{fig:data-cn-training-distribution}, shows
+how the foot positions are distributed in the training data.
+The darker spots are the discrete points which are used as candidate
 footstep positions. For any given datapoint a foot is in one of these
-positions because it
-was just moved there.
+positions because it was just moved there.
 
 \begin{figure}[H]
   \centering
@@ -124,28 +117,32 @@ was just moved there.
   \label{fig:data-cn-training-distribution}
 \end{figure}
 
-The purpose of this data collection is to generate about where the
-robot should place
-its feet for arbitrary states. The \textit{cost} of each footstep
-position is calculated
-heuristically. The factors that make up the footstep cost maps in the
-training data
+The purpose of this data collection is to generate the associated cost of
+moving a foot to a specific position, a set of $f_c$. The \textit{cost}
+of each footstep position is calculated heuristically from the simulations.
+The heuristic was designed to encourage a balance of stability and efficiency.
+The specific factors that make up the footstep cost maps in the training data
 are shown in \autoref{fig:data-costmap-composition-elements}, while the
 combined cost map is shown in \autoref{fig:data-costmap-composition-combined}.
-The most significant factors are the support polygon stability,
-measured as the distance from the COM to the nearest edge of the
-support polygon (\textit{inscribed\_circle\_radius}), and the
-distance from the nominal foot position
-(\textit{foot\_hip\_distance}). Other factors make up a small, but
-still important part of the cost map. These include
-\textit{lin\_vel\_z\_l2} which penalizes high vertical velocity,
-\textit{ang\_vel\_xy\_l2} which penalizes high angular velocity in
-the horizontal plane, \textit{joint\_torques\_l2} which penalizes
-high joint torques, \textit{joint\_acc\_l2} which penalizes high
-joint accelerations, and \textit{control\_error}, which penalizes
-errors in the swing duration between the requested and actual values.
-Some of these factors are balanced to have a lower spread, mitigating
-factors that consistently prefer one leg over another.
+The factors are justified below.
+
+\begin{itemize}
+  \item \textit{lin\_vel\_z\_l2}\textemdash Penalizes high vertical
+    velocity of the trunk.
+  \item \textit{ang\_vel\_xy\_l2}\textemdash Penalizes high angular
+    velocity of the trunk in
+    the horizontal axes.
+  \item \textit{joint\_torques\_l2}\textemdash Penalizes high joint torques.
+  \item \textit{joint\_acc\_l2}\textemdash Penalizes high joint accelerations.
+  \item \textit{control\_error}\textemdash Penalizes errors between the control
+    input and actual robot motion.
+  \item \textit{inscribed\_circle\_radius}\textemdash Measures the distance
+    from the COM to the nearest edge of the support polygon. This
+    encourages the robot to keep its COM in a stable position.
+  \item \textit{foot\_hip\_distance}\textemdash Measures the distance from
+    the nominal foot position. This encourages the robot to keep its feet
+    moving along with the body.
+\end{itemize}
 
 \begin{figure}[H]
   \centering
@@ -163,10 +160,14 @@ factors that consistently prefer one leg over another.
   \begin{subfigure}[T]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/training/costmap-composition/combined.png}
-    \caption{Combined cost map from factors in (a).}
+    \caption{Combined cost map from factors in (a) (not normalized).}
     \label{fig:data-costmap-composition-combined}
   \end{subfigure}
   \hfill
+  \caption{Footstep cost map composition. (a) shows the individual
+    factors that make up the footstep cost maps, while (b) shows the
+  combined cost map.}
+  \label{fig:data-costmap-composition}
 \end{figure}
 
 As in \cite{bratta_contactnet_2024}, the cost maps are normalized to
@@ -195,7 +196,7 @@ The cost map is then filtered based on the robot state and terrain data
 (\autoref{fig:diagram-costmap-processing-cspace}) to mask out
 invalid actions, including positions that are too close to terrain edges,
 and actions which would attempt to move a leg already in the swing state
-(seen in the Front Right leg in this figure). Finally, the top 4
+(seen in the Front Right leg in this figure). Finally, the top 8
 candidates from each leg are selected
 (\autoref{fig:diagram-costmap-processing-topk})
 to be processed by GaitNet.

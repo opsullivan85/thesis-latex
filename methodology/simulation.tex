@@ -20,10 +20,14 @@ Despite the simulation and learning being run on the GPU, the
 robot controllers are run on the CPU. \autoref{fig:diagram-processing-flow}
 shows a block diagram of the processing flow. The simulation
 environment is run entirely on the GPU, with each robot being
-simulated in parallel. The robot controllers are run on the CPU,
+simulated in parallel. The robot MPCs are run on the CPU,
 with each robot controller being run in parallel. The CPU and GPU
 communicate at each simulation step to exchange the robot state and
 the control actions.
+
+\begin{todo}
+  add in learning step
+\end{todo}
 
 \begin{figure}[H]
   \centering
@@ -39,7 +43,7 @@ define the simulation environment. For this work, a custom
 environment is used (\autoref{fig:figure-terrain-raycast}), including:
 
 \begin{todo}
-  update the terrain description
+  update
 \end{todo}
 
 \begin{itemize}
@@ -58,9 +62,7 @@ environment is used (\autoref{fig:figure-terrain-raycast}), including:
 \end{itemize}
 
 \begin{todo}
-  update figure \autoref{fig:figure-terrain-raycast} for the new
-  terrain and footstep points.
-  Add figure of terrain?
+  update \autoref{fig:figure-terrain-raycast}
 \end{todo}
 
 \begin{figure}[H]

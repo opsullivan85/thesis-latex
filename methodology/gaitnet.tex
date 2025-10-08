@@ -29,7 +29,7 @@ The proposed model is designed to jointly evaluate robot state and
 candidate footstep actions. The architecture consists of two
 encoders, a shared trunk, and two task-specific output heads:
 \begin{todo}
-  update dimensions below
+  update
 \end{todo}
 \begin{itemize}
   \item Robot state encoder. The robot state vector is processed by a
@@ -42,8 +42,8 @@ encoders, a shared trunk, and two task-specific output heads:
     index (one-hot encoded), the relative displacement
     $(\delta x, \delta y)$, and an associated cost term, is encoded by a similar
     two-layer network with hidden size $d_{footstep}$, again using
-    Layer Normalization and ReLU activations. Invalid or
-    no-action candidates are handled through a learned embedding.
+    Layer Normalization and ReLU activations. No-action candidates are
+    handled through a fixed embedding.
   \item Shared trunk. The concatenated robot state and footstep embeddings
     are processed by a two-layer feedforward “trunk,” reducing the
     dimensionality while applying Layer Normalization and ReLU nonlinearity.
@@ -51,16 +51,16 @@ encoders, a shared trunk, and two task-specific output heads:
     are applied
 
     \begin{itemize}
-      \item a linear “value head” outputs the predicted reward
-        value
+      \item a one-layer “value head” outputs the predicted reward
+        value as a logit.
       \item a one-layer “duration head” with sigmoid activation
-        outputs a normalized swing duration, which is then scaled to the
+        outputs a normalized swing duration, which is then scaled to a
         valid temporal range.
     \end{itemize}
 \end{itemize}
 
 This design allows the network to evaluate multiple candidate
-footstep options in parallel, assigning each both an expected value
+footstep options sequentially, assigning each both an expected value
 and a feasible swing duration, while explicitly supporting a
 “no-action” option via a dedicated embedding.
 
