@@ -1,1 +1,19 @@
 \section{GaitNet}
+
+The primary goal of GaitNet is to generate fully dynamic and acyclic
+gaits for quadruped robots. An example swing sequence can be seen in
+\autoref{fig:data-swing-schedule}. The figure clearly shows an acyclic
+gait, in that it is non-repetitive, and dynamic gait, in that the robot
+performs dynamically unstable motions with up to two feet off of the ground.
+Additionally, the swing durations are non-uniform, with some legs
+swinging for longer than others. It is clear that the system is able to
+synthesize a wide variety of actions, the value of which will be evaluated
+in this section.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/data/swing-schedule.png}
+  \caption{Example swing schedule for a single gait cycle. Each row
+  represents a leg, with color indicating the leg is in swing phase.}
+  \label{fig:data-swing-schedule}
+\end{figure}

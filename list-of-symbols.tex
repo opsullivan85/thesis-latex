@@ -3,8 +3,28 @@
 \begin{table}[h!]
   \centering
   \begin{tabular}{lll}
-    $\mathbf x$ & Machine learning model input & - \\
-    $\mathbf y$ & Machine learning model output & - \\
+    $\mathbf x_f$ & Footstep evaluation model input & - \\
+    $\mathbf y_f$ & Footstep evaluation model output & - \\
+    $\mathbf x_c$ & ContactNet input & - \\
+    $\mathbf y_c$ & ContactNet output & - \\
+    $\mathbf f_c$ & Footstep cost & $
+    \begin{bmatrix}
+      \text{-} & \text{m} & \text{m} & \text{-}
+    \end{bmatrix}^T$ \\
+    & \,\footnotesize{Vector of \textit{leg index} (or $-1$ for no
+    leg), \textit{dx}, \textit{dy}, and \textit{cost}.} & \\
+    & \,\footnotesize{With \textit{dx} and \textit{dy} being offsets
+    from the nominal foot position} & \\
+    & \,\footnotesize{in the base frame.} & \\
+    $\mathbf f_a$ & Footstep action & $
+    \begin{bmatrix}
+      \text{-} & \text{m} & \text{m} & \text{s}
+    \end{bmatrix}^T$ \\
+    & \,\footnotesize{Vector of \textit{leg index} (or $-1$ for no
+    leg), \textit{dx}, \textit{dy}, and \textit{swing duration}.} & \\
+    & \,\footnotesize{With \textit{dx} and \textit{dy} being offsets
+    from the nominal foot position} & \\
+    & \,\footnotesize{in the base frame.} & \\
     & & \\
 
     % $\mathbf s$ & Robot root state & - \\
@@ -23,13 +43,11 @@
     $\mathbf \tau$ & Joint torques & N\,m \\
     & & \\
 
-    $\mathbf u$ & Control Input $
-    \begin{bmatrix}
-      v_x & v_y & \omega
-    \end{bmatrix}^T$ & $
+    $\mathbf u$ & Control Input & $
     \begin{bmatrix}
       \text{m}\,\text{s}^{-1} & \text{m}\,\text{s}^{-1} &
       \text{rad}\,\text{s}^{-1}
     \end{bmatrix}^T$ \\
+    & \,\footnotesize{Vector of $v_x$, $v_y$, and $\omega$} & \\
   \end{tabular}
 \end{table}

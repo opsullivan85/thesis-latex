@@ -6,21 +6,27 @@
   proposal) and a description of each component.
 \end{outline}
 
-This work aims to take a footstep evaluation network, like ContactNet
-from \cite{bratta_contactnet_2024}, and
-extend it to provide dynamic gait generation capabilities. A footstep
-evaluation network
-ranks the cost of different footstep locations,
+This work presents a control framework for quadruped robots that
+can generate dynamic, acyclic gaits in challenging environments. The
+framework is hierarchal, taking in robot state and terrain data and
+outputting footstep commands to the robot controller. The first stage of
+the framework is a footstep evaluation network, similar to ContactNet
+from \cite{bratta_contactnet_2024}, which estimates footstep costs $f_c$.
+The second stage is a gait generation
+network (ContactNet), which takes in candidate footstep costs $f_c$,
+ranks them, and finally sends the best footstep action $f_a$ to the
+robot controller.
 
-is able to generate acyclic gaits, which this work builds on top of
-that to allow for moving multiple feet simultaneously. The proposed
-framework is shown in \autoref{fig:diagram-control-system}.
+This hierarchal framework allows for strict control over the possible
+actions the robot can take. Between the two stages, the candidate
+actions are filtered to ensure that the robot can only take prescribed
+actions.
 
 \begin{todo}
   update the caption for \autoref{fig:diagram-control-system}
 \end{todo}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=1.0\linewidth]{images/diagrams/control-system.png}
   \caption{A block diagram of the proposed framework. The user

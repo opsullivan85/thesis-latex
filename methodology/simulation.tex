@@ -1,4 +1,5 @@
 \section{Simulation Environment}
+\label{sec:simulation}
 
 \begin{outline}
   Describe the physics-based simulation environment (IsaacLab) and
@@ -15,6 +16,24 @@ hardware. Additionally, there are a large number of example and
 community projects demonstrating many of the simulation features
 needed for this project.
 
+Despite the simulation and learning being run on the GPU, the
+robot controllers are run on the CPU. \autoref{fig:diagram-processing-flow}
+shows a block diagram of the processing flow. The simulation
+environment is run entirely on the GPU, with each robot being
+simulated in parallel. The robot controllers are run on the CPU,
+with each robot controller being run in parallel. The CPU and GPU
+communicate at each simulation step to exchange the robot state and
+the control actions.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/diagrams/processing-flow.png}
+  \caption{A block diagram showing the programming tasks computed on
+    the CPU vs GPU. The full simulation is run in parallel using Nvidia
+  Isaac Lab on the GPU, while the robot MPCs are run in parallel on the CPU.}
+  \label{fig:diagram-processing-flow}
+\end{figure}
+
 NVIDIA Isaac Lab uses a declarative system of python dataclasses to
 define the simulation environment. For this work, a custom
 environment is used (\autoref{fig:figure-terrain-raycast}), including:
@@ -26,7 +45,7 @@ environment is used (\autoref{fig:figure-terrain-raycast}), including:
 \begin{itemize}
   \item Unitree Go 1\textemdash Configured to use force control for each joint.
   \item Terrain raycasts\textemdash Measure the height of the terrain
-    at each possible footstep location. This bypasses the lidar
+    at each possible footstep location. This emulates the lidar
     processing steps of a full vision pipeline.
   \item Custom terrain\textemdash Planar terrain with sections
     missing on a grid pattern. The underlying grid is 8cm square, and
@@ -39,25 +58,16 @@ environment is used (\autoref{fig:figure-terrain-raycast}), including:
 \end{itemize}
 
 \begin{todo}
-  update figure \autoref{fig:diagram-control-system} for the new
+  update figure \autoref{fig:figure-terrain-raycast} for the new
   terrain and footstep points.
   Add figure of terrain?
 \end{todo}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.75\linewidth]{images/figures/terrain-raycast.png}
   \caption{Image of a Unitree Go 1 navigating the terrain. Red
     spheres show the hit location of raycasts. Black regions show voids
   in the terrain.}
   \label{fig:figure-terrain-raycast}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\linewidth]{images/diagrams/processing-flow.png}
-  \caption{A block diagram showing the programming tasks computed on
-    the CPU vs GPU. The full simulation is run in parallel using Nvidia
-  Isaac Lab on the GPU, while the robot MPCs are run in parallel on the CPU.}
-  \label{fig:diagram-processing-flow}
 \end{figure}

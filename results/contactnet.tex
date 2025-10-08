@@ -1,6 +1,7 @@
 \section{Footstep Evaluation Network}
 
-The results of this model are very promising, with the model able to
+The results of the Footstep Evaluation Network are very promising,
+with the model able to
 predict footstep cost maps with high accuracy.
 \autoref{fig:data-cn-typical-comparison}
 shows the model output and ground truth for typical data sample.
@@ -8,9 +9,13 @@ shows the model output and ground truth for typical data sample.
 shows a particularly challenging data sample, and the model is still
 able to identify the best positions for each leg,
 particularly the back left leg, which needs to be far from the
-nominal position to maintain stability in that state.
+nominal position to maintain stability in that state. As it is used
+in this work,
+the specific accuracy of this model is not critical, as it is only used
+to sample the continuous space of foot positions to generate candidate
+actions for the GaitNet policy.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{minipage}[T]{0.45\textwidth}
     \centering
@@ -28,7 +33,7 @@ nominal position to maintain stability in that state.
   \label{fig:data-cn-typical-comparison}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{minipage}[T]{0.45\textwidth}
     \centering

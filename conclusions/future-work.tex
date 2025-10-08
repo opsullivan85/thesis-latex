@@ -5,3 +5,29 @@
   the method to real-world deployment, integrating different sensor
   modalities, or exploring multi-robot collaboration.
 \end{outline}
+
+\begin{itemize}
+  \item Real-World Deployment
+
+  \item Swing re-planning
+    \begin{itemize}
+      \item Currently, GaitNet doesn't re-plan at all during swings.
+      \item This would be trivial to add to GaitNet, but would require
+        a more robust low level controller.
+    \end{itemize}
+
+  \item Explore different action sampling methods
+    \begin{itemize}
+      \item Currently we are using ContactNet to approximate the
+        value of foot positions, but other methods could be explored.
+    \end{itemize}
+
+  \item Long horizon planning
+    \begin{itemize}
+      \item Currently GaitNet is only trained to optimize actions
+        at a single point in time.
+      \item The current implementation causes issues with the MPC
+        not accurately knowing the future contact state. It looks
+        like after every swing the robot will return to a nominal stance.
+    \end{itemize}
+\end{itemize}
