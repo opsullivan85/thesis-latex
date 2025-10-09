@@ -1,7 +1,8 @@
 \section{GaitNet}
 
 GaitNet is designed to select the best footstep action from a discrete
-set of candidates. By choosing from a predefined set of continuous actions,
+set of footstep candidates. By choosing from a predefined set of
+continuous actions,
 we are able to enforce constraints on the robot's motion, strictly
 prohibiting invalid foot placements, and limiting the possible gaits. The
 addition of a no-action candidate and continuous re-evaluation makes this
@@ -11,8 +12,8 @@ feet in swing at once.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
 
-GaitNet is tasked with ranking candidate footstep costs based on the
-footstep costs with the leg index switched to one-hot encoding
+GaitNet is tasked with ranking footstep candidates based on the
+footstep candidates with the leg index switched to one-hot encoding
 $\mathbf f_c^{\prime}$ and the robot state $\mathbf x_g$:
 
 \[
@@ -39,7 +40,7 @@ duration if that step is chosen.
   \centering
   \includegraphics[width=0.625\linewidth]{images/diagrams/gait-network-architecture.png}
   \caption{Gait net architecture. Sections of the diagram include the
-    footstep cost encoder in red,
+    footstep candidate encoder in red,
     robot state encoder in blue, and shared trunk in green.
     The final output is a logit encoding the value of this option and the
   desired swing duration if this action is taken.}
@@ -51,7 +52,7 @@ duration if that step is chosen.
 \end{todo}
 
 The proposed model is designed to jointly evaluate robot state and
-candidate footstep actions. The architecture consists of two
+footstep candidates. The architecture consists of two
 encoders, a shared trunk, and two task-specific output heads:
 
 \begin{itemize}
@@ -60,7 +61,7 @@ encoders, a shared trunk, and two task-specific output heads:
     of 128, each layer has a ReLU activation.
     This produces a fixed-dimensional latent representation of the
     current robot state.
-  \item Footstep encoder. Each candidate footstep cost is encoded by a similar
+  \item Footstep encoder. Each footstep candidate is encoded by a similar
     two-layer network with hidden size 64, again using ReLU activations.
     No-action candidates are handled through a fixed embedding.
   \item Shared trunk. The concatenated robot state and footstep embeddings
@@ -78,8 +79,8 @@ encoders, a shared trunk, and two task-specific output heads:
     \end{itemize}
 \end{itemize}
 
-This design allows the network to evaluate multiple candidate
-footstep options sequentially, assigning each both an expected value
+This design allows the network to evaluate multiple footstep
+candidates sequentially, assigning each both an expected value
 and a feasible swing duration, while explicitly supporting a
 “no-action” option via a dedicated embedding.
 
@@ -98,18 +99,20 @@ ReLU activations on all but the last layer.
 
 A custom actor critic implementation was also necessary to handle the
 dual outputs of GaitNet. The logits are used to define a categorical
-distribution over the footstep options, and the duration output is
+distribution over the footstep candidates, and the duration output is
 treated as a separate normal distribution with a fixed standard deviation
 of $0.01$\,s for each action. For the logits, all but one no-action candidates
 are removed (set to $-\infty$) to avoid overly influencing the
 selection process.
 
 The total log probability of an action is the sum of
-the categorical log probability of the footstep and the
+the categorical log probability of the footstep candidate and the
 log probability of the duration under the normal distribution.
-To sample an action, a footstep is first sampled from the categorical
+To sample an action, a footstep candidate is first sampled from the categorical
 distribution, and then the duration is sampled from the normal
-distribution associated with that footstep.
+distribution associated with that footstep candidate. The duration
+and footstep candidate
+are then combined to form a single footstep action.
 
 \begin{todo}
   detail rewards

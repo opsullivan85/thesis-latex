@@ -1,10 +1,10 @@
 \section{Footstep Evaluation Network}
 
 The purpose of the footstep evaluation network is to provide
-candidate footstep positions to the GaitNet model. Importantly,
-the exact costs output from this network are not critical, just that
-they provide good candidate actions when sampled from. It accomplishes
-this by ranking the cost of potential footstep positions given the
+footstep candidates to the GaitNet model. Importantly,
+the exact output of this network is not critical, just that
+it provide good candidates when sampled from. It accomplishes
+this by estimating the cost of potential footsteps given the
 robot state. The architecture and training process are similar to
 ContactNet \cite{bratta_contactnet_2024}, but with some key differences
 detailed below.
@@ -14,7 +14,7 @@ detailed below.
 \label{sec:contactnet-architecture}
 
 The footstep evaluation network is tasked with generating a set of
-footstep costs $\mathbf f_c$ based on $\mathbf x_c$:
+footstep candidates $\mathbf f_c$ based on $\mathbf x_c$:
 
 \[
   \mathbf{x_c} =
@@ -37,7 +37,8 @@ Here, the inclusion of $\mathbf \omega_b$ differs from
 The model is trained on heuristically calculated footstep
 cost maps (\autoref{fig:data-costmap-composition-combined}), which estimate
 the cost associated with moving each foot to certain positions based on the
-robot state.
+robot state. These are represented as 4 5x5 grids of footstep candidates;
+one for each leg.
 
 The footstep evaluation network architecture is shown in
 \autoref{fig:diagram-contactnet-architecture}. It consists of a
@@ -48,7 +49,12 @@ feature vector is reshaped into an 8x8 spatial representation and
 processed by a convolutional layer with two output channels, a
 3x3 kernel, with stride 1, and padding 1, followed by a ReLU
 nonlinearity. The output is flattened and passed to a final
-fully connected layer before being reshaped into a 5x5 grid.
+fully connected layer before being reshaped into a 5x5 grid. In order to
+produce the 4 footstep candidate maps, this entire network is replicated
+4 times, once for each leg. The weights are not shared between legs.
+This design choice was made to allow the network to learn
+leg-specific behaviors,
+as dynamics may differ between legs due to asymmetries in the robot.
 
 \begin{figure}[H]
   \centering
@@ -60,7 +66,7 @@ fully connected layer before being reshaped into a 5x5 grid.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=0.5\linewidth]{images/data/footstep-cost-map.png}
-%   \caption{Footstep cost map. Shows the heuristic cost for each
+%   \caption{Footstep candidate map. Shows the heuristic cost for each
 %   possible footstep location.}
 %   \label{fig:data-footstep-cost-map}
 % \end{figure}
@@ -105,8 +111,8 @@ method ensures that a diverse
 set of data is collected, while still focusing on the more successful
 actions. \autoref{fig:data-cn-training-distribution}, shows
 how the foot positions are distributed in the training data.
-The darker spots are the discrete points which are used as candidate
-footstep positions. For any given datapoint a foot is in one of these
+The darker spots are the discrete points on the 5x5 grid of tested footstep
+positions. For any given datapoint a foot is in one of these
 positions because it was just moved there.
 
 \begin{figure}[H]
@@ -119,10 +125,14 @@ positions because it was just moved there.
 \end{figure}
 
 The purpose of this data collection is to generate the associated cost of
-moving a foot to a specific position, a set of $\mathbf f_c$. The \textit{cost}
+moving a foot to a specific position, a set of $\mathbf f_c$. The cost
 of each footstep position is calculated heuristically from the simulations.
 The heuristic was designed to encourage a balance of stability and efficiency.
-The specific factors that make up the footstep cost maps in the training data
+The heuristic includes many similar elements to the one used in
+\cite{bratta_contactnet_2024}, but with some differences to better suit
+our system, which will eventually need to move multiple feet at once.
+The specific factors that make up the footstep candidate maps in the
+training data
 are shown in \autoref{fig:data-costmap-composition-elements}, while the
 combined cost map is shown in \autoref{fig:data-costmap-composition-combined}.
 The factors are justified below.
@@ -150,7 +160,7 @@ The factors are justified below.
   \begin{subfigure}[T]{0.65\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/training/costmap-composition/elements.png}
-    \caption{Factors influencing footstep cost maps. \textit{(bal)}
+    \caption{Factors influencing footstep candidate maps. \textit{(bal)}
       indicates that the values for each leg were balanced to have a
       lower spread, mitigating factors that consistently prefer one leg
       over another. The last number in parenthesis indicates the total
@@ -165,8 +175,8 @@ The factors are justified below.
     \label{fig:data-costmap-composition-combined}
   \end{subfigure}
   \hfill
-  \caption{Footstep cost map composition. (a) shows the individual
-    factors that make up the footstep cost maps, while (b) shows the
+  \caption{Footstep candidate map composition. (a) shows the individual
+    factors that make up the footstep candidate maps, while (b) shows the
   combined cost map.}
   \label{fig:data-costmap-composition}
 \end{figure}
@@ -183,7 +193,7 @@ upstream GaitNet model with as much information as possible.
 \subsection{Post-Processing}
 
 Ultimately, the purpose of the footstep evaluation network is to
-provide candidate footstep positions to the GaitNet model.
+provide footstep candidates to the GaitNet model.
 \autoref{fig:diagram-costmap-processing} shows the processing pipeline.
 The raw cost map output (\autoref{fig:diagram-costmap-processing-raw})
 from the footstep evaluation network is first upsampled
@@ -192,7 +202,7 @@ resolution of possible footstep positions, and to match the resolution of
 the terrain data. Next, noise is added
 (\autoref{fig:diagram-costmap-processing-noise}) to
 encourage exploration of more varied footstep positions. Without noise,
-all of the candidate footstep positions would be right next to each other.
+all of the footstep candidates would be right next to each other.
 The cost map is then filtered based on the robot state and terrain data
 (\autoref{fig:diagram-costmap-processing-cspace}) to mask out
 invalid actions, including positions that are too close to terrain edges,
