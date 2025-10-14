@@ -1,0 +1,116 @@
+\chapter{GaitNet Training Configuration}
+\section{Reward Function Analysis}
+
+The reward functions used to train GaitNet (see \autoref{tab:reward-function}) proved
+challenging to design. With many combinations of reward functions, the robot would exhibit undesirable
+behaviors, such as frequently lifting its feet when
+idle, or dragging feet behind while walking. The
+specific balance of \textit{op\_reward} and
+\textit{mdp.foot\_slip\_penalty} were particularly
+important to achieve a natural gait.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{lll}
+    \hline
+    \textbf{Function}\tablefootnote{Functions named "mdp.*" are built-in functions
+    provided by the NVIDIA Isaac Lab framework.} & \textbf{Weight} & \textbf{Description} \\
+    \hline
+    mdp.is\_alive & 0.4 & Reward for being alive \\
+    mdp.track\_lin\_vel\_xy\_exp & 0.5 & Reward for tracking linear velocity in the XY plane \\
+    mdp.track\_ang\_vel\_z\_exp & 0.5 & Reward for tracking angular velocity around the Z axis \\
+    \hline
+    op\_reward & -0.1 & Penalty for performing actions \\
+    mdp.is\_terminated & -200 & Penalty for termination \\
+    mdp.lin\_vel\_z\_l2 & -2.5 & Penalty for linear velocity in the Z direction \\
+    mdp.ang\_vel\_xy\_l2 & -0.1 & Penalty for angular velocity in the XY plane \\
+    mdp.flat\_orientation\_l2 & -8 & Penalty for non-flat orientation \\
+    mdp.foot\_slip\_penalty & -6 & Penalty for foot slip \\
+    \hline
+  \end{tabular}
+  \caption{Final reward functions used to train GaitNet.}
+  \label{tab:reward-function}
+\end{table}
+
+In addition to the rewards listed in Table \ref{tab:reward-function},
+the following reward functions were explored but ultimately not used:
+
+\vspace{1em}
+\noindent
+\textit{a\_foot\_in\_swing}\\
+\noindent
+A reward for a foot being in the swing phase. This was
+intended to help the agent learn to frequently lift its feet,
+in the early stages of learning. In practice, this reward
+was found to be unnecessary, as initial network weights
+already heavily favored moving the feet. Additionally,
+it would cause the agent to always move its feet when idle.
+
+\vspace{1em}
+\noindent
+\textit{no\_op\_reward}\\
+\noindent
+A reward for not performing any actions. This was
+intended to encourage the agent to remain idle when
+no useful actions were available. In practice, this reward
+would not provide useful information unless very highly
+weighted, at which point it would drown out other rewards.
+\textit{op\_reward} was found to be a more suitable alternative
+to achieve the desired behavior.
+
+\section{Termination Functions}
+
+The termination functions used in training GaitNet
+are detailed below.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{lll}
+    \hline
+    \textbf{Function}\tablefootnote{Functions named "mdp.*" are built-in functions
+    provided by the NVIDIA Isaac Lab framework.} & \textbf{Time Out}\tablefootnote{Time Out indicates whether the
+    termination applies the mdp.is\_terminated penalty.} & \textbf{Description} \\
+    \hline
+    mdp.time\_out & True & Terminate at the end of the episode \\
+    mdp.bad\_orientation & False & Terminate if the robot's orientation is too far from upright \\
+    mdp.root\_height\_below\_minimum & False & Terminate if the robot's base height is too low \\
+    mdp.terrain\_out\_of\_bounds & True & Terminate if the robot leaves the terrain bounds \\
+    foot\_in\_void & False & Terminate if any foot steps into the void \\
+    \hline
+  \end{tabular}
+  \caption{Final termination functions used to train GaitNet.}
+  \label{tab:termination-function}
+\end{table}
+
+\section{PPO Hyperparameters}
+
+The PPO hyperparameters used to train GaitNet
+are detailed below. These were not all rigorously
+tuned, but were found to work well in practice.
+\textit{gamma} was specifically chosen in relation
+to the agent observation frequency of 25 Hz, providing
+a reasonable discount length. The \textit{learning\_rate}
+was also specifically chosen to be relatively high,
+to make up for the slow data collection speed.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ll}
+    \hline
+    \textbf{Hyperparameter} & \textbf{Value} \\
+    \hline
+    clip\_param & 0.3 \\
+    num\_learning\_epochs & 8 \\
+    num\_mini\_batches & 4 \\
+    value\_loss\_coef & 0.5 \\
+    entropy\_coef & 0.02 \\
+    learning\_rate & 3e-4 \\
+    max\_grad\_norm & 1.0 \\
+    use\_clipped\_value\_loss & True \\
+    gamma & 0.99 \\
+    lam & 0.95 \\
+    \hline
+  \end{tabular}
+  \caption{Final hyperparameters used for PPO training.}
+  \label{tab:ppo-hyperparams}
+\end{table}
