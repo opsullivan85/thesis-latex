@@ -1,14 +1,42 @@
 \section{GaitNet}
 
+\begin{todo}
+  this section will show the results of training GaitNet.
+  specifically, we need to show that the model is able to generate
+  dynamic and acyclic gaits. We will not be comparing with the baseline
+  method in this section.
+\end{todo}
+
 The primary goal of GaitNet is to generate fully dynamic and acyclic
 gaits for quadruped robots. An example swing sequence can be seen in
-\autoref{fig:data-swing-schedule}. The figure clearly shows an acyclic
-gait, in that it is non-repetitive, and dynamic gait, in that the robot
-performs dynamically unstable motions with up to two feet off of the ground.
+\autoref{fig:data-swing-schedule}. This shows an acyclic
+gait and dynamic gait; it is non-repetitive and the robot performs
+dynamically unstable motions with up to two feet off of the ground
+at once.
 Additionally, the swing durations are non-uniform, with some legs
 swinging for longer than others. It is clear that the system is able to
 synthesize a wide variety of actions, the value of which will be evaluated
 in this section.
+
+Further analyzing \autoref{fig:data-swing-schedule}, we can see that
+a particularly short step was taken by the front left leg (green) at 3s,
+while a longer step was taken by the rear right leg (red) at 5s. Although
+the difference in duration is minor, this shows that the system is capable
+of dynamically varying the step duration.
+
+The other takeaway from \autoref{fig:data-swing-schedule} is the
+system's response to changing control inputs. Between 0-7.5s, the
+system is commanded to follow a slow control input. After 7.5s, the
+control input is changed to a faster speed. In the slow section,
+the system is very cautious, only taking one step at a time. However,
+in the fast section, the system exhibits a much more dynamic gait. At
+multiple points the system can be seen to take two steps at a time,
+while also not adhering to a strict alternating pattern.
+
+\begin{todo}
+  Modify figure \autoref{fig:data-swing-schedule} to show
+  the terrain/robot at multiple time stamps.
+\end{todo}
 
 \begin{figure}[H]
   \centering
@@ -17,3 +45,12 @@ in this section.
   represents a leg, with color indicating the leg is in swing phase.}
   \label{fig:data-swing-schedule}
 \end{figure}
+
+\begin{todo}
+  Include figure showing the distribution of swing durations.
+\end{todo}
+
+\begin{todo}
+  Include training figures from tensorboard detailing how the model
+  improves over time.
+\end{todo}

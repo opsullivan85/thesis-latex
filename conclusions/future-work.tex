@@ -24,10 +24,30 @@
 
   \item Long horizon planning
     \begin{itemize}
-      \item Currently GaitNet is only trained to optimize actions
-        at a single point in time.
+      \item Currently GaitNet is only trained to output actions
+        for a single point in time.
       \item The current implementation causes issues with the MPC
         not accurately knowing the future contact state. It looks
         like after every swing the robot will return to a nominal stance.
+      \item This does not create significant issues at the low speeds
+        being explored in this work, but would be problematic at faster speeds.
+    \end{itemize}
+
+  \item GPU accelerated MPC
+    \begin{itemize}
+      \item Currently the MPC is run on the CPU, which seriously limits
+        the speed of RL learning.
+      \item Some works explore GPU accelerated MPCs, which could be used
+        to greatly speed up training.
+    \end{itemize}
+
+  \item Simultaneous actions
+    \begin{itemize}
+      \item Currently GaitNet only selects one action at a time.
+      \item A method of selecting the two best actions at once was
+        briefly explored, but was abandoned due to poor learning,
+        and implementation challenges.
+      \item specifically, I don't think I was able to get the gradients
+        to flow properly through the two action selections.
     \end{itemize}
 \end{itemize}
