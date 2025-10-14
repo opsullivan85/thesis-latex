@@ -1,0 +1,15 @@
+\section{Action Cost Ablation Study}
+
+\begin{todo}\\
+  explore the correlation between logits and candidate action costs
+  \begin{itemize}
+    \item starts off very high 0.8, drops to 0.4 during training
+    \item compare training time and final performance of a model
+      trained with and without the action cost in the reward function
+    \item hypothesis: The action cost is useful at the beginning of
+      training to help the model quickly learn the robot dynamics.
+    \item note: if the action cost and logits are very poorly
+      correlated, then there is possible improvement in the candidate
+      action sampling method.
+  \end{itemize}
+\end{todo}
