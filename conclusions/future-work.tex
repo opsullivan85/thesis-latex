@@ -16,12 +16,6 @@
         a more robust low level controller.
     \end{itemize}
 
-  \item Explore different action sampling methods
-    \begin{itemize}
-      \item Currently we are using ContactNet to approximate the
-        value of foot positions, but other methods could be explored.
-    \end{itemize}
-
   \item Long horizon planning
     \begin{itemize}
       \item Currently GaitNet is only trained to output actions
@@ -49,5 +43,20 @@
         and implementation challenges.
       \item specifically, I don't think I was able to get the gradients
         to flow properly through the two action selections.
+    \end{itemize}
+
+  \item Sampler improvements
+    \begin{itemize}
+      \item Currently GaitNet relies on a sampling based method
+        to select actions.
+      \item It should be possible to directly
+        search the action space. This could be done with
+        projected gradient ascent to handle the sparse action space,
+        or some sort of diffusion?
+      \item This would increase the quality of solutions at the
+        cost of compute time.
+      \item Unsure of how this would work with learning.
+      \item Could also train candidate selection network in
+        tandem with GaitNet to improve sampling quality.
     \end{itemize}
 \end{itemize}
