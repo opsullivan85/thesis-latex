@@ -6,20 +6,21 @@
   our implementation is sufficiently similar to \cite{bratta_contactnet_2024}
 \end{todo}
 
-The results of the Footstep Evaluation Network are very promising,
-with the model able to
-predict footstep candidate maps with high accuracy.
-\autoref{fig:data-cn-typical-comparison}
-shows the model output and ground truth for typical data sample.
-\autoref{fig:data-cn-challenging-comparison}
-shows a particularly challenging data sample, and the model is still
-able to identify the best positions for each leg,
-particularly the back left leg, which needs to be far from the
-nominal position to maintain stability in that state. As it is used
-in this work,
-the specific accuracy of this model is not critical, as it is only used
-to sample the continuous space of foot positions to generate candidate
-actions for the GaitNet policy.
+The results of the Footstep Evaluation Network are highly promising,
+with the model able to predict footstep candidate maps with strong
+accuracy. \autoref{fig:data-cn-typical-comparison} shows the model
+output alongside the ground truth for a typical data sample.
+
+\autoref{fig:data-cn-challenging-comparison} illustrates a
+particularly challenging sample, in which the model still
+successfully identifies the most suitable positions for each leg.
+Notably, the back-left leg must be positioned far from its nominal
+location to maintain stability in this scenario, and the model
+correctly predicts this adjustment.
+
+In the context of this work, the precise accuracy of the model is not
+critical. Its primary role is to sample the continuous space of foot
+positions to generate candidate actions for the GaitNet policy.
 
 \begin{figure}[H]
   \centering

@@ -7,31 +7,29 @@
   method in this section.
 \end{todo}
 
-The primary goal of GaitNet is to generate fully dynamic and acyclic
-gaits for quadruped robots. An example swing sequence can be seen in
-\autoref{fig:data-swing-schedule}. This shows an acyclic
-gait and dynamic gait; it is non-repetitive and the robot performs
-dynamically unstable motions with up to two feet off of the ground
-at once.
-Additionally, the swing durations are non-uniform, with some legs
-swinging for longer than others. It is clear that the system is able to
-synthesize a wide variety of actions, the value of which will be evaluated
-in this section.
+The primary objective of GaitNet is to generate fully dynamic and
+acyclic gaits for quadruped robots. An example swing sequence is
+shown in \autoref{fig:data-swing-schedule}, illustrating a
+non-repetitive, dynamic gait in which the robot performs motions with
+up to two feet off the ground simultaneously. Swing durations are
+non-uniform, with some legs remaining in the swing phase longer than
+others. These results demonstrate that the system can synthesize a
+wide variety of actions, which are analyzed further below.
 
-Further analyzing \autoref{fig:data-swing-schedule}, we can see that
-a particularly short step was taken by the front left leg (green) at 3s,
-while a longer step was taken by the rear right leg (red) at 5s. Although
-the difference in duration is minor, this shows that the system is capable
-of dynamically varying the step duration.
+Examining \autoref{fig:data-swing-schedule}, a short step is observed
+for the front-left leg (green) at 3\,s, while the rear-right leg
+(red) executes a longer step at 5\,s. Although the differences in
+duration are subtle, they indicate that the system is capable of
+dynamically varying step timing.
 
-The other takeaway from \autoref{fig:data-swing-schedule} is the
-system's response to changing control inputs. Between 0-7.5s, the
-system is commanded to follow a slow control input. After 7.5s, the
-control input is changed to a faster speed. In the slow section,
-the system is very cautious, only taking one step at a time. However,
-in the fast section, the system exhibits a much more dynamic gait. At
-multiple points the system can be seen to take two steps at a time,
-while also not adhering to a strict alternating pattern.
+Another important observation from \autoref{fig:data-swing-schedule}
+is the system's response to changing control inputs. Between
+0-7.5\,s, the robot is commanded to follow a slow input, and the
+system takes a cautious approach, moving one foot at a time. After
+7.5\,s, the input speed increases, prompting a more dynamic gait.
+During this faster phase, the robot occasionally executes two steps
+simultaneously and does not follow a strict alternating pattern,
+further highlighting the system's flexibility in generating acyclic gaits.
 
 \begin{todo}
   Modify figure \autoref{fig:data-swing-schedule} to show

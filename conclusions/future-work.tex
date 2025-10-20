@@ -1,62 +1,43 @@
 \section{Future Work}
 
-\begin{outline}
-  Suggest potential avenues for future research, such as extending
-  the method to real-world deployment, integrating different sensor
-  modalities, or exploring multi-robot collaboration.
-\end{outline}
+Several avenues exist to extend and improve the current framework.
+First, real-world deployment remains a crucial next step. Testing
+GaitNet on physical hardware would expose the system to real-world
+dynamics, sensor noise, and hardware constraints, providing valuable
+insights for further refinement.
 
-\begin{itemize}
-  \item Real-World Deployment
+Swing re-planning is another potential improvement. Currently,
+GaitNet does not re-plan during the swing phase. Incorporating
+real-time re-planning would allow the robot to adjust to unexpected
+disturbances or terrain changes, though this would require a more
+robust low-level controller capable of accurately tracking the
+modified footstep trajectories.
 
-  \item Swing re-planning
-    \begin{itemize}
-      \item Currently, GaitNet doesn't re-plan at all during swings.
-      \item This would be trivial to add to GaitNet, but would require
-        a more robust low level controller.
-    \end{itemize}
+Long-horizon planning also presents an opportunity for enhancement.
+GaitNet is presently trained to generate actions for a single point
+in time, which limits the MPC's ability to predict future contact
+states accurately; the MPC expects the robot to revert to a
+nominal stance after each swing. While this is acceptable at low
+speeds, it could become problematic at higher velocities, where
+predictive planning would improve stability and performance.
 
-  \item Long horizon planning
-    \begin{itemize}
-      \item Currently GaitNet is only trained to output actions
-        for a single point in time.
-      \item The current implementation causes issues with the MPC
-        not accurately knowing the future contact state. It looks
-        like after every swing the robot will return to a nominal stance.
-      \item This does not create significant issues at the low speeds
-        being explored in this work, but would be problematic at faster speeds.
-    \end{itemize}
+Currently, the MPC runs on the CPU, limiting the speed of
+reinforcement learning. Leveraging GPU-accelerated MPCs, as explored
+in recent works \cite{todo}, could significantly accelerate training.
 
-  \item GPU accelerated MPC
-    \begin{itemize}
-      \item Currently the MPC is run on the CPU, which seriously limits
-        the speed of RL learning.
-      \item Some works explore GPU accelerated MPCs, which could be used
-        to greatly speed up training.
-    \end{itemize}
+GaitNet also selects only one action at a time, leading to slightly
+staggered swing start times. Initial attempts to
+select multiple simultaneous actions encountered difficulties with
+gradient flow and learning stability. Developing a reliable method
+for multi-action selection could enable more fluid and dynamic gait
+patterns, though it would require careful network and training design.
 
-  \item Simultaneous actions
-    \begin{itemize}
-      \item Currently GaitNet only selects one action at a time.
-      \item A method of selecting the two best actions at once was
-        briefly explored, but was abandoned due to poor learning,
-        and implementation challenges.
-      \item specifically, I don't think I was able to get the gradients
-        to flow properly through the two action selections.
-    \end{itemize}
-
-  \item Sampler improvements
-    \begin{itemize}
-      \item Currently GaitNet relies on a sampling based method
-        to select actions.
-      \item It should be possible to directly
-        search the action space. This could be done with
-        projected gradient ascent to handle the sparse action space,
-        or some sort of diffusion?
-      \item This would increase the quality of solutions at the
-        cost of compute time.
-      \item Unsure of how this would work with learning.
-      \item Could also train candidate selection network in
-        tandem with GaitNet to improve sampling quality.
-    \end{itemize}
-\end{itemize}
+Finally, improvements to the action candidate sampler could enhance
+GaitNet's performance. At present, action selection relies on
+sampling-based methods, which may not always identify the
+highest-quality actions. Directly searching the action space using
+techniques such as projected gradient \cite{todo} ascent or other optimization
+strategies could improve solution quality at the expense of
+additional computation. Another possibility is to train a candidate
+selection network jointly with GaitNet to improve the diversity and
+relevance of sampled actions.

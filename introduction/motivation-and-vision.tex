@@ -1,40 +1,36 @@
 \section{Motivation and Vision}
 
-\begin{outline}
-  Discuss the challenges of quadruped locomotion in unstructured
-  environments and the limitations of traditional gaited methods.
-\end{outline}
+Quadruped control pipelines can be categorized into several
+approaches, most of which can be broadly classified as traditional,
+neural network-based, or hybrid methods.
 
-Quadruped control pipelines fall into many different categories, but
-most can be broadly classified as either traditional, neural
-network-based, or hybrid methods.
+Traditional methods often rely on MPC for
+optimization, combined with lower-level controllers to track the
+desired motions. Many aspects of quadruped locomotion—such as joint
+torques and ground reaction forces—are smooth and can be efficiently
+optimized. However, these methods become less practical when
+optimizing over the robot's discrete contact states. Typically, they
+employ pre-defined gait sequences or embed discrete contact decisions
+into a more complex optimization problem. This trade-off performs well
+in general settings, but ultimately limits the unique capabilities of
+quadruped robots.
 
-Traditional methods often rely on
-an MPC to perform optimization and lower level controllers to track the
-desired motions. Many parts of quadruped locomotion are smooth
-and can be trivially optimized, such as joint torques or ground
-reaction forces. These methods become more impractical when
-attempting to optimize over the discrete contact state of the robot.
-Typically, these methods use a pre-defined gait sequence or integrate
-the discrete contacts into a more complicated optimization problem.
-This trade-off often works well, but ultimately limits the
-capabilities of the robot in certain terrains.
+Neural network-based methods have gained traction in recent years,
+particularly with the advancement of reinforcement learning
+techniques. These approaches often replace the MPC component of
+traditional pipelines, directly mapping state information to joint
+commands. In doing so, they implicitly address the discrete contact
+problem, allowing the network to learn the mixed-integer optimization
+implicitly. Although this provides greater flexibility, such methods
+sacrifice the formal guarantees of traditional control, demand
+extensive training data, and frequently exhibit poor generalization
+to novel environments.
 
-Neural network-based methods have shown promise in recent years,
-especially with the rise of reinforcement learning techniques.
-Often, these methods replace the MPC in a traditional pipeline,
-taking in state information and directly outputting joint commands.
-These methods implicitly solve the discrete contact problem, with
-the network learning to optimize the whole mixed-integer problem.
-In exchange for this flexibility, these methods loose the guarantees
-associated with traditional methods, require large amounts of data
-to train, and often generalize poorly in new environments.
-
-Falling in the middle of these two approaches are hybrid methods,
-which attempt to combine the best of both worlds. This will be the
-focus of this thesis. These methods often
-use neural networks to solve certain aspects of the problem while
-a traditional controller performs the tracking. This allows the network
-to focus on the more difficult parts of the problem, such as contact
-planning, while still leveraging the stability and reliability of
-traditional controllers.
+Hybrid methods, which combine elements of both approaches, form the
+focus of this thesis. These methods leverage neural networks to
+address specific challenges—such as contact or foothold
+planning—while relying on traditional controllers for carrying out
+higher level tasks. This synergy enables the neural network to
+concentrate on the more complex and non-smooth aspects of
+locomotion, while maintaining the stability and robustness offered
+by model-based control frameworks.

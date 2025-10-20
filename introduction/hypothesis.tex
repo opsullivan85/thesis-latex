@@ -1,19 +1,19 @@
 \section{Hypothesis}
 
-In order to fill in the identified research gap, we hypothesize that
-a hybrid control pipeline that incorporates a greedy, neural network-based
-footstep planner can effectively generate dynamic, non-gaited locomotion
-for quadruped robots in challenging. By leveraging the advancements
-made by ContactNet and extending its capabilities to support multi-leg
-actions, we believe that such a planner can produce footstep sequences
-that enable the robot to navigate complex terrains while maintaining
-stability and efficiency.
+To address the identified research gap, we hypothesize that a hybrid
+control pipeline incorporating a greedy, neural network-based
+footstep planner can effectively generate dynamic, non-gaited
+locomotion for quadruped robots in challenging environments. By
+leveraging the advancements introduced by ContactNet and extending
+its capabilities to support multi-leg actions, we propose that such a
+planner can produce footstep sequences that enable the robot to
+traverse complex terrains while maintaining both stability and efficiency.
 
-The proposed approach will utilize a modified implementation of
-ContactNet's architecture, adapting it for the purpose of generating
-footstep candidates. These footstep candidates will then be ranked by
-a novel planner, GaitNet, in order to select the most suitable action
-at every point in time. By integrating this planner into a traditional
-control pipeline, we aim to combine the strengths of both learning-based
-and classical methods, resulting in a robust and adaptable quadruped
-locomotion system.
+The proposed approach employs a modified implementation of
+ContactNet's architecture, adapted specifically to generate footstep
+candidates. These candidates will be evaluated and ranked by a novel
+planner, \textit{GaitNet}, which selects the most appropriate action
+at each time step. By integrating this planner within a traditional
+control framework, we aim to harness the advantages of both
+learning-based and model-based methods, yielding a robust and
+adaptable quadruped locomotion system.

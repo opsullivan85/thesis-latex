@@ -1,20 +1,20 @@
 \section{GaitNet}
 
-GaitNet is designed to select the best footstep action from a discrete
-set of footstep candidates. By choosing from a predefined set of
-continuous actions,
-we are able to enforce constraints on the robot's motion, strictly
-prohibiting invalid foot placements, and limiting the possible gaits. The
-addition of a no-action candidate and continuous re-evaluation makes this
-algorithm novel, as it is able to greedily generate acyclic gaits with multiple
-feet in swing at once.
+GaitNet is designed to select the optimal footstep action from a
+discrete set of candidates. By restricting selection to a predefined
+set of continuous actions, the algorithm enforces constraints on the
+robot’s motion, strictly preventing invalid foot placements and
+limiting the range of possible gaits. The inclusion of a no-action
+candidate, combined with continuous re-evaluation, distinguishes this
+approach: it enables the greedy generation of acyclic gaits in which
+multiple feet can be in the swing phase simultaneously.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
 
-GaitNet is tasked with ranking footstep candidates based on the
-footstep candidates with the leg index switched to one-hot encoding
-$\mathbf f_c^{\prime}$ and the robot state $\mathbf x_g$:
+GaitNet is responsible for ranking footstep candidates based on the
+one-hot encoded leg index $\mathbf{f_c}^{\prime}$ and the robot state
+$\mathbf{x_g}$:
 
 \[
   \mathbf{x_g} =
@@ -29,12 +29,12 @@ $\mathbf f_c^{\prime}$ and the robot state $\mathbf x_g$:
   \end{bmatrix}
 \]
 
-Descriptions of $\mathbf p_{b,xy}$ and $\mathbf r_{w,z}$ can be found in
-\autoref{sec:contactnet-architecture}. The additional terms included
-here in comparison to the footstep evaluation network are
-$\mathbf g$ and $\mathbf c$. Using $\mathbf x_g$ and $\mathbf f_c^{\prime}$,
-it then outputs a logit associated with the footstep and the desired swing
-duration if that step is chosen.
+Descriptions of $\mathbf p_{b,xy}$ and $\mathbf r_{w,z}$ can be found
+in \autoref{sec:contactnet-architecture}. The additional terms,
+compared to the footstep evaluation network, are $\mathbf g$ and
+$\mathbf c$. Using $\mathbf{x_g}$ and $\mathbf{f_c}^{\prime}$,
+GaitNet outputs a logit associated with each footstep and the desired
+swing duration if that step is selected.
 
 \begin{figure}[H]
   \centering
@@ -51,68 +51,68 @@ duration if that step is chosen.
   Use \cite{feng2021deep} somewhere
 \end{todo}
 
-The proposed model is designed to jointly evaluate robot state and
-footstep candidates. The architecture consists of two
-encoders, a shared trunk, and two task-specific output heads:
+The model is designed to jointly evaluate robot state and footstep
+candidates. The architecture consists of two encoders, a shared
+trunk, and two task-specific output heads:
 
 \begin{itemize}
-  \item Robot state encoder. The robot state vector is processed by a
-    three-layer feedforward encoder with intermediate dimensionality
-    of 128, each layer has a ReLU activation.
-    This produces a fixed-dimensional latent representation of the
-    current robot state.
-  \item Footstep encoder. Each footstep candidate is encoded by a similar
-    two-layer network with hidden size 64, again using ReLU activations.
-    No-action candidates are handled through a fixed embedding.
-  \item Shared trunk. The concatenated robot state and footstep embeddings
-    are processed by a three-layer feedforward “trunk,” reducing the
-    dimensionality while applying Layer Normalization and ReLU nonlinearity.
-  \item Output heads. From the shared trunk, two parallel prediction heads
-    are applied
-
+  \item Robot state encoder: The robot state vector is processed by a
+    three-layer feedforward network with intermediate dimensionality
+    of 128 and ReLU activations. This produces a fixed-dimensional
+    latent representation of the current robot state.
+  \item Footstep encoder: Each footstep candidate is encoded by a
+    two-layer feedforward network with hidden size 64 and ReLU
+    activations. No-action candidates are represented through a fixed embedding.
+  \item Shared trunk: The concatenated robot state and footstep
+    embeddings are processed by a three-layer feedforward trunk,
+    reducing dimensionality while applying Layer Normalization and
+    ReLU nonlinearity.
+  \item Output heads: Two parallel prediction heads are applied to
+    the shared trunk:
     \begin{itemize}
-      \item a one-layer "logit head” outputs the predicted reward
-        value as a logit.
-      \item a one-layer “duration head” with sigmoid activation
-        outputs a normalized swing duration, which is then scaled to a
-        valid temporal range.
+      \item Logit head: A single-layer network outputs the predicted
+        reward value as a logit.
+      \item Duration head: A single-layer network with sigmoid
+        activation outputs a normalized swing duration, which is then
+        scaled to a valid temporal range.
     \end{itemize}
 \end{itemize}
 
-This design allows the network to evaluate multiple footstep
-candidates sequentially, assigning each both an expected value
-and a feasible swing duration, while explicitly supporting a
-“no-action” option via a dedicated embedding.
+This design allows the network to sequentially evaluate multiple
+footstep candidates, assigning each an expected value and a feasible
+swing duration, while explicitly supporting a “no-action” option via
+a dedicated embedding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
 
-By including the $\mathbf c$ term in the input, GaitNet cannot reasonably
-be trained with supervised learning because of the high
-dimensionality of the problem. Instead, it is trained
-using PPO \cite{todo}. For PPO, the actor network is GaitNet
-(\autoref{fig:diagram-gaitnet-architecture}),
-and the critic follows the same architecture without the duration head,
-and with all of the logits passed through a final MLP to produce a single
-value estimate. The final MLP has two hidden layers of size 64, with
-ReLU activations on all but the last layer.
+Due to the inclusion of the $\mathbf{c}$ term in the input, GaitNet
+cannot be effectively trained using supervised learning because of
+the high dimensionality of the problem. Instead, it is trained using
+Proximal Policy Optimization (PPO) \cite{todo}. In this setup, the
+actor network is GaitNet
+(\autoref{fig:diagram-gaitnet-architecture}), while the critic
+follows a similar architecture but omits the duration head. All
+logits from the critic are passed through a final multi-layer
+perceptron (MLP) to produce a single value estimate. This MLP
+consists of two hidden layers of size 64, with ReLU activations
+applied to all layers except the output.
 
-A custom actor critic implementation was also necessary to handle the
-dual outputs of GaitNet. The logits are used to define a categorical
-distribution over the footstep candidates, and the duration output is
-treated as a separate normal distribution with a fixed standard deviation
-of $0.01$\,s for each action. For the logits, all but one no-action candidates
-are removed (set to $-\infty$) to avoid overly influencing the
-selection process.
+A custom actor-critic implementation was necessary to handle
+GaitNet's dual outputs. The logits define a categorical distribution
+over footstep candidates, while the duration output is treated as a
+separate normal distribution with a fixed standard deviation of
+0.01\,s for each action. To prevent multiple no-action candidates
+from skewing the selection, all but one no-action candidate are
+removed (set to $-\infty$).
 
-The total log probability of an action is the sum of
-the categorical log probability of the footstep candidate and the
-log probability of the duration under the normal distribution.
-To sample an action, a footstep candidate is first sampled from the categorical
-distribution, and then the duration is sampled from the normal
-distribution associated with that footstep candidate. The duration
-and footstep candidate
-are then combined to form a single footstep action.
+The total log probability of an action is computed as the sum of the
+categorical log probability of the selected footstep candidate and
+the log probability of the duration under the normal distribution.
+During action sampling, a footstep candidate is first sampled from
+the categorical distribution, followed by sampling the duration from
+its associated normal distribution. The footstep candidate and
+duration are then combined to form a complete footstep action.
 
 \begin{todo}
   detail rewards

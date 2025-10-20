@@ -1,20 +1,21 @@
 \section{Footstep Evaluation Network}
 
-The purpose of the footstep evaluation network is to provide
-footstep candidates to the GaitNet model. Importantly,
-the exact output of this network is not critical, just that
-it provide good candidates when sampled from. It accomplishes
-this by estimating the cost of potential footsteps given the
-robot state. The architecture and training process are similar to
-ContactNet \cite{bratta_contactnet_2024}, but with some key differences
-detailed below.
+The purpose of the footstep evaluation network is to generate
+footstep candidates for the GaitNet model. Importantly, the precise
+output of this network is not critical; rather, it is essential that
+the network provides high-quality candidates when sampled. It
+achieves this by estimating the cost associated with potential
+footsteps given the current robot state. The network’s architecture
+and training process are largely based on ContactNet
+\cite{bratta_contactnet_2024}, with several key modifications, which
+are described in detail below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
 \label{sec:contactnet-architecture}
 
-The footstep evaluation network is tasked with generating a set of
-footstep candidates $\mathbf f_c$ based on $\mathbf x_c$:
+The footstep evaluation network is responsible for generating a set
+of footstep candidates $\mathbf{f_c}$ based on the robot state $\mathbf{x_c}$:
 
 \[
   \mathbf{x_c} =
@@ -27,34 +28,41 @@ footstep candidates $\mathbf f_c$ based on $\mathbf x_c$:
   \end{bmatrix}
 \]
 
-where
-$\mathbf p_{b,xy}$ is the $x$ and $y$ position all end effectors in
-the base frame stacked into a single vector, and
-$\mathbf r_{w,z}$ is the height of the robot's COM in the world frame.
-Here, the inclusion of $\mathbf \omega_b$ differs from
-\cite{bratta_contactnet_2024}.
+Here, $\mathbf p_{b,xy}$ represents the $x$ and $y$ positions of all
+end effectors in the base frame, stacked into a single vector, and
+$\mathbf r_{w,z}$ denotes the height of the robot's center of mass in
+the world frame. The inclusion of $\mathbf \omega_b$ distinguishes
+this formulation from that in \cite{bratta_contactnet_2024}. This was
+with the intent to improve the model's performance in situations with
+high rotational velocities.
 
-The model is trained on heuristically calculated footstep
-cost maps (\autoref{fig:data-costmap-composition-combined}), which estimate
-the cost associated with moving each foot to certain positions based on the
-robot state. These are represented as 4 5x5 grids of footstep candidates;
-one for each leg.
+The network is trained on heuristically computed footstep cost maps
+(\autoref{fig:data-costmap-composition-combined}), which estimate the
+cost of moving each foot to candidate positions given the current
+robot state. These maps are represented as four $5 \times 5$ grids,
+one for each leg. This choice also differs from the implementation in
+\cite{bratta_contactnet_2024}. This grid size was selected to provide
+more information for each foot, important later when sampling
+footstep candidates.
 
-The footstep evaluation network architecture is shown in
+The architecture of the footstep evaluation network is shown in
 \autoref{fig:diagram-contactnet-architecture}. It consists of a
-feedforward neural
-network that first maps the input through two fully connected layers
-of 64 nodes each, both with ReLU activations. The resulting 64-dimensional
-feature vector is reshaped into an 8x8 spatial representation and
-processed by a convolutional layer with two output channels, a
-3x3 kernel, with stride 1, and padding 1, followed by a ReLU
-nonlinearity. The output is flattened and passed to a final
-fully connected layer before being reshaped into a 5x5 grid. In order to
-produce the 4 footstep candidate maps, this entire network is replicated
-4 times, once for each leg. The weights are not shared between legs.
-This design choice was made to allow the network to learn
-leg-specific behaviors,
-as dynamics may differ between legs due to asymmetries in the robot.
+feedforward neural network that initially maps the input through two
+fully connected layers of 64 nodes each, both with ReLU activations.
+The resulting 64-dimensional feature vector is reshaped into an $8
+\times 8$ spatial representation and processed by a convolutional
+layer with two output channels, a $3 \times 3$ kernel, stride 1, and
+padding 1, followed by a ReLU nonlinearity. The output is flattened
+and passed through a final fully connected layer before being
+reshaped into a $5 \times 5$ grid. Again, this specific architecture
+differs from \cite{bratta_contactnet_2024}, where a larger network
+without the convolutional layer was used. These specific changes were
+found to provide better results for the $5 \times 5$ output grid.
+
+To produce the four footstep candidate maps, this network is
+replicated four times—once per leg—with weights not shared between
+legs. This design allows the network to learn leg-specific behaviors,
+accommodating potential asymmetries in the robot’s dynamics.
 
 \begin{figure}[H]
   \centering
@@ -63,29 +71,21 @@ as dynamics may differ between legs due to asymmetries in the robot.
   \label{fig:diagram-contactnet-architecture}
 \end{figure}
 
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[width=0.5\linewidth]{images/data/footstep-cost-map.png}
-%   \caption{Footstep candidate map. Shows the heuristic cost for each
-%   possible footstep location.}
-%   \label{fig:data-footstep-cost-map}
-% \end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
 
-The footstep evaluation network is trained to predict the heuristic
-footstep cost maps used in \cite{bratta_contactnet_2024}. The training
-data is generated in the simulation environment described in
-\autoref{sec:simulation},
-During the training sessions, 100 robots are run in parallel, being split
-up into 4 groups of 25. Each group tests a grid of different footstep
-positions for one foot at a time; the front left group is shown in
-\autoref{fig:figure-training-fl-sweep}.
-After every robot has finished (or failed) it's motion, an
-\textit{iteration} is complete.
-It is important to note that all robots start each iteration from the
-same state.
+The footstep evaluation network is trained to predict heuristic
+footstep cost maps, as described in \cite{bratta_contactnet_2024}.
+Training data is generated using the simulation environment outlined
+in \autoref{sec:simulation}.
+
+During training, 100 robots are simulated in parallel, divided into
+four groups of 25. Each group tests a grid of footstep positions for
+one foot at a time; the front-left group is illustrated in
+\autoref{fig:figure-training-fl-sweep}. An \textit{iteration} is
+considered complete once all robots have either successfully
+completed or failed their assigned motions. Importantly, all robots
+begin each iteration from the same initial state.
 
 \begin{figure}[H]
   \centering
@@ -96,24 +96,23 @@ same state.
   \label{fig:figure-training-fl-sweep}
 \end{figure}
 
-During the data collection process, we chain together many
-iterations, periodically
-changing the control inputs. After each one,
-the best 10 actions are placed into a tree structure as edges, with
-the resultant
-state as the leaf. The program then explores the tree by randomly selecting
-leaves to expand. This process is repeated until a maximum number of
-iterations is reached.
-To avoid collecting poor data, iterations which result in more than
-50\% of the robots falling
-over are discarded, as well as their 2 parents up the tree. This
-method ensures that a diverse
-set of data is collected, while still focusing on the more successful
-actions. \autoref{fig:data-cn-training-distribution}, shows
-how the foot positions are distributed in the training data.
-The darker spots are the discrete points on the 5x5 grid of tested footstep
-positions. For any given datapoint a foot is in one of these
-positions because it was just moved there.
+Data collection proceeds by chaining multiple iterations together,
+with control inputs periodically updated. After each iteration, the
+top 10 actions are inserted into a tree structure as edges, with the
+resulting state as the leaf node. The tree is explored by randomly
+selecting leaves for expansion, and this process continues until a
+predefined maximum number of iterations is reached. To ensure data
+quality, iterations in which more than 50\% of the robots fall are
+discarded, along with their two parent nodes in the tree. This
+approach promotes the collection of diverse, yet successful, training
+data. This implementation differs in the specifics to
+\cite{bratta_contactnet_2024}, while still remaining faithful
+to the overall methodology.
+
+\autoref{fig:data-cn-training-distribution} illustrates the
+distribution of foot positions in the training dataset. Darker
+regions correspond to discrete points on the $5 \times 5$ footstep
+grids; a foot occupies a given position if it was moved there in that iteration.
 
 \begin{figure}[H]
   \centering
@@ -124,18 +123,16 @@ positions because it was just moved there.
   \label{fig:data-cn-training-distribution}
 \end{figure}
 
-The purpose of this data collection is to generate the associated cost of
-moving a foot to a specific position, a set of $\mathbf f_c$. The cost
-of each footstep position is calculated heuristically from the simulations.
-The heuristic was designed to encourage a balance of stability and efficiency.
-The heuristic includes many similar elements to the one used in
-\cite{bratta_contactnet_2024}, but with some differences to better suit
-our system, which will eventually need to move multiple feet at once.
-The specific factors that make up the footstep candidate maps in the
-training data
-are shown in \autoref{fig:data-costmap-composition-elements}, while the
-combined cost map is shown in \autoref{fig:data-costmap-composition-combined}.
-The factors are justified below.
+The purpose of this data collection is to assign a cost to each
+potential footstep, forming the candidate set $\mathbf{f_c}$. Costs
+are computed heuristically based on simulation outcomes, balancing
+stability and efficiency. While similar to the approach in
+\cite{bratta_contactnet_2024}, our heuristic differs in several
+aspects to better suit the output for the footstep candidate sampling.
+\autoref{fig:data-costmap-composition-elements} shows the individual
+factors used to construct the footstep candidate maps, and
+\autoref{fig:data-costmap-composition-combined} displays the
+resulting combined cost map. These factors are described below:
 
 \begin{itemize}
   \item \textit{lin\_vel\_z\_l2}\textemdash Penalizes high vertical
@@ -182,37 +179,37 @@ The factors are justified below.
 \end{figure}
 
 As in \cite{bratta_contactnet_2024}, the cost maps are normalized to
-improve training performance. Our approach differs in how the cost
-maps are normalized though. We directly normalize the cost maps to
-the range $[0, 1]$, whereas \cite{bratta_contactnet_2024} normalizes
-to $[0,1]$ in such a way that only the relative ordering of costs are
-preserved. This difference is critical to our system to provide the
-upstream GaitNet model with as much information as possible.
+enhance training performance. Our approach differs in that the maps
+are normalized directly to the range $[0, 1]$, rather than preserving
+only the relative ordering of costs as in
+\cite{bratta_contactnet_2024}. This direct normalization is crucial
+for providing the upstream GaitNet model with maximal information.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Post-Processing}
 
-Ultimately, the purpose of the footstep evaluation network is to
-provide footstep candidates to the GaitNet model.
-\autoref{fig:diagram-costmap-processing} shows the processing pipeline.
-The raw cost map output (\autoref{fig:diagram-costmap-processing-raw})
-from the footstep evaluation network is first upsampled
+The primary purpose of the footstep evaluation network is to provide
+high-quality footstep candidates to the GaitNet model.
+\autoref{fig:diagram-costmap-processing} illustrates the processing pipeline.
+
+The raw cost map output from the footstep evaluation network
+(\autoref{fig:diagram-costmap-processing-raw}) is first upsampled
 (\autoref{fig:diagram-costmap-processing-upsample}) to increase the
-resolution of possible footstep positions, and to match the resolution of
-the terrain data. Next, noise is added
-(\autoref{fig:diagram-costmap-processing-noise}) to
-encourage exploration of more varied footstep positions. Without noise,
-all of the footstep candidates would be right next to each other.
-The cost map is then filtered based on the robot state and terrain data
-(\autoref{fig:diagram-costmap-processing-cspace}) to mask out
-invalid actions, including positions that are too close to terrain edges,
-and actions which would attempt to move a leg already in the swing state
-(seen in the Front Right leg in this figure). Finally, the top 8
-candidates from each leg are selected
-(\autoref{fig:diagram-costmap-processing-topk})
-to be processed by GaitNet. In the case where there are fewer than 8 valid
-candidates for a leg, no-action candidates are added to the set to maintain
-the size of the tensors.
+resolution of possible footstep positions and to match the resolution
+of the terrain data. Next, noise is added
+(\autoref{fig:diagram-costmap-processing-noise}) to encourage
+exploration of a more diverse set of footstep positions; without this
+noise, all candidates would cluster in close proximity.
+
+The cost map is then filtered based on the robot state and terrain
+data (\autoref{fig:diagram-costmap-processing-cspace}) to mask out
+invalid actions. This includes positions that are too close to
+terrain edges and movements that would attempt to reposition a leg
+already in the swing phase (as illustrated by the Front Right leg in
+the figure). Finally, the top 8 candidates from each leg are selected
+(\autoref{fig:diagram-costmap-processing-topk}) for processing by
+GaitNet. If fewer than 8 valid candidates exist for a given leg,
+no-action candidates are added to maintain consistent tensor dimensions.
 
 % === Define layout constants ===
 \def\imgwidth{0.16\textwidth}

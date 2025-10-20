@@ -6,22 +6,22 @@
   proposal) and a description of each component.
 \end{outline}
 
-This work presents a control framework for quadruped robots that
-can generate dynamic, acyclic gaits in challenging environments. The
-framework is hierarchal, taking in robot state and terrain data and
-outputting footstep commands to the robot controller. The first stage of
-the framework is a footstep evaluation network, similar to ContactNet
-from \cite{bratta_contactnet_2024}, which estimates footstep candidates
-$\mathbf f_c$.
-The second stage is a gait generation
-network (ContactNet), which takes in footstep candidates $\mathbf f_c$,
-ranks them, and finally sends the best footstep action $\mathbf f_a$ to the
-robot controller.
+This work presents a control framework for quadruped robots capable
+of generating dynamic, acyclic gaits in challenging environments. The
+framework is hierarchical, processing robot state and terrain data to
+produce footstep commands for the robot controller.
 
-This hierarchal framework allows for strict control over the possible
-actions the robot can take. Between the two stages, the candidate
-actions are filtered to ensure that the robot can only take prescribed
-actions.
+The first stage of the framework is a footstep evaluation network,
+similar to ContactNet from \cite{bratta_contactnet_2024}, which
+estimates footstep candidates $\mathbf{f_c}$. The second stage, a
+gait generation network (ContactNet), takes these candidates
+$\mathbf{f_c}$, ranks them, and outputs the optimal footstep action
+$\mathbf{f_a}$ to the robot controller.
+
+This hierarchical design enables strict control over the range of
+possible actions the robot can execute. Between the two stages,
+candidate actions are filtered to ensure that only valid, prescribed
+movements are permitted.
 
 \begin{todo}
   update \autoref{fig:diagram-control-system}
