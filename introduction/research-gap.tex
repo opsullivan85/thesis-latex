@@ -1,0 +1,67 @@
+\section{Research Gap}
+
+\begin{outline}
+  Explain the need for more adaptive, non-gaited approaches and the
+  specific problem you are solving: balancing computational
+  efficiency with dynamic behaviors for real-time control.
+\end{outline}
+
+% Quadruped control pipelines fall into many different categories, but
+% most can be broadly classified as either traditional, neural
+% network-based, or hybrid methods.
+
+% Traditional methods often rely on
+% an MPC to perform optimization and lower level controllers to track the
+% desired motions. Many parts of quadruped locomotion are smooth
+% and can be trivially optimized, such as joint torques or ground
+% reaction forces. These methods become more impractical when
+% attempting to optimize over the discrete contact state of the robot.
+% Typically, these methods use a pre-defined gait sequence or integrate
+% the discrete contacts into a more complicated optimization problem.
+% This trade-off often works well, but ultimately limits the
+% capabilities of the robot in certain terrains.
+
+% Neural network-based methods have shown promise in recent years,
+% especially with the rise of reinforcement learning techniques.
+% Often, these methods replace the MPC in a traditional pipeline,
+% taking in state information and directly outputting joint commands.
+% These methods implicitly solve the discrete contact problem, with
+% the network learning to optimize the whole mixed-integer problem.
+% In exchange for this flexibility, these methods loose the guarantees
+% associated with traditional methods, require large amounts of data
+% to train, and often generalize poorly in new environments.
+
+% Falling in the middle of these two approaches are hybrid methods,
+% which attempt to combine the best of both worlds. These methods often
+% use neural networks to solve certain aspects of the problem while
+% a traditional controller performs the tracking. This allows the network
+% to focus on the more difficult parts of the problem, such as contact
+% planning, while still leveraging the stability and reliability of
+% traditional controllers.
+
+Traditional methods have continually struggled with footstep planning.
+Some approaches attempt to integrate the discrete aspects of contact
+planning into the optimization problem (TOWR), but this creates
+significant computational challenges when trying to solve in real-time.
+Other approaches rely on pre-defined gait sequences (Raibert-style gaits, etc.),
+but these approaches do not allow for full utilization of the quadruped's
+unique capabilities. There has been significant groundwork made in MCTS-based
+footstep planners for use with classical controllers, but these methods still
+prove computationally intensive.
+
+Despite the advantages and recent advancements of the hybrid methods,
+there is still a significant gap in the literature when it comes to
+hybrid control methods which can match the robust contact planning
+of neural network-based methods while still maintaining the
+reliability and stability of traditional methods. Recently, (Contactnet)
+showed potential for generating footstep plans using a machine learning
+approach, but this method is limited to moving one leg at a time, and
+for a pre-defined duration\textemdash falling short of the fully
+dynamic and acyclic gaits observed in end-to-end learning methods.
+
+All of this begs the question:
+
+\begin{emphasis}
+  Can a machine learning planner generate dynamic, acyclic gaits for
+  quadruped robots in challenging environments?
+\end{emphasis}

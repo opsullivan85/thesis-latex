@@ -1,7 +1,19 @@
 \section{Hypothesis}
 
-\begin{outline}
-  Clearly state your hypothesis that a greedy, CNN-based planner can
-  achieve comparable expressiveness to tree-search methods with
-  significantly faster planning times.
-\end{outline}
+In order to fill in the identified research gap, we hypothesize that
+a hybrid control pipeline that incorporates a greedy, neural network-based
+footstep planner can effectively generate dynamic, non-gaited locomotion
+for quadruped robots in challenging. By leveraging the advancements
+made by ContactNet and extending its capabilities to support multi-leg
+actions, we believe that such a planner can produce footstep sequences
+that enable the robot to navigate complex terrains while maintaining
+stability and efficiency.
+
+The proposed approach will utilize a modified implementation of
+ContactNet's architecture, adapting it for the purpose of generating
+footstep candidates. These footstep candidates will then be ranked by
+a novel planner, GaitNet, in order to select the most suitable action
+at every point in time. By integrating this planner into a traditional
+control pipeline, we aim to combine the strengths of both learning-based
+and classical methods, resulting in a robust and adaptable quadruped
+locomotion system.
