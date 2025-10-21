@@ -1,41 +1,42 @@
 \section{Learning-Based Footstep Planners}
 
-\begin{outline}
-  Detail the evolution of learned footstep planners, including
-  FootstepNet, ContactNet, and DeepLoco. Critically analyze their
-  limitations, particularly regarding simultaneous support for
-  non-gaited and dynamically unstable footstep generation.
-\end{outline}
-
 Learning-based footstep planners combine perception and control
-through data-driven models, often using a learned component upstream
-of a model-predictive controller. FootstepNet
-\cite{gaspard_footstepnet_2024} uses deep reinforcement learning to
-generate heuristic-free plans but is limited to bipeds in simple 2D
-environments. ContactNet \cite{bratta_contactnet_2024} employs a CNN
-to produce non-gaited footstep sequences using greedy selection,
-though it is constrained to one-leg-at-a-time motion and coarse
-foothold discretization. DeepGait \cite{tsounis_deepgait_2020}
-separates footstep planning and motion optimization, enabling more
-modular design but still relying on static gaits. Omar et al.
-\cite{omar_fast_2022} use a CNN to identify safe stepping regions,
-which are then decomposed into convex regions and passed to an MPC
-for downstream planning. While efficient and fully onboard, the
-method relies on fixed gait sequences and is primarily focused on
-safe terrain classification. Villarreal et al.
-\cite{villarreal_fast_2019} similarly use a CNN for foothold
-classification, replacing expert heuristics and enabling real-time
-performance with significantly faster inference, but their method
-also depends on a fixed gait schedule. DeepLoco
-\cite{peng_deeploco_2017} introduces a hierarchical policy for
-footstep and motion planning, but its coarse terrain input and focus
-on gaited footstep generation for bipeds limit dynamic adaptability.
-Taouil et al. \cite{taouil_non-gaited_2025} use Monte Carlo Tree
-Search (MCTS) to explore dynamic and non-gaited stepping
-combinations, making them first to generate dynamic, non-gaited
-footstep plans in real time. Their approach does suffer from a high
-computational cost due to its high branching factor, especially on
-certain types of terrain \cite{bratta_contactnet_2024}. Overall,
-while these approaches advance learning-based planning, few
-simultaneously support both non-gaited and dynamically unstable
-footstep generation.
+through data-driven models, often coupling learned components with
+downstream MPC or search-based planning. FootstepNet
+\cite{gaspard_footstepnet_2024} generates heuristic-free plans via
+deep RL but is limited to bipeds in simple 2D environments.
+ContactNet \cite{bratta_contactnet_2024} uses a CNN to produce
+non-gaited footstep sequences with greedy selection, though it is
+constrained to one-leg-at-a-time motion and coarse foothold
+discretization. DeepGait \cite{tsounis_deepgait_2020} separates
+footstep planning from motion optimization, enabling modularity but
+relying on static gaits. Omar et al. \cite{omar_fast_2022} and
+Villarreal et al. \cite{villarreal_fast_2019} use CNNs for terrain
+classification to inform MPC or heuristic-free selection, but both
+depend on fixed gait sequences. DeepLoco \cite{peng_deeploco_2017}
+introduces a hierarchical policy for footstep and motion planning,
+yet its coarse terrain input and biped focus limit dynamic adaptability.
+
+Recent advances further expand terrain generalization and
+multi-contact reasoning. Tolomei et al.
+\cite{tolomei_learning-based_2025} create a framework like ContactNet
+but generalized to 3D terrain and variable foot shapes, ranking
+footholds based on terrain curvature, foot parameters, and kinematic
+feasibility, but still follow a fixed gait. Chen et al.
+\cite{chen_gait_2024} apply a DQN to a hexapod, simultaneously
+selecting next foot positions and gait, with fallback to predefined
+behaviors outside expected states, but motion is constrained to
+three-leg-at-a-time gaits. Yao et al. \cite{yao_hierarchical_2021}
+output both swing leg motions and desired robot pose from a deep RL
+policy, demonstrating accurate control with a small network, yet
+remain limited to a trotting gait. Meduri et al.
+\cite{meduri_deepq_2021} use a Deep Q Network to learn 3D foothold
+cost maps, similar to ContactNet, but retain fixed biped gait timing.
+
+Overall, these approaches highlight trade-offs between expressive,
+non-gaited footstep planning and computational efficiency. CNN-based
+and RL methods improve terrain generalization and allow multi-step
+planning, but fixed gaits or sequential leg motions remain common
+constraints. This motivates hybrid methods that combine learned
+foothold evaluation with fast, greedy planning to achieve real-time,
+non-gaited footstep generation—forming the basis of our proposed approach.

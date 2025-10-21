@@ -6,23 +6,42 @@
   Discuss how they often rely on fixed or implicit gaits.
 \end{outline}
 
-Recent work has shown the potential of deep learning to generate
-agile, robust locomotion policies, often without explicit footstep
-planning. Shi et al. \cite{shi_terrain-aware_2023} use a neural
-network to modulate trajectory generator parameters in real time for
-energy-efficient walking. Xie et al. \cite{xie_glide_2023} train
-reinforcement learning policies on centroidal dynamics models to
-output desired body accelerations, assuming a fixed foot-placement
-heuristic and gait pattern. Duan et al. \cite{duan_sim--real_2022}
-learn step-to-step transitions using proprioception, generating joint
-targets and varying step frequency for terrain-adaptive behaviors.
-Siekmann et al. \cite{siekmann_blind_2021} focus on blind locomotion
-by training an LSTM policy to handle randomized stairs using only
-proprioceptive feedback. Lee et al. \cite{lee_learning_2020} employ a
-temporal convolutional network to infer terrain structure from
-proprioceptive history, using an automated curriculum to adapt to
-progressively harder environments. While these approaches enable
-robust locomotion across diverse terrains, they generally rely on
-fixed or implicit gait patterns and lack explicit control over
-individual footstep selection, making them less suitable for
-non-gaited or footstep-specific planning.
+Deep learning has shown strong potential for generating agile, robust
+locomotion policies, often without explicit footstep planning. Shi et
+al. \cite{shi_terrain-aware_2023} modulate trajectory generator
+parameters in real time for energy-efficient walking, while Xie et
+al. \cite{xie_glide_2023} train RL policies on centroidal dynamics
+models to output body accelerations under fixed gait heuristics. Duan
+et al. \cite{duan_sim--real_2022} learn step-to-step transitions
+using proprioception, and Siekmann et al. \cite{siekmann_blind_2021}
+achieve blind stair climbing through LSTM-based proprioceptive
+policies. Lee et al. \cite{lee_learning_2020} infer terrain structure
+from proprioceptive history using a temporal CNN and automated
+curriculum learning. Though effective, these methods rely on fixed or
+implicit gait patterns and lack explicit control over individual footsteps.
+
+Subsequent works extend these ideas through high-level gait
+selection. Da et al. \cite{da_learning_2020} use a DQN to choose
+among predefined gait primitives executed by a low-level controller,
+while Yang et al. \cite{yang_fast_2021} learn policies that output
+gait parameters—frequency, swing ratio, and phase offsets—interpreted
+by a phase integrator. Both enable efficient gait modulation but
+assume flat terrain and heuristic foot placement. Sun et al.
+\cite{sun_online_2024} integrate offline gait optimization with
+contact-implicit trajectory optimization and high-frequency MPC,
+achieving dynamic control but limiting adaptability to discrete,
+speed-dependent gaits.
+
+In contrast, Zhang et al. \cite{zhang_learning_2023} propose an
+end-to-end RL approach mapping proprioceptive input directly to joint
+targets, reaching 2.5 m/s and generalizing across terrains via a
+terrain curriculum and curiosity rewards. However, such models
+require slow training, and re-training for new environments. Zhang et
+al. \cite{zhang_novel_2024} address multi-gait transitions using
+heuristically defined tables between similar gaits, improving
+flexibility but still constraining behaviors to predefined families.
+
+Overall, learning-based locomotion methods trade interpretability and
+efficiency for expressiveness and adaptability. While
+gait-conditioned policies achieve reliable control, they lack the
+flexibility needed for explicit, non-gaited footstep planning.
