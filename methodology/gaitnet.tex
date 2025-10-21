@@ -47,13 +47,10 @@ swing duration if that step is selected.
   \label{fig:diagram-gaitnet-architecture}
 \end{figure}
 
-\begin{todo}
-  Use \cite{feng2021deep} somewhere
-\end{todo}
-
 The model is designed to jointly evaluate robot state and footstep
-candidates. The architecture consists of two encoders, a shared
-trunk, and two task-specific output heads:
+candidates with a middle fusion architecture \cite{feng2021deep}. The
+architecture (seen in \autoref{fig:diagram-gaitnet-architecture})
+consists of two encoders, a shared trunk, and two task-specific output heads:
 
 \begin{itemize}
   \item Robot state encoder: The robot state vector is processed by a
