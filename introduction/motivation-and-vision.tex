@@ -6,12 +6,17 @@ neural network-based, or hybrid methods.
 
 Traditional methods often rely on MPC for
 optimization, combined with lower-level controllers to track the
-desired motions. Many aspects of quadruped locomotion—such as joint
+desired motions \cite{Kim2019highly-dynamic}. Many aspects of
+quadruped locomotion—such as joint
 torques and ground reaction forces—are smooth and can be efficiently
 optimized. However, these methods become less practical when
-optimizing over the robot's discrete contact states. Typically, they
-employ pre-defined gait sequences or embed discrete contact decisions
-into a more complex optimization problem. This trade-off performs well
+optimizing over the robot's discrete contact states
+\cite{Geisert2019contact-planning}.
+Typically, they
+employ pre-defined gait sequences \cite{Chai2022survey,
+Fan2024survey} or embed discrete contact decisions
+into a more complex optimization problem \cite{winkler_gait_2018}.
+This trade-off performs well
 in general settings, but ultimately limits the unique capabilities of
 quadruped robots.
 

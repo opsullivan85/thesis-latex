@@ -2,14 +2,18 @@
 
 Traditional methods have continually faced challenges in footstep
 planning. Some approaches attempt to incorporate the discrete aspects
-of contact planning directly into the optimization problem (TOWR),
+of contact planning directly into the optimization problem,
 but this introduces significant computational complexity, making
-real-time solutions difficult. Other methods rely on pre-defined gait
-sequences (Raibert-style gaits, etc.), which constrain the robot's
+real-time solutions difficult \cite{winkler_gait_2018}. Other methods
+rely on pre-defined gait
+sequences
+\cite{xie_glide_2023, grandia_perceptive_2022, lee_learning_2020,
+villarreal_fast_2019},
+which constrain the robot's
 ability to fully exploit the versatility of quadruped locomotion.
 Although substantial progress has been made in MCTS-based footstep
 planners for classical controllers, these approaches remain
-computationally demanding.
+computationally demanding \cite{amatucci_monte_2022, taouil_non-gaited_2025}.
 
 Despite the advantages and recent advancements in hybrid control
 methods, a notable gap persists in the literature. Specifically,
