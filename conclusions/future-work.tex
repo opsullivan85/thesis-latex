@@ -16,27 +16,28 @@ modified footstep trajectories.
 Long-horizon planning also presents an opportunity for enhancement.
 GaitNet is presently trained to generate actions for a single point
 in time, which limits the MPC's ability to predict future contact
-states accurately; the MPC expects the robot to revert to a
-nominal stance after each swing. While this is acceptable at low
-speeds, it could become problematic at higher velocities, where
-predictive planning would improve stability and performance.
+states accurately; the MPC expects the robot to revert to a nominal
+stance after each swing. While this is acceptable at low speeds, it
+could become problematic at higher velocities, where predictive
+planning would improve stability and performance.
 
 Currently, the MPC runs on the CPU, limiting the speed of
 reinforcement learning. Leveraging GPU-accelerated MPCs, as explored
-in recent works \cite{todo}, could significantly accelerate training.
+in recent works \cite{bishop_relu_2023, Plancher22Dissertation},
+could significantly accelerate training.
 
 GaitNet also selects only one action at a time, leading to slightly
-staggered swing start times. Initial attempts to
-select multiple simultaneous actions encountered difficulties with
-gradient flow and learning stability. Developing a reliable method
-for multi-action selection could enable more fluid and dynamic gait
-patterns, though it would require careful network and training design.
+staggered swing start times. Initial attempts to select multiple
+simultaneous actions encountered difficulties with gradient flow and
+learning stability. Developing a reliable method for multi-action
+selection could enable more fluid and dynamic gait patterns, though
+it would require careful network and training design.
 
 Finally, improvements to the action candidate sampler could enhance
 GaitNet's performance. At present, action selection relies on
 sampling-based methods, which may not always identify the
 highest-quality actions. Directly searching the action space using
-techniques such as projected gradient \cite{todo} ascent or other optimization
+techniques such as projected gradient descent or other optimization
 strategies could improve solution quality at the expense of
 additional computation. Another possibility is to train a candidate
 selection network jointly with GaitNet to improve the diversity and

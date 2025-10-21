@@ -40,10 +40,10 @@ swing duration if that step is selected.
   \centering
   \includegraphics[width=0.625\linewidth]{images/diagrams/gait-network-architecture.png}
   \caption{Gait net architecture. Sections of the diagram include the
-    footstep candidate encoder in red,
-    robot state encoder in blue, and shared trunk in green.
-    The final output is a logit encoding the value of this option and the
-  desired swing duration if this action is taken.}
+    footstep candidate encoder in red,     robot state encoder in blue,
+    and shared trunk in green.     The final output is a logit encoding
+    the value of this option and the   desired swing duration if this
+  action is taken.}
   \label{fig:diagram-gaitnet-architecture}
 \end{figure}
 
@@ -89,8 +89,8 @@ a dedicated embedding.
 Due to the inclusion of the $\mathbf{c}$ term in the input, GaitNet
 cannot be effectively trained using supervised learning because of
 the high dimensionality of the problem. Instead, it is trained using
-Proximal Policy Optimization (PPO) \cite{todo}. In this setup, the
-actor network is GaitNet
+Proximal Policy Optimization (PPO) \cite{Schulman_proximal_2017}. In
+this setup, the actor network is GaitNet
 (\autoref{fig:diagram-gaitnet-architecture}), while the critic
 follows a similar architecture but omits the duration head. All
 logits from the critic are passed through a final multi-layer
