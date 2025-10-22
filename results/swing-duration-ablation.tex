@@ -1,10 +1,81 @@
 \section{Swing Duration Ablation Study}
 \label{sec:results-swing-ablation-study}
 
-\begin{todo}\\
-  quantify the improvement from dynamic swing duration
-  \begin{itemize}
-    \item compare the training time and final performance of a model
-      with fixed swing durations vs dynamic swing durations
-  \end{itemize}
+In this section we present an ablation study to assess the impact of
+dynamic swing duration on GaitNet's performance. We compare two
+models: the standard GaitNet formulation as described in
+\autoref{sec:methodology-gaitnet}, and a Duration-Ablated-GaitNet trained
+with a fixed swing duration.
+
+\begin{todo}
+  update the swing duration and standard deviations
 \end{todo}
+
+During training, the GaitNet model learns to adjust swing durations
+based on its input, as illustrated with
+\autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
+The mean swing duration settles to 0.21\,s with a standard deviation
+of 0.025\,s, indicating that the model uses a wide range of its
+allowable swing durations. These figures highlight how the model
+learns to effectively utilize dynamic swing durations to adapt to
+varying conditions.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[T]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Mean swing duration across all environments during
+    GaitNet training.}
+    \label{fig:data-duration-mean}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[T]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{example-image-b}
+    \caption{Swing duration standard deviation across all
+    environments during GaitNet training.}
+    \label{fig:data-duration-std}
+  \end{minipage}
+  \hfill
+\end{figure}
+
+Furthermore, a histogram of swing durations selected by GaitNet
+during training, shown in \autoref{fig:data-duration-histogram},
+reveals a broad distribution of values. This indicates that the model
+is not biased towards a narrow range of swing durations, but rather
+effectively leverages the flexibility provided by dynamic swing
+durations to optimize its gait.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{example-image-a}
+  \caption{Histogram of swing durations selected by GaitNet
+  during training, showing a wide distribution of values.}
+  \label{fig:data-duration-histogram}
+\end{figure}
+
+Now, we train the Duration-Ablated-GaitNet model, setting the swing
+duration to a constant 0.21\,s. The training process is identical to
+that of the standard GaitNet model, ensuring a fair comparison. The
+performance of both models is then evaluated using the same metrics outlined in
+\autoref{sec:results-baseline-comparison}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{example-image-a}
+  \caption{Evaluation of GaitNet vs. Duration-Ablated-GaitNet
+    across various terrain difficulties and commanded velocities.
+    Mean success rate measured as the percentage of 50 episodes
+    which completed 20\,s without terminating, under the termination
+  conditions described in \autoref{sec:appendix-termination-functions}.}
+  \label{fig:data-duration-ablation-comparison}
+\end{figure}
+
+\autoref{fig:data-duration-ablation-comparison} presents the
+performance comparison between the standard GaitNet and the
+duration-ablated variant. The results indicate that the standard
+GaitNet outperforms the duration-ablated model across a range of
+terrain difficulties and commanded velocities. This demonstrates the
+effectiveness of dynamic swing duration in enhancing GaitNet's
+ability to adapt to varying conditions and generate robust gaits.
