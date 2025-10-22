@@ -1,4 +1,5 @@
 \section{Footstep Evaluation Network}
+\label{sec:footstep-evaluation-network}
 
 The purpose of the footstep evaluation network is to generate
 footstep candidates for the GaitNet model. Importantly, the precise
@@ -12,7 +13,7 @@ are described in detail below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
-\label{sec:contactnet-architecture}
+\label{subsec:contactnet-architecture}
 
 The footstep evaluation network is responsible for generating a set
 of footstep candidates $\mathbf{f_c}$ based on the robot state $\mathbf{x_c}$:
@@ -73,11 +74,12 @@ accommodating potential asymmetries in the robot’s dynamics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
+\label{subsec:contactnet-training}
 
 The footstep evaluation network is trained to predict heuristic
 footstep cost maps, as described in \cite{bratta_contactnet_2024}.
 Training data is generated using the simulation environment outlined
-in \autoref{sec:simulation}.
+in \autoref{sec:simulation-environment}.
 
 During training, 100 robots are simulated in parallel, divided into
 four groups of 25. Each group tests a grid of footstep positions for
@@ -138,8 +140,7 @@ resulting combined cost map. These factors are described below:
   \item \textit{lin\_vel\_z\_l2}\textemdash Penalizes high vertical
     velocity of the trunk.
   \item \textit{ang\_vel\_xy\_l2}\textemdash Penalizes high angular
-    velocity of the trunk in
-    the horizontal axes.
+    velocity of the trunk in     the horizontal axes.
   \item \textit{joint\_torques\_l2}\textemdash Penalizes high joint torques.
   \item \textit{joint\_acc\_l2}\textemdash Penalizes high joint accelerations.
   \item \textit{control\_error}\textemdash Penalizes errors between the control
@@ -148,8 +149,8 @@ resulting combined cost map. These factors are described below:
     from the COM to the nearest edge of the support polygon. This
     encourages the robot to keep its COM in a stable position.
   \item \textit{foot\_hip\_distance}\textemdash Measures the distance from
-    the nominal foot position. This encourages the robot to keep its feet
-    moving along with the body.
+    the nominal foot position. This encourages the robot to keep its
+    feet     moving along with the body.
 \end{itemize}
 
 \begin{figure}[H]
@@ -173,8 +174,8 @@ resulting combined cost map. These factors are described below:
   \end{subfigure}
   \hfill
   \caption{Footstep candidate map composition. (a) shows the individual
-    factors that make up the footstep candidate maps, while (b) shows the
-  combined cost map.}
+    factors that make up the footstep candidate maps, while (b) shows
+  the   combined cost map.}
   \label{fig:data-costmap-composition}
 \end{figure}
 
@@ -187,6 +188,7 @@ for providing the upstream GaitNet model with maximal information.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Post-Processing}
+\label{subsec:contactnet-post-processing}
 
 The primary purpose of the footstep evaluation network is to provide
 high-quality footstep candidates to the GaitNet model.
@@ -224,40 +226,37 @@ no-action candidates are added to maintain consistent tensor dimensions.
 
     % === Style for image blocks ===
     \tikzset{
-      imgblock/.style={inner sep=0pt, outer sep=0pt, align=center}
-    }
+    imgblock/.style={inner sep=0pt, outer sep=0pt, align=center}     }
 
     % === Subfigure nodes ===
     \node[imgblock] (a)
-    {\subcaptionbox{Raw\label{fig:diagram-costmap-processing-raw}}%
+    {\subcaptionbox{Raw\label{fig:diagram-costmap-processing-raw}}
     {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/1-default.png}}};
 
     \node[imgblock, right=of a]
     (b)
-    {\subcaptionbox{Upsample\label{fig:diagram-costmap-processing-upsample}}%
+    {\subcaptionbox{Upsample\label{fig:diagram-costmap-processing-upsample}}
     {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/2-upscale.png}}};
 
     \node[imgblock, right=of b]
     (c)
-    {\subcaptionbox{Noise\label{fig:diagram-costmap-processing-noise}}%
+    {\subcaptionbox{Noise\label{fig:diagram-costmap-processing-noise}}
     {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/3-noise.png}}};
 
     \node[imgblock, right=of c]
     (d)
-    {\subcaptionbox{C-space\label{fig:diagram-costmap-processing-cspace}}%
+    {\subcaptionbox{C-space\label{fig:diagram-costmap-processing-cspace}}
     {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/4-masked.png}}};
 
     \node[imgblock, right=of d]
-    (e)
-    {\subcaptionbox{TopK (green)\label{fig:diagram-costmap-processing-topk}}%
+    (e)     {\subcaptionbox{TopK
+      (green)\label{fig:diagram-costmap-processing-topk}}
     {\includegraphics[width=\imgwidth]{images/diagrams/cost-map-processing/5-selected.png}}};
 
     % === Arrows ===
     \foreach \src/\dst in {a/b, b/c, c/d, d/e}{
       \draw[->, thick] ([yshift=\arrowshift]\src.east) --
-      ++(\arrowwidth,0) --
-      ([yshift=\arrowshift]\dst.west);
-    }
+    ++(\arrowwidth,0) --       ([yshift=\arrowshift]\dst.west);     }
 
   \end{tikzpicture}
 

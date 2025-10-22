@@ -1,5 +1,6 @@
 \chapter{GaitNet Training Configuration}
 \section{Reward Function Analysis}
+\label{sec:appendix-reward-function-analysis}
 
 Designing the reward functions for training GaitNet (see
 \autoref{tab:reward-function}) proved to be a challenging task.
@@ -14,24 +15,22 @@ careful balancing, particularly between \textit{op\_reward} and
   \begin{tabular}{lll}
     \hline
     \textbf{Function}\tablefootnote{Functions named "mdp.*" are
-      built-in functions
-    provided by the NVIDIA Isaac Lab framework.} & \textbf{Weight} &
+      built-in functions     provided by the NVIDIA Isaac Lab
+    framework.} & \textbf{Weight} &
     \textbf{Description} \\
     \hline
     mdp.is\_alive & 0.4 & Reward for being alive \\
     mdp.track\_lin\_vel\_xy\_exp & 0.5 & Reward for tracking linear
-    velocity in the XY plane \\
-    mdp.track\_ang\_vel\_z\_exp & 0.5 & Reward for tracking angular
-    velocity around the Z axis \\
+    velocity in the XY plane \\     mdp.track\_ang\_vel\_z\_exp & 0.5
+    & Reward for tracking angular     velocity around the Z axis \\
     \hline
     op\_reward & -0.1 & Penalty for performing actions \\
     mdp.is\_terminated & -200 & Penalty for termination \\
     mdp.lin\_vel\_z\_l2 & -2.5 & Penalty for linear velocity in the Z
-    direction \\
-    mdp.ang\_vel\_xy\_l2 & -0.1 & Penalty for angular velocity in the
-    XY plane \\
-    mdp.flat\_orientation\_l2 & -8 & Penalty for non-flat orientation \\
-    mdp.foot\_slip\_penalty & -6 & Penalty for foot slip \\
+    direction \\     mdp.ang\_vel\_xy\_l2 & -0.1 & Penalty for
+    angular velocity in the     XY plane \\
+    mdp.flat\_orientation\_l2 & -8 & Penalty for non-flat orientation
+    \\     mdp.foot\_slip\_penalty & -6 & Penalty for foot slip \\
     \hline
   \end{tabular}
   \caption{Final reward functions used to train GaitNet.}
@@ -50,10 +49,12 @@ move its feet excessively when idle.
 The \textit{no\_op\_reward} was designed to encourage the agent to
 remain idle when no useful actions were available. In practice, this
 reward required an excessively high weighting to have any effect, at
-which point it would overshadow other rewards. The \textit{op\_reward}
-was found to be a more effective alternative for achieving the desired behavior.
+which point it would overshadow other rewards. The
+\textit{op\_reward} was found to be a more effective alternative for
+achieving the desired behavior.
 
 \section{Termination Functions}
+\label{sec:appendix-termination-functions}
 
 The termination functions used in training GaitNet are summarized in
 Table \ref{tab:termination-function}. These functions help define the
@@ -65,10 +66,10 @@ termination penalty or simply signaling an invalid state.
   \begin{tabular}{lll}
     \hline
     \textbf{Function}\tablefootnote{Functions named "mdp.*" are
-      built-in functions
-    provided by the NVIDIA Isaac Lab framework.} & \textbf{Time
-    Out}\tablefootnote{Time Out indicates whether the
-    termination applies the mdp.is\_terminated penalty.} &
+      built-in functions     provided by the NVIDIA Isaac Lab
+    framework.} & \textbf{Time     Out}\tablefootnote{Time Out
+      indicates whether the     termination applies the
+    mdp.is\_terminated penalty.} &
     \textbf{Description} \\
     \hline
     mdp.time\_out & True & Terminate at the end of the episode \\
@@ -77,8 +78,8 @@ termination penalty or simply signaling an invalid state.
     mdp.root\_height\_below\_minimum & False & Terminate if the
     robot's base height is too low \\
     mdp.terrain\_out\_of\_bounds & True & Terminate if the robot
-    leaves the terrain bounds \\
-    foot\_in\_void & False & Terminate if any foot steps into the void \\
+    leaves the terrain bounds \\     foot\_in\_void & False &
+    Terminate if any foot steps into the void \\
     \hline
   \end{tabular}
   \caption{Final termination functions used to train GaitNet.}
@@ -86,6 +87,7 @@ termination penalty or simply signaling an invalid state.
 \end{table}
 
 \section{PPO Hyperparameters}
+\label{sec:appendix-ppo-hyperparameters}
 
 The PPO hyperparameters used for training GaitNet are summarized in
 Table \ref{tab:ppo-hyperparams}. While not all parameters were
@@ -101,16 +103,11 @@ high to compensate for the slower data collection speed.
     \hline
     \textbf{Hyperparameter} & \textbf{Value} \\
     \hline
-    clip\_param & 0.3 \\
-    num\_learning\_epochs & 8 \\
-    num\_mini\_batches & 4 \\
-    value\_loss\_coef & 0.5 \\
-    entropy\_coef & 0.02 \\
-    learning\_rate & 3e-4 \\
-    max\_grad\_norm & 1.0 \\
-    use\_clipped\_value\_loss & True \\
-    gamma & 0.99 \\
-    lam & 0.95 \\
+    clip\_param & 0.3 \\     num\_learning\_epochs & 8 \\
+    num\_mini\_batches & 4 \\     value\_loss\_coef & 0.5 \\
+    entropy\_coef & 0.02 \\     learning\_rate & 3e-4 \\
+    max\_grad\_norm & 1.0 \\     use\_clipped\_value\_loss & True \\
+    gamma & 0.99 \\     lam & 0.95 \\
     \hline
   \end{tabular}
   \caption{Final hyperparameters used for PPO training.}

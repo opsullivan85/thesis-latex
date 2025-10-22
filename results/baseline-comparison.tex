@@ -1,4 +1,11 @@
 \section{Baseline Comparison}
+\label{sec:baseline-comparison}
+
+For the purpose of evaluating GaitNet's performance, a baseline
+method is established using a single leg motion planner. This planner
+operates as is described in \cite{bratta_contactnet_2024}, where in
+place of ContactNet, we directly use the footstep evaluation  network
+described in \autoref{label}
 
 \autoref{fig:data-terrain-evaluation-comparison} illustrates the
 performance of GaitNet relative to the baseline method across a range
@@ -19,7 +26,10 @@ benefits of its dynamic, acyclic gait generation capabilities.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/data/terrain-evaluation-comparison.png}
-  \caption{Evaluation of GaitNet and the baseline method for
-  different terrain difficulties and commanded velocities.}
+  \caption{Evaluation of GaitNet vs. single leg motion planner
+    across various terrain difficulties and commanded velocities.
+    Mean success rate measured as the percentage of 50 episodes
+    which completed 20\,s without terminating, under the termination
+  conditions described in \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-terrain-evaluation-comparison}
 \end{figure}

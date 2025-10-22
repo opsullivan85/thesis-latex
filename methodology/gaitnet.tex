@@ -1,9 +1,10 @@
 \section{GaitNet}
+\label{sec:gaitnet}
 
 GaitNet is designed to select the optimal footstep action from a
 discrete set of candidates. By restricting selection to a predefined
 set of continuous actions, the algorithm enforces constraints on the
-robot’s motion, strictly preventing invalid foot placements and
+robot's motion, strictly preventing invalid foot placements and
 limiting the range of possible gaits. The inclusion of a no-action
 candidate, combined with continuous re-evaluation, distinguishes this
 approach: it enables the greedy generation of acyclic gaits in which
@@ -11,6 +12,7 @@ multiple feet can be in the swing phase simultaneously.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
+\label{subsec:contactnet-architecture}
 
 GaitNet is responsible for ranking footstep candidates based on the
 one-hot encoded leg index $\mathbf{f_c}^{\prime}$ and the robot state
@@ -30,7 +32,7 @@ $\mathbf{x_g}$:
 \]
 
 Descriptions of $\mathbf p_{b,xy}$ and $\mathbf r_{w,z}$ can be found
-in \autoref{sec:contactnet-architecture}. The additional terms,
+in \autoref{subsec:contactnet-architecture}. The additional terms,
 compared to the footstep evaluation network, are $\mathbf g$ and
 $\mathbf c$. Using $\mathbf{x_g}$ and $\mathbf{f_c}^{\prime}$,
 GaitNet outputs a logit associated with each footstep and the desired
@@ -82,6 +84,7 @@ a dedicated embedding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
+\label{subsec:contactnet-training}
 
 Due to the inclusion of the $\mathbf{c}$ term in the input, GaitNet
 cannot be effectively trained using supervised learning because of
