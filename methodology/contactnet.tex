@@ -1,5 +1,5 @@
 \section{Footstep Evaluation Network}
-\label{sec:footstep-evaluation-network}
+\label{sec:methodology-footstep-evaluation-network}
 
 The purpose of the footstep evaluation network is to generate
 footstep candidates for the GaitNet model. Importantly, the precise
@@ -13,7 +13,7 @@ are described in detail below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
-\label{subsec:contactnet-architecture}
+\label{subsec:methodology-contactnet-architecture}
 
 The footstep evaluation network is responsible for generating a set
 of footstep candidates $\mathbf{f_c}$ based on the robot state $\mathbf{x_c}$:
@@ -74,12 +74,16 @@ accommodating potential asymmetries in the robot’s dynamics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
-\label{subsec:contactnet-training}
+\label{subsec:methodology-contactnet-training}
 
 The footstep evaluation network is trained to predict heuristic
 footstep cost maps, as described in \cite{bratta_contactnet_2024}.
 Training data is generated using the simulation environment outlined
-in \autoref{sec:simulation-environment}.
+in \autoref{sec:methodology-simulation-environment}, but with planar
+terrain. As in \cite{bratta_contactnet_2024}, planar terrain is
+sufficient for data collection because the cost maps are masked based
+on terrain after inference (see
+\autoref{subsec:methodology-contactnet-post-processing}).
 
 During training, 100 robots are simulated in parallel, divided into
 four groups of 25. Each group tests a grid of footstep positions for
@@ -99,8 +103,10 @@ begin each iteration from the same initial state.
 \end{figure}
 
 Data collection proceeds by chaining multiple iterations together,
-with control inputs periodically updated. After each iteration, the
-top 10 actions are inserted into a tree structure as edges, with the
+with control inputs periodically re-sampled from  $\mathbf u \in
+(-0.2, 0.2) \times (-0.2, 0.2) \times (-0.4, 0.4)$ with "$\times$"
+being the cartesian product.  After each iteration, the top 10
+actions are inserted into a tree structure as edges, with the
 resulting state as the leaf node. The tree is explored by randomly
 selecting leaves for expansion, and this process continues until a
 predefined maximum number of iterations is reached. To ensure data
@@ -148,9 +154,9 @@ resulting combined cost map. These factors are described below:
   \item \textit{inscribed\_circle\_radius}\textemdash Measures the distance
     from the COM to the nearest edge of the support polygon. This
     encourages the robot to keep its COM in a stable position.
-  \item \textit{foot\_hip\_distance}\textemdash Measures the distance from
-    the nominal foot position. This encourages the robot to keep its
-    feet     moving along with the body.
+  \item \textit{foot\_hip\_distance}\textemdash Measures the distance
+    between the hip and foot in the $XY$ plane. This encourages the
+    robot to keep its feet moving along with the body.
 \end{itemize}
 
 \begin{figure}[H]
@@ -188,7 +194,7 @@ for providing the upstream GaitNet model with maximal information.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Post-Processing}
-\label{subsec:contactnet-post-processing}
+\label{subsec:methodology-contactnet-post-processing}
 
 The primary purpose of the footstep evaluation network is to provide
 high-quality footstep candidates to the GaitNet model.
@@ -203,12 +209,19 @@ of the terrain data. Next, noise is added
 exploration of a more diverse set of footstep positions; without this
 noise, all candidates would cluster in close proximity.
 
+\begin{todo}
+  update the number of candidates in text and diagram
+\end{todo}
+
 The cost map is then filtered based on the robot state and terrain
 data (\autoref{fig:diagram-costmap-processing-cspace}) to mask out
 invalid actions. This includes positions that are too close to
 terrain edges and movements that would attempt to reposition a leg
 already in the swing phase (as illustrated by the Front Right leg in
-the figure). Finally, the top 8 candidates from each leg are selected
+the figure). Additional masking occurs based on the total number of
+legs in the swing phase; when 2 legs are already in swing, all
+remaining options are masked out to prevent unstable motions.
+Finally, the top 8 candidates from each leg are selected
 (\autoref{fig:diagram-costmap-processing-topk}) for processing by
 GaitNet. If fewer than 8 valid candidates exist for a given leg,
 no-action candidates are added to maintain consistent tensor dimensions.

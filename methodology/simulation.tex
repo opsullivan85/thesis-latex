@@ -1,5 +1,5 @@
 \section{Simulation Environment}
-\label{sec:simulation-environment}
+\label{sec:methodology-simulation-environment}
 
 \begin{outline}
   Describe the physics-based simulation environment (IsaacLab) and
@@ -9,13 +9,13 @@
 The simulation environment used for this project is NVIDIA Isaac Lab
 \cite{mittal_orbit_2023}. This framework was selected for several
 reasons. It is a modern platform with a Python interface designed
-specifically for machine learning applications and GPU parallelism.
-The use of GPU parallelism enables significantly faster simulation
-and data collection, albeit at the cost of increased programming
-complexity and reduced compatibility with older hardware.
-Furthermore, the extensive collection of example and community
-projects provides valuable references for implementing the simulation
-features required in this work.
+specifically for RL applications and GPU parallelism. The use of GPU
+parallelism enables significantly faster simulation and data
+collection, albeit at the cost of increased programming complexity
+and reduced compatibility with older hardware. Furthermore, the
+extensive collection of example and community projects provides
+valuable references for implementing the simulation features required
+in this work.
 
 Although both simulation and learning processes are executed on the
 GPU, the robot controllers operate on the CPU.
@@ -25,10 +25,6 @@ where multiple robots are simulated in parallel. Meanwhile, the robot
 MPCs execute on the CPU, with each controller running concurrently.
 The CPU and GPU communicate at every simulation step to exchange
 robot states and corresponding control actions.
-
-\begin{todo}
-  add in learning step
-\end{todo}
 
 \begin{figure}[H]
   \centering
@@ -43,23 +39,18 @@ NVIDIA Isaac Lab uses a declarative system of python dataclasses to
 define the simulation environment. For this work, a custom
 environment is used (\autoref{fig:figure-terrain-raycast}), including:
 
-\begin{todo}
-  update
-\end{todo}
-
 \begin{itemize}
   \item Unitree Go 1\textemdash Configured to use force control for each joint.
   \item Terrain raycasts\textemdash Measure the height of the terrain
     at each possible footstep location. This emulates the lidar
     processing steps of a full vision pipeline.
   \item Custom terrain\textemdash Planar terrain with sections
-    missing on a grid pattern. The underlying grid is 8\,cm square,
-    and     the void density is tuned to create a challenging but
-    possible     environment. Multiple difficulty levels of the
-    terrain are generated     for the robots to progress through as
-    they learn.     The terrain is designed to mirror that used in
-    \cite{bratta_contactnet_2024}
-    through as they learn.
+    missing on a grid pattern. The underlying grid is 12\,cm square,
+    and the void density is tuned to create a challenging but
+    possible environment. Multiple difficulty levels of the
+    terrain are generated for the robots to progress through as
+    they learn. The terrain is designed to mirror that used in
+    \cite{bratta_contactnet_2024} through as they learn.
 \end{itemize}
 
 \begin{todo}

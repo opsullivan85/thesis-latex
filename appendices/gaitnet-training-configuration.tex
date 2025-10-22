@@ -1,4 +1,7 @@
 \chapter{GaitNet Training Configuration}
+\label{chap:appendix-gaitnet-training-configuration}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reward Function Analysis}
 \label{sec:appendix-reward-function-analysis}
 
@@ -33,7 +36,7 @@ careful balancing, particularly between \textit{op\_reward} and
     \\     mdp.foot\_slip\_penalty & -6 & Penalty for foot slip \\
     \hline
   \end{tabular}
-  \caption{Final reward functions used to train GaitNet.}
+  \caption{Reward functions used to train GaitNet.}
   \label{tab:reward-function}
 \end{table}
 
@@ -53,6 +56,7 @@ which point it would overshadow other rewards. The
 \textit{op\_reward} was found to be a more effective alternative for
 achieving the desired behavior.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Termination Functions}
 \label{sec:appendix-termination-functions}
 
@@ -82,10 +86,31 @@ termination penalty or simply signaling an invalid state.
     Terminate if any foot steps into the void \\
     \hline
   \end{tabular}
-  \caption{Final termination functions used to train GaitNet.}
+  \caption{Termination functions used to train GaitNet.}
   \label{tab:termination-function}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Commands}
+\label{sec:appendix-commands}
+
+The command used in training GaitNet is summarized below. This
+command defines the highest level input to the environment, $\mathbf u$.
+
+\begin{itemize}
+  \item \textbf{UniformVelocityCommand}: This command samples a desired
+    velocity vector $\mathbf{v} = [v_x, v_y, \omega_z]$ from a
+    uniform   distribution.
+    \begin{itemize}
+      \item resampling time range: (2.5, 10)\,s
+      \item $v_x$ range: (-0.2, 0.2)\,m/s
+      \item $v_y$ range: (-0.2, 0.2)\,m/s
+      \item $\omega_z$ range: (-0.4, 0.4)\,rad/s
+      \item probability of zero command: 0.05
+    \end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{PPO Hyperparameters}
 \label{sec:appendix-ppo-hyperparameters}
 
@@ -110,6 +135,6 @@ high to compensate for the slower data collection speed.
     gamma & 0.99 \\     lam & 0.95 \\
     \hline
   \end{tabular}
-  \caption{Final hyperparameters used for PPO training.}
+  \caption{Hyperparameters used for PPO training.}
   \label{tab:ppo-hyperparams}
 \end{table}

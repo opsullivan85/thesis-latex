@@ -1,5 +1,5 @@
 \section{GaitNet}
-\label{sec:gaitnet}
+\label{sec:methodology-gaitnet}
 
 GaitNet is designed to select the optimal footstep action from a
 discrete set of candidates. By restricting selection to a predefined
@@ -12,7 +12,7 @@ multiple feet can be in the swing phase simultaneously.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
-\label{subsec:contactnet-architecture}
+\label{subsec:methodology-gaitnet-architecture}
 
 GaitNet is responsible for ranking footstep candidates based on the
 one-hot encoded leg index $\mathbf{f_c}^{\prime}$ and the robot state
@@ -32,11 +32,11 @@ $\mathbf{x_g}$:
 \]
 
 Descriptions of $\mathbf p_{b,xy}$ and $\mathbf r_{w,z}$ can be found
-in \autoref{subsec:contactnet-architecture}. The additional terms,
-compared to the footstep evaluation network, are $\mathbf g$ and
-$\mathbf c$. Using $\mathbf{x_g}$ and $\mathbf{f_c}^{\prime}$,
-GaitNet outputs a logit associated with each footstep and the desired
-swing duration if that step is selected.
+in \autoref{subsec:methodology-contactnet-architecture}. The
+additional terms, compared to the footstep evaluation network, are
+$\mathbf g$ and $\mathbf c$. Using $\mathbf{x_g}$ and
+$\mathbf{f_c}^{\prime}$, GaitNet outputs a logit associated with each
+footstep and the desired swing duration if that step is selected.
 
 \begin{figure}[H]
   \centering
@@ -84,19 +84,17 @@ a dedicated embedding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
-\label{subsec:contactnet-training}
+\label{subsec:methodology-gaitnet-training}
 
 Due to the inclusion of the $\mathbf{c}$ term in the input, GaitNet
 cannot be effectively trained using supervised learning because of
 the high dimensionality of the problem. Instead, it is trained using
-Proximal Policy Optimization (PPO) \cite{Schulman_proximal_2017}. In
-this setup, the actor network is GaitNet
-(\autoref{fig:diagram-gaitnet-architecture}), while the critic
-follows a similar architecture but omits the duration head. All
-logits from the critic are passed through a final multi-layer
-perceptron (MLP) to produce a single value estimate. This MLP
-consists of two hidden layers of size 64, with ReLU activations
-applied to all layers except the output.
+PPO \cite{Schulman_proximal_2017}. In this setup, the actor network
+is GaitNet (\autoref{fig:diagram-gaitnet-architecture}), while the
+critic follows a similar architecture but omits the duration head.
+All logits from the critic are passed through a final MLP to produce
+a single value estimate. This MLP consists of two hidden layers of
+size 64, with ReLU activations applied to all layers except the output.
 
 A custom actor-critic implementation was necessary to handle
 GaitNet's dual outputs. The logits define a categorical distribution
@@ -114,14 +112,7 @@ the categorical distribution, followed by sampling the duration from
 its associated normal distribution. The footstep candidate and
 duration are then combined to form a complete footstep action.
 
-\begin{todo}
-  detail rewards
-\end{todo}
-
-\begin{todo}
-  detail events
-\end{todo}
-
-\begin{todo}
-  detail terminations
-\end{todo}
+Following the reward structure, termination conditions, commands, and
+hyperparameters outlined in
+\autoref{chap:appendix-gaitnet-training-configuration}, GaitNet is
+trained for ?? environment steps using a batch size of ??.

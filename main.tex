@@ -1,6 +1,6 @@
 \documentclass{report}
-% Set page size and margins
-% Replace `letterpaper' with `a4paper' for UK/EU standard size
+% Set page size and margins % Replace `letterpaper' with `a4paper' %
+% % % % for UK/EU standard size
 \usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -23,6 +23,7 @@
 \usepackage{import}
 \usepackage{amssymb}
 % \usepackage{refcheck}  % uncomment and check log for "Unused label"
+\usepackage[inline]{showlabels} % shows labels for easier referencing
 \usepackage{changepage} % provides adjustwidth
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -49,26 +50,12 @@
 % \togglefalse{todo_toggle}  % Disable
 
 \newtcolorbox{emphasis}{
-  colback=gray!10,
-  colframe=gray!50,
-  boxrule=0.5pt,
-  arc=4pt,
-  left=4pt,
-  right=4pt,
-  top=4pt,
-  bottom=4pt
-}
+  colback=gray!10,   colframe=gray!50,   boxrule=0.5pt,   arc=4pt,
+left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
 
 \newtcolorbox{todo_box}{
-  colback=yellow!20,
-  colframe=yellow!70,
-  boxrule=0.5pt,
-  arc=4pt,
-  left=4pt,
-  right=4pt,
-  top=4pt,
-  bottom=4pt
-}
+  colback=yellow!20,   colframe=yellow!70,   boxrule=0.5pt,   arc=4pt,
+left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
 
 \iftoggle{todo_toggle}{
   \newlength{\todoshift}%
@@ -78,12 +65,10 @@
   {%
     \begin{adjustwidth}{-\todoshift}{0pt}%
       \begin{todo_box}\noindent\textbf{TODO:}\quad
-      }
-      {%
+      }       {%
       \end{todo_box}
     \end{adjustwidth}\par
-  }
-}{
+} }{
   \excludecomment{todo}
 }
 
@@ -120,14 +105,12 @@
   \vfill
 
   \Large
-  Supervisors: \\
-  Prof. Mahdi Agheli
+  Supervisors: \\   Prof. Mahdi Agheli
 
   \vspace{0.8cm}
 
   \Large
-  Worcester Polytechnic Institute \\
-  {\small \today}
+  Worcester Polytechnic Institute \\   {\small \today}
 
 \end{titlepage}
 

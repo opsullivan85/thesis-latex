@@ -1,11 +1,19 @@
 \section{Baseline Comparison}
-\label{sec:baseline-comparison}
+\label{sec:results-baseline-comparison}
 
 For the purpose of evaluating GaitNet's performance, a baseline
 method is established using a single leg motion planner. This planner
 operates as is described in \cite{bratta_contactnet_2024}, where in
-place of ContactNet, we directly use the footstep evaluation  network
-described in \autoref{label}
+place of ContactNet, we directly use our footstep evaluation network
+described in \autoref{sec:methodology-footstep-evaluation-network},
+excluding the noise post-processing step
+(\autoref{fig:diagram-costmap-processing-noise}), and only picking
+one candidate in the selection step
+(\autoref{fig:diagram-costmap-processing-topk}).
+
+\begin{todo}
+  describe and illustrate the terrain
+\end{todo}
 
 \autoref{fig:data-terrain-evaluation-comparison} illustrates the
 performance of GaitNet relative to the baseline method across a range
