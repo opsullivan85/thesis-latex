@@ -44,14 +44,12 @@ environment is used (\autoref{fig:figure-envirnment-close}), including:
   \item Terrain raycasts\textemdash Measure the height of the terrain
     at each possible footstep location. This emulates the lidar
     processing steps of a full vision pipeline.
-  \item Custom terrain\textemdash Planar terrain with sections
-    missing on a grid pattern. The underlying grid is 12\,cm square,
-    and the void density varying from $\sim$0\% to 40\%. Multiple
-    difficulty levels of the     terrain are generated for the robots
-    to progress through as     they learn. The terrain is designed to
-    mirror that used in
-    \cite{bratta_contactnet_2024}. A view of the full terrain is shown
-    in \autoref{fig:figure-envirnment-far}.
+  \item Custom terrain\textemdash A grid of 12x12 sub-terrains
+    (4x4\,m each) with increasing difficulty
+    (\autoref{fig:figure-envirnment-far}). Each sub-terrain consists
+    of     a 12\,cm square grid pattern with missing sections. The
+    void density     varies from $\sim$0\% to 40\%. The quantity of
+    terrain is limited     by GPU memory.
 \end{itemize}
 
 \begin{figure}[H]

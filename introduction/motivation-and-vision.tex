@@ -1,41 +1,39 @@
 \section{Motivation and Vision}
 \label{sec:introduction-motivation-and-vision}
 
-Quadruped control pipelines can be categorized into several
-approaches, most of which can be broadly classified as traditional,
-neural network-based, or hybrid methods.
+Legged robots hold significant promise for enabling mobility in
+environments that are inaccessible or hazardous to wheeled and
+tracked systems. Their ability to traverse uneven, unstructured, and
+unpredictable terrains—such as disaster zones, staircases, dense
+vegetation, and rocky landscapes—positions them as key enablers for
+future exploration, inspection, and rescue missions.
 
-Traditional methods often rely on MPC for optimization, combined with
-lower-level controllers to track the desired motions
-\cite{Kim2019highly-dynamic}. Many aspects of quadruped
-locomotion—such as joint torques and ground reaction forces—are
-smooth and can be efficiently optimized \cite{Wensing2022Nov}.
-However, these methods become less practical when optimizing over the
-robot's discrete contact states
-\cite{Geisert2019contact-planning}. Typically, they employ
-pre-defined gait sequences
-\cite{Chai2022survey, Fan2024survey} or embed discrete contact
-decisions into a more complex optimization problem
-\cite{winkler_gait_2018}. This trade-off performs well in general
-settings, but ultimately limits the unique capabilities of quadruped robots.
+Realizing this potential requires a robot to continuously and
+intelligently decide where and when to place its feet—a process known
+as contact planning. Unlike periodic gait patterns suitable for flat
+or predictable surfaces, real-world locomotion often demands dynamic,
+acyclic, and adaptive footstep sequences. Even minor errors in
+contact selection can lead to instability or failure, whereas
+well-chosen footholds enable efficient, agile, and robust movement.
 
-Neural network-based methods have gained traction in recent years,
-particularly with the advancement of reinforcement learning
-techniques. These approaches often replace the MPC component of
-traditional pipelines, directly mapping state information to joint
-commands \cite{Gurram2024survey}. In doing so, they implicitly
-address the discrete contact problem, allowing the network to learn
-the mixed-integer optimization implicitly \cite{Wensing2022Nov}.
-Although this provides greater flexibility, such methods sacrifice
-the formal guarantees of traditional control, demand extensive
-training data, and frequently exhibit poor generalization to novel
-environments \cite{Gurram2024survey}.
+The generation of such contact plans in real time remains a
+formidable challenge. It requires the system to perceive its
+surroundings, anticipate the outcomes of possible actions, and select
+feasible contact points within tight temporal constraints. Existing
+methods often trade off between deliberative, computationally
+intensive planning and fast, reactive control that lacks stability or
+generalization.
 
-Hybrid methods, which combine elements of both approaches, form the
-focus of this thesis. These methods leverage neural networks to
-address specific challenges—such as contact or foothold
-planning—while relying on traditional controllers for carrying out
-higher level tasks \cite{Bao2024survey, Wang2022Oct}. This synergy
-enables the neural network to concentrate on the more complex and
-non-smooth aspects of locomotion, while maintaining the stability and
-robustness offered by model-based control frameworks.
+The vision of this research is to develop a control architecture that
+bridges this divide. Specifically, this work aims to design a system
+capable of producing non-gaited, dynamic footstep plans that retain
+both the responsiveness of learning-based approaches and the
+reliability of model-based control. The objective is to provide
+quadruped robots with the decision-making agility necessary for
+navigating complex terrains while maintaining the stability and
+robustness demanded by real-world operation.
+
+Through this approach, the thesis seeks to contribute toward a new
+class of hybrid locomotion frameworks that enable real-time,
+adaptive, and physically consistent quadruped motion—closing the gap
+between high-level perception and low-level control in legged robotics.
