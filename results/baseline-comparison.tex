@@ -9,11 +9,32 @@ described in \autoref{sec:methodology-footstep-evaluation-network},
 excluding the noise post-processing step
 (\autoref{fig:diagram-costmap-processing-noise}), and only picking
 one candidate in the selection step
-(\autoref{fig:diagram-costmap-processing-topk}).
+(\autoref{fig:diagram-costmap-processing-topk}). The lowest cost
+candidate is then used as the footstep target for that leg, with a
+200ms swing duration.
 
-\begin{todo}
-  describe and illustrate the terrain
-\end{todo}
+In order to benchmark the two methods, a custom test environment is
+created (\autoref{fig:figure-test-environment}). This environment has
+the robots navigate straight forward across narrow strips of terrain
+with characteristics matching the sub-terrains used in training
+(\autoref{sec:methodology-simulation-environment}).  The space of
+terrain difficulties and commanded forward velocities is
+systematically explored with a grid search, evaluating the success
+rate of each method over 150 trials of 20\,s each. An episode is
+considered successful if the robot is able to complete the full 20\,s
+without terminating according to the conditions described in
+\autoref{sec:appendix-termination-functions}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/figures/test-environment.png}
+  \caption{Three robots simultaneously navigating the test environment
+    used for baseline comparison. The terrain consists of narrow strips
+    of a grid pattern with missing sections. Density of missing
+    sections     (difficulty) and commanded forward velocity are varied
+  to evaluate performance.}
+  \label{fig:figure-test-environment}
+\end{figure}
 
 \autoref{fig:data-terrain-evaluation-comparison} illustrates the
 performance of GaitNet relative to the baseline method across a range
@@ -36,7 +57,7 @@ benefits of its dynamic, acyclic gait generation capabilities.
   \includegraphics[width=\textwidth]{images/data/terrain-evaluation-comparison.png}
   \caption{Evaluation of GaitNet vs. single leg motion planner
     across various terrain difficulties and commanded velocities.
-    Mean success rate measured as the percentage of 50 episodes
+    Mean success rate measured as the percentage of 150 trials
     which completed 20\,s without terminating, under the termination
   conditions described in \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-terrain-evaluation-comparison}

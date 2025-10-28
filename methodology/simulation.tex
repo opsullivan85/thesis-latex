@@ -37,7 +37,7 @@ robot states and corresponding control actions.
 
 NVIDIA Isaac Lab uses a declarative system of python dataclasses to
 define the simulation environment. For this work, a custom
-environment is used (\autoref{fig:figure-terrain-raycast}), including:
+environment is used (\autoref{fig:figure-envirnment-close}), including:
 
 \begin{itemize}
   \item Unitree Go 1\textemdash Configured to use force control for each joint.
@@ -46,22 +46,29 @@ environment is used (\autoref{fig:figure-terrain-raycast}), including:
     processing steps of a full vision pipeline.
   \item Custom terrain\textemdash Planar terrain with sections
     missing on a grid pattern. The underlying grid is 12\,cm square,
-    and the void density is tuned to create a challenging but
-    possible environment. Multiple difficulty levels of the
-    terrain are generated for the robots to progress through as
-    they learn. The terrain is designed to mirror that used in
-    \cite{bratta_contactnet_2024} through as they learn.
+    and the void density varying from $\sim$0\% to 40\%. Multiple
+    difficulty levels of the     terrain are generated for the robots
+    to progress through as     they learn. The terrain is designed to
+    mirror that used in
+    \cite{bratta_contactnet_2024}. A view of the full terrain is shown
+    in \autoref{fig:figure-envirnment-far}.
 \end{itemize}
-
-\begin{todo}
-  update \autoref{fig:figure-terrain-raycast}
-\end{todo}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.75\linewidth]{images/figures/terrain-raycast.png}
+  \includegraphics[width=0.75\linewidth]{images/figures/environment-close.png}
   \caption{Image of a Unitree Go 1 navigating the terrain. Red
-    spheres show the hit location of raycasts. Black regions show voids
-  in the terrain.}
-  \label{fig:figure-terrain-raycast}
+    region shows area converted into heightmap for front left leg.
+    Black regions show voids   in the terrain. Green arrow shows
+  desired velocity vector.}
+  \label{fig:figure-envirnment-close}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{images/figures/environment-far.png}
+  \caption{Image showing the full terrain used in simulation.
+    Full terrain is a grid of 12x12 sub-terrains with increasing
+  difficulty.     Sub-terrains are 4x4\,m grids with missing sections.}
+  \label{fig:figure-envirnment-far}
 \end{figure}
