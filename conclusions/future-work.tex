@@ -37,9 +37,11 @@ it would require careful network and training design.
 Finally, improvements to the action candidate sampler could enhance
 GaitNet's performance. At present, action selection relies on
 sampling-based methods, which may not always identify the
-highest-quality actions. Directly searching the action space using
-techniques such as projected gradient descent or other optimization
-strategies could improve solution quality at the expense of
-additional computation. Another possibility is to train a candidate
-selection network jointly with GaitNet to improve the diversity and
-relevance of sampled actions.
+highest-quality actions. This is seen in
+\autoref{fig:data-action-cost-correlation} by the fact that GaitNet
+relies less and less on the footstep candidate cost as training
+progresses. Directly searching the action space using techniques such
+as projected gradient descent or other optimization strategies could
+improve solution quality at the expense of additional computation.
+Another possibility is to train a candidate selection network jointly
+with GaitNet to improve the diversity and relevance of sampled actions.
