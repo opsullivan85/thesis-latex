@@ -7,34 +7,31 @@ models: the standard GaitNet formulation as described in
 \autoref{sec:methodology-gaitnet}, and a Duration-Ablated-GaitNet trained
 with a fixed swing duration.
 
-\begin{todo}
-  update the swing duration and standard deviations
-\end{todo}
-
 During training, the GaitNet model learns to adjust swing durations
 based on its input, as illustrated with
 \autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
-The mean swing duration settles to 0.21\,s with a standard deviation
-of 0.025\,s, indicating that the model uses a wide range of its
+The mean swing duration settles to 0.24\,s with a standard deviation
+of 0.034\,s, indicating that the model uses a wide range of its
 allowable swing durations. These figures highlight how the model
 learns to effectively utilize dynamic swing durations to adapt to
 varying conditions.
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{example-image-a}
+    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_mean_survival-curr.png}
     \caption{Mean swing duration across all environments during
-    GaitNet training.}
+    GaitNet training. Each color is a different training instance.}
     \label{fig:data-duration-mean}
   \end{minipage}
   \hfill
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{example-image-b}
+    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
     \caption{Swing duration standard deviation across all
-    environments during GaitNet training.}
+      environments during GaitNet training. Each color is a different
+    training instance.}
     \label{fig:data-duration-std}
   \end{minipage}
   \hfill
@@ -51,24 +48,26 @@ durations to optimize its gait.
   \centering
   \includegraphics[width=0.45\textwidth]{example-image-a}
   \caption{Histogram of swing durations selected by GaitNet
-  during training, showing a wide distribution of values.}
+  during evaluation, showing a wide distribution of values.}
   \label{fig:data-duration-histogram}
 \end{figure}
 
 Now, we train the Duration-Ablated-GaitNet model, setting the swing
-duration to a constant 0.21\,s. The training process is identical to
+duration to a constant 0.24\,s. The training process is identical to
 that of the standard GaitNet model, ensuring a fair comparison. The
 performance of both models is then evaluated using the same metrics outlined in
 \autoref{sec:results-baseline-comparison}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{example-image-a}
-  \caption{Evaluation of GaitNet vs. Duration-Ablated-GaitNet
+  \includegraphics[width=0.45\textwidth]{images/data/experiments/Gaitnet
+  - swing-duration - 67.2 - individual.png}
+  \caption{Evaluation Duration-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
-    Mean success rate measured as the percentage of 50 episodes
-    which completed 20\,s without terminating, under the termination
-  conditions described in \autoref{sec:appendix-termination-functions}.}
+    Overall survival rate of 67.2\%.     Mean success rate measured as
+    the percentage of 50 episodes     which completed 20\,s without
+    terminating, under the termination   conditions described in
+  \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-duration-ablation-comparison}
 \end{figure}
 

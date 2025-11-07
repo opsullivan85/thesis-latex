@@ -36,13 +36,14 @@ without terminating according to the conditions described in
   \label{fig:figure-test-environment}
 \end{figure}
 
-\autoref{fig:data-terrain-evaluation-comparison} illustrates the
-performance of GaitNet relative to the baseline method across a range
-of terrain difficulties and commanded velocities. The results
-indicate that GaitNet outperforms the baseline in most scenarios,
-particularly on more challenging terrains and at higher commanded
-speeds. This demonstrates the effectiveness of GaitNet in generating
-robust gaits capable of adapting to varying conditions.
+\autoref{fig:data-experiments-survival-curr} and
+\autoref{fig:data-experiments-baseline-method}
+illustrate the performance of GaitNet and the baseline method,
+respectively, across a range of terrain difficulties and commanded
+velocities. The results indicate that GaitNet outperforms the
+baseline in most scenarios, particularly on more challenging terrains
+and at higher commanded speeds. This demonstrates the effectiveness
+of GaitNet in generating robust gaits capable of adapting to varying conditions.
 
 A closer examination of the graphs reveals that GaitNet maintains
 strong performance when the commanded velocity is below 0.15\,m/s or
@@ -54,11 +55,45 @@ benefits of its dynamic, acyclic gait generation capabilities.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{images/data/terrain-evaluation-comparison.png}
-  \caption{Evaluation of GaitNet vs. single leg motion planner
-    across various terrain difficulties and commanded velocities.
-    Mean success rate measured as the percentage of 150 trials
-    which completed 20\,s without terminating, under the termination
-  conditions described in \autoref{sec:appendix-termination-functions}.}
-  \label{fig:data-terrain-evaluation-comparison}
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/experiments/Gaitnet
+    - survival-curr - 69.4 - individual.png}
+    \caption{GaitNet Evaluation. Overall survival rate of 69.4\%.
+      Mean success rate measured as the percentage of 150 trials
+      which completed 20\,s without terminating, under the termination
+      conditions described in
+      \autoref{sec:appendix-termination-functions}.   Data point shapes
+    denote different training instances.}
+    \label{fig:data-experiments-survival-curr}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/experiments/Contactnet
+    - baseline-method - 25.6 - individual.png}
+    \caption{Single Leg Motion Planner Evaluation. Overall survival
+      rate of 25.6\%. Mean success rate measured as the percentage of 150 trials
+      which completed 20\,s without terminating, under the termination
+    conditions described in \autoref{sec:appendix-termination-functions}.}
+    \label{fig:data-experiments-baseline-method}
+  \end{minipage}
+  \hfill
+  % \caption{Evaluation of GaitNet vs. single leg motion planner   %
+  %  across various terrain difficulties and commanded velocities.
+  % %   Mean success rate measured as the percentage of 150 trials
+  % %   which completed 20\,s without terminating, under the
+  % termination   % conditions described in
+  % \autoref{sec:appendix-termination-functions}.}   %
+  % \label{fig:data-terrain-evaluation-comparison}
 \end{figure}
+
+% \begin{figure}[H] %   \centering %
+% \includegraphics[width=\textwidth]{images/data/terrain-evaluation-comparison.png}
+% %   \caption{Evaluation of GaitNet vs. single leg motion planner %
+%    across various terrain difficulties and commanded velocities. %
+%    Mean success rate measured as the percentage of 150 trials %
+% which completed 20\,s without terminating, under the termination %
+%  conditions described in
+% \autoref{sec:appendix-termination-functions}.} %
+% \label{fig:data-terrain-evaluation-comparison} % \end{figure}
