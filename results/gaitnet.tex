@@ -25,11 +25,6 @@ During this faster phase, the robot occasionally executes two steps
 simultaneously and does not follow a strict alternating pattern,
 further highlighting the system's flexibility in generating acyclic gaits.
 
-\begin{todo}
-  Modify figure \autoref{fig:data-swing-schedule} to show   the
-  terrain/robot at multiple time stamps.
-\end{todo}
-
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/data/swing-schedule.png}
@@ -38,14 +33,25 @@ further highlighting the system's flexibility in generating acyclic gaits.
   \label{fig:data-swing-schedule}
 \end{figure}
 
-\begin{todo}
-  Include figure showing the distribution of swing durations.
-\end{todo}
+To ensure the consistency of the training process, we trained GaitNet
+3 times. Due to compute limitations, the 700 step training curriculum
+needed to be split into multiple runs. The runs were typically 350
+steps long. This has the side-effect of resetting the distribution of
+terrain levels, which can cause dis-continuities in certian training metrics.
 
-\begin{todo}
-  Include training figures from tensorboard detailing how the model
-  improves over time.
-\end{todo}
+The mean episode reward during training is shown in
+\autoref{fig:data-training-mean-reward}. Each training instance shows a
+similar trend, with the reward increasing as the model learns to
+navigate the terrain.
+
+Another important metric is the mean steps per second. Initially,
+with limited training, the model moves its legs very frequently,
+leading to unstable motion. In initial experiments, It was found that
+this issue does not resolve well  without guidance from the reward function.
+\autoref{sec:appendix-reward-function-analysis} goes into more detail
+on this issue, but the results are shown in
+\autoref{fig:data-training-steps-per-second}. The mean steps per second
+starts high and decreases as the model learns to take more stable steps.
 
 \begin{figure}[H]
   \centering
@@ -65,4 +71,56 @@ further highlighting the system's flexibility in generating acyclic gaits.
     \label{fig:data-training-steps-per-second}
   \end{minipage}
   \hfill
+\end{figure}
+
+During training, the GaitNet model learns to adjust swing durations
+based on its input, as illustrated with
+\autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
+The mean swing duration settles to 0.24\,s with a standard deviation
+of 0.034\,s, indicating that the model uses a wide range of its
+allowable swing durations. These figures highlight how the model
+learns to effectively utilize dynamic swing durations to adapt to
+varying conditions.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_mean_survival-curr.png}
+    \caption{Mean swing duration across all environments during
+    GaitNet training. Each color is a different training instance.}
+    \label{fig:data-duration-mean}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
+    \caption{Swing duration standard deviation across all
+      environments during GaitNet training. Each color is a different
+    training instance.}
+    \label{fig:data-duration-std}
+  \end{minipage}
+  \hfill
+\end{figure}
+
+\begin{todo}
+  explore a per-leg analysis of swing durations
+\end{todo}
+
+\begin{figure}
+  \centering
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/swing_duration_histogram.png}
+    \caption{Histogram of swing durations selected by GaitNet}
+    \label{fig:data-swing-duration-histogram}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/data/swing_duration_histogram_easy_vs_hard.png}
+    \caption{Comparison of swing durations on easy and hard terrain
+    (0\% vs 40\% terrain difficulty).}
+    \label{fig:data-swing-duration-histogram-easy-vs-hard}
+  \end{minipage}
 \end{figure}

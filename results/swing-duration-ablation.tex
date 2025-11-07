@@ -7,50 +7,9 @@ models: the standard GaitNet formulation as described in
 \autoref{sec:methodology-gaitnet}, and a Duration-Ablated-GaitNet trained
 with a fixed swing duration.
 
-During training, the GaitNet model learns to adjust swing durations
-based on its input, as illustrated with
-\autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
-The mean swing duration settles to 0.24\,s with a standard deviation
-of 0.034\,s, indicating that the model uses a wide range of its
-allowable swing durations. These figures highlight how the model
-learns to effectively utilize dynamic swing durations to adapt to
-varying conditions.
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_mean_survival-curr.png}
-    \caption{Mean swing duration across all environments during
-    GaitNet training. Each color is a different training instance.}
-    \label{fig:data-duration-mean}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
-    \caption{Swing duration standard deviation across all
-      environments during GaitNet training. Each color is a different
-    training instance.}
-    \label{fig:data-duration-std}
-  \end{minipage}
-  \hfill
-\end{figure}
-
-Furthermore, a histogram of swing durations selected by GaitNet
-during training, shown in \autoref{fig:data-duration-histogram},
-reveals a broad distribution of values. This indicates that the model
-is not biased towards a narrow range of swing durations, but rather
-effectively leverages the flexibility provided by dynamic swing
-durations to optimize its gait.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.45\textwidth]{example-image-a}
-  \caption{Histogram of swing durations selected by GaitNet
-  during evaluation, showing a wide distribution of values.}
-  \label{fig:data-duration-histogram}
-\end{figure}
+\begin{todo}
+  tie back to the swing duration histogram
+\end{todo}
 
 Now, we train the Duration-Ablated-GaitNet model, setting the swing
 duration to a constant 0.24\,s. The training process is identical to
@@ -62,19 +21,45 @@ performance of both models is then evaluated using the same metrics outlined in
   \centering
   \includegraphics[width=0.45\textwidth]{images/data/experiments/Gaitnet
   - swing-duration - 67.2 - individual.png}
-  \caption{Evaluation Duration-Ablated-GaitNet
+  \caption{Evaluation of Duration-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
-    Overall survival rate of 67.2\%.     Mean success rate measured as
-    the percentage of 50 episodes     which completed 20\,s without
-    terminating, under the termination   conditions described in
+    Overall survival rate of 67.2\%.     Mean success rate measured
+    as     the percentage of 50 episodes     which completed 20\,s
+    without     terminating, under the termination   conditions described in
   \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-duration-ablation-comparison}
 \end{figure}
 
 \autoref{fig:data-duration-ablation-comparison} presents the
-performance comparison between the standard GaitNet and the
-duration-ablated variant. The results indicate that the standard
-GaitNet outperforms the duration-ablated model across a range of
-terrain difficulties and commanded velocities. This demonstrates the
-effectiveness of dynamic swing duration in enhancing GaitNet's
-ability to adapt to varying conditions and generate robust gaits.
+performance of the Duration-Ablated-GaitNet. The results indicates
+negligible performance changes over standard GaitNet formulation.
+GaitNet was able to achieve an overall survival rate of 69.4\%
+(\autoref{fig:data-experiments-survival-curr}), while the
+Cost-Ablated-GaitNet achieved a survival rate of 67.2\%
+(\autoref{fig:data-duration-ablation-comparison}). This suggests that
+GaitNet may not be using the dynamic swing duration feature
+effectively, or it may not be an important consideration in the
+static environment being tested in.
+
+This conclusion is further supported by the mean episode reward
+during training, as shown in
+\autoref{fig:data-duration-ablation-reward}. The steady state
+behavior of the reward curves for both models indicates that the
+Duration-Ablated-GaitNet is able to learn a policy that performs
+comparably to the standard GaitNet, despite the lack of dynamic swing duration.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/data/training/gaitnet/mean_reward_survival-curr_vs_swing-duration.png}
+  \caption{Mean episode reward during training for GaitNet and
+  Duration-Ablated-GaitNet.}
+  \label{fig:data-duration-ablation-reward}
+\end{figure}
+
+These findings suggest that dynamic swing duration may not be a
+critical factor for GaitNet's performance in the tested environments.
+However, it is important to note that this conclusion may not hold in
+more complex or dynamic environments, where the ability to adjust
+swing duration could provide a significant advantage. Future work
+should explore the impact of dynamic swing duration in a wider range
+of environments and conditions
