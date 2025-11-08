@@ -38,13 +38,21 @@ with the intent to improve the model's performance in situations with
 high rotational velocities.
 
 The network is trained on heuristically computed footstep cost maps
-(\autoref{fig:data-costmap-composition-combined}), which estimate the
+(\autoref{fig:data-contactnet-costmap}), which estimate the
 cost of moving each foot to candidate positions given the current
 robot state. These maps are represented as four $5 \times 5$ grids,
 one for each leg. This choice also differs from the implementation in
 \cite{bratta_contactnet_2024}. This grid size was selected to provide
 more information for each foot, important later when sampling
 footstep candidates.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/data/footstep-cost-map.png}
+  \caption{Example footstep cost maps for all four legs. Darker colors
+    indicate lower cost (more favorable) footstep positions.}
+  \label{fig:data-contactnet-costmap}
+\end{figure}
 
 The architecture of the footstep evaluation network is shown in
 \autoref{fig:diagram-contactnet-architecture}. It consists of a
@@ -120,7 +128,9 @@ to the overall methodology.
 \autoref{fig:data-cn-training-distribution} illustrates the
 distribution of foot positions in the training dataset. Darker
 regions correspond to discrete points on the $5 \times 5$ footstep
-grids; a foot occupies a given position if it was moved there in that iteration.
+grids; a foot occupies a given position if it was moved there in that 
+iteration. The uniform coverage indicates that the training dataset
+effectively captures a wide range of states.
 
 \begin{figure}[H]
   \centering
