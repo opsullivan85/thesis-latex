@@ -41,17 +41,16 @@ footstep and the desired swing duration if that step is selected.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.625\linewidth]{images/diagrams/gait-network-architecture.png}
-  \caption{Gait net architecture. Sections of the diagram include the
-    footstep candidate encoder in red,     robot state encoder in blue,
-    and shared trunk in green.     The final output is a logit encoding
-    the value of this option and the   desired swing duration if this
-  action is taken.}
+  \caption{GaitNet architecture. Sections of the diagram include the
+    footstep candidate encoder in red, robot state encoder in blue, and
+    shared trunk in green. The final output is a logit encoding the
+  value of this option and the desired swing duration if this action is taken.}
   \label{fig:diagram-gaitnet-architecture}
 \end{figure}
 
 The model is designed to jointly evaluate robot state and footstep
 candidates with a middle fusion architecture \cite{feng2021deep}. The
-architecture (seen in \autoref{fig:diagram-gaitnet-architecture})
+architecture (shown in \autoref{fig:diagram-gaitnet-architecture})
 consists of two encoders, a shared trunk, and two task-specific output heads:
 
 \begin{itemize}
@@ -64,7 +63,7 @@ consists of two encoders, a shared trunk, and two task-specific output heads:
     activations. No-action candidates are represented through a fixed embedding.
   \item Shared trunk: The concatenated robot state and footstep
     embeddings are processed by a three-layer feedforward trunk,
-    reducing dimensionality while applying Layer Normalization and
+    reducing dimensionality while applying layer normalization and
     ReLU nonlinearity.
   \item Output heads: Two parallel prediction heads are applied to
     the shared trunk:
@@ -79,8 +78,8 @@ consists of two encoders, a shared trunk, and two task-specific output heads:
 
 This design allows the network to sequentially evaluate multiple
 footstep candidates, assigning each an expected value and a feasible
-swing duration, while explicitly supporting a “no-action” option via
-a dedicated embedding.
+swing duration, while explicitly supporting a no-action option via a
+dedicated embedding.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Training}
@@ -115,4 +114,4 @@ duration are then combined to form a complete footstep action.
 Following the reward structure, termination conditions, commands, and
 hyperparameters outlined in
 \autoref{chap:appendix-gaitnet-training-configuration}, GaitNet is
-trained for ?? environment steps using a batch size of ??.
+trained for 750 environment steps using 100 agents in parallel.

@@ -1,6 +1,9 @@
 # Created by https://gitignore.org
 # TeX.gitignore
 
+**/.*
+**/.vscode
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

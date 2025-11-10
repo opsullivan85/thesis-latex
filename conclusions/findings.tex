@@ -4,3 +4,110 @@
 \begin{outline}
   Reiterate your key findings and how they support your hypothesis.
 \end{outline}
+
+This thesis presents GaitNet, a novel neural network-based greedy
+planner for generating dynamic, acyclic gaits in quadruped robots
+operating in challenging environments. Through a hierarchical hybrid
+control architecture that combines learned footstep evaluation with
+reinforcement learning-based gait selection, this work demonstrates
+that efficient, terrain-adaptive locomotion can be achieved without
+relying on predefined gait patterns.
+
+GaitNet successfully generates non-periodic, dynamically stable gaits
+that adapt to varying terrain conditions and commanded velocities.
+Unlike traditional approaches that rely on fixed gait patterns (trot,
+walk, etc.), the system learns to coordinate multi-leg motions with
+variable timing, moving up to two legs simultaneously when conditions
+permit. The generated swing schedules
+(\autoref{fig:data-swing-schedule}) demonstrate true acyclic
+behavior, with the robot adjusting its gait pattern in response to
+both terrain difficulty and commanded velocity without following
+repetitive cycles.
+
+Comparative evaluation against a single leg motion planner baseline
+reveals substantial performance improvements. GaitNet achieves a
+\resGaitNetSurvivalRate survival rate across diverse terrain difficulties and
+commanded velocities, compared to \resBaselineSurvivalRate for the
+baseline method (\autoref{fig:data-experiments-survival-curr}
+and~\autoref{fig:data-experiments-baseline-method}). This improvement
+is particularly pronounced at higher speeds and on more challenging
+terrain, demonstrating the value of dynamic gait coordination. The
+baseline method's performance degrades rapidly above \expLowestSpeed
+commanded velocity, while GaitNet maintains robust performance up to 0.15\,m/s.
+
+The footstep evaluation network, adapted from ContactNet
+\cite{bratta_contactnet_2024}, successfully generates high-quality
+footstep candidates for the gait selection process. The network
+demonstrates strong generalization across diverse robot states,
+accurately identifying low-cost foothold regions even in challenging
+configurations (\autoref{fig:data-cn-typical-comparison}
+and~\autoref{fig:data-cn-challenging-comparison}). While not perfect
+in all scenarios, the network fulfills its role as a candidate
+generator, providing sufficient diversity for downstream selection.
+
+GaitNet learns to modulate swing durations based on environmental
+conditions, with mean swing duration of \resGaitNetMeanSwingDuration
+and standard deviation of \resGaitNetSTDSwingDuration during
+evaluation. The system selects longer swing durations on more
+challenging terrain
+(\autoref{fig:data-swing-duration-histogram-easy-vs-hard}),
+indicating a more cautious gait strategy when stability is at greater
+risk. However, the swing duration ablation study reveals that this
+feature provides only marginal performance benefits (2.2\% difference
+in survival rate) in the tested environments, suggesting either that
+the current scenarios do not fully exploit this capability or that
+the reward structure does not adequately incentivize optimal duration selection.
+
+Perhaps the most surprising finding emerges from the action cost
+ablation study, which demonstrates that removing the footstep
+candidate cost from GaitNet's input actually improves performance.
+Cost-Ablated-GaitNet achieves a \resCostAblatedSurvivalRate survival
+rate, representing an 8.3 percentage point improvement over the
+standard formulation. This result challenges conventional wisdom
+about hybrid architectures and suggests that learned heuristics from
+perception modules may constrain rather than enhance downstream
+reinforcement learning. The correlation analysis
+(\autoref{fig:data-action-cost-correlation}) shows that while GaitNet
+initially relies heavily on the provided costs, this dependence
+decreases during training as the network learns to prioritize other
+state features.
+
+Cost-Ablated-GaitNet exhibits naturally more efficient behavior,
+taking fewer redundant steps and maintaining a lower overall cadence
+(\autoref{fig:data-action-cost-ablation-steps-per-second}) without
+explicit reward shaping for these characteristics. This emergent
+efficiency suggests that when freed from pre-computed heuristic
+constraints, the reinforcement learning process discovers more
+globally optimal locomotion strategies. The comparison of swing
+schedules (\autoref{fig:data-action-cost-ablation-swing-duration})
+illustrates this efficiency, with fewer instances of the same foot
+being repositioned multiple times in succession.
+
+The greedy planning approach enables real-time operation suitable for
+online control. Unlike MCTS-based or full trajectory optimization
+methods that require substantial computation for each decision,
+GaitNet performs a single forward pass through a relatively compact
+neural network to evaluate and rank discrete action candidates. This
+computational efficiency is achieved without sacrificing performance,
+as demonstrated by the system's superior results compared to more
+sophisticated but slower planning approaches from the literature.
+
+The hierarchical design successfully bridges learning-based and
+model-based control paradigms. By decomposing the problem into
+footstep candidate generation and gait selection, the architecture
+provides interpretability and safety through explicit action
+filtering while maintaining the adaptability of learned policies. The
+strict constraints on possible actions prevent invalid or unsafe
+motions while allowing sufficient flexibility for dynamic,
+terrain-adaptive behavior.
+
+In summary, this work validates the hypothesis that a greedy, neural
+network-based planner integrated within a hybrid control framework
+can generate dynamic, acyclic gaits for robust quadruped locomotion.
+The findings provide valuable insights into the design of hybrid
+locomotion controllers, particularly regarding the role of learned
+heuristics and the balance between constraint and flexibility in
+action selection. While absolute performance leaves room for
+improvement, the demonstrated capabilities and unexpected insights
+from ablation studies establish a foundation for future development
+of adaptive legged locomotion systems.

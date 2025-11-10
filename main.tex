@@ -1,6 +1,6 @@
 \documentclass{report}
 % Set page size and margins % Replace `letterpaper' with `a4paper' %
-% % % % % % for UK/EU standard size
+% % % % % % % % % % % % for UK/EU standard size
 \usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -16,14 +16,14 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
-% \usepackage{minted}  % Code formatting
+% \usepackage{minted} % Code formatting
 \usepackage{etoolbox}
 \usepackage{comment}
 \usepackage[most]{tcolorbox}
 \usepackage{import}
 \usepackage{amssymb}
-% \usepackage{refcheck}  % uncomment and check log for "Unused label"
-% % % \usepackage[inline]{showlabels} % shows labels for easier referencing
+% \usepackage{refcheck} % uncomment and check log for "Unused label"
+% % \usepackage[inline]{showlabels} % shows labels for easier referencing
 \usepackage{changepage} % provides adjustwidth
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -47,15 +47,15 @@
 
 \newtoggle{todo_toggle}
 \toggletrue{todo_toggle}  % Enable
-\togglefalse{todo_toggle}  % Disable
+\togglefalse{todo_toggle} % Disable
 
 \newtcolorbox{emphasis}{
-  colback=gray!10,   colframe=gray!50,   boxrule=0.5pt,   arc=4pt,
-left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
+  colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=4pt, left=4pt,
+right=4pt, top=4pt, bottom=4pt }
 
 \newtcolorbox{todo_box}{
-  colback=yellow!20,   colframe=yellow!70,   boxrule=0.5pt,   arc=4pt,
-left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
+  colback=yellow!20, colframe=yellow!70, boxrule=0.5pt, arc=4pt,
+left=4pt, right=4pt, top=4pt, bottom=4pt }
 
 \iftoggle{todo_toggle}{
   \newlength{\todoshift}%
@@ -65,7 +65,7 @@ left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
   {%
     \begin{adjustwidth}{-\todoshift}{0pt}%
       \begin{todo_box}\noindent\textbf{TODO:}\quad
-      }       {%
+      } {%
       \end{todo_box}
     \end{adjustwidth}\par
 } }{
@@ -84,50 +84,9 @@ left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
 
 \begin{document}
 
-% Cover Page
-\begin{titlepage}
-  \centering
-  \vspace*{1cm}
+\input{constants.tex}
 
-  \includegraphics[width=0.4\textwidth]{images/wpi-logo.png}\par\vspace{1cm}
-  % Adjust the width as needed
-
-  \Huge
-  \textbf{GaitNet: Greedy, Dynamic Quadruped Gait Generation}
-
-  \vspace{0.5cm}
-  \LARGE
-
-  \vspace{1.5cm}
-
-  \textbf{Owen Sullivan}
-
-  \vfill
-
-  \Large
-  Supervisors: \\   Prof. Mahdi Agheli
-
-  \vspace{0.8cm}
-
-  \Large
-  Worcester Polytechnic Institute \\   {\small \today}
-
-\end{titlepage}
-
-\newpage
-\pagenumbering{roman}
-\setcounter{page}{1}
-
-\newpage
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
-\include{list-of-abbreviations}
-\newpage
-\include{list-of-symbols}
+\include{header/header}
 
 \newpage
 % \begin{doublespacing}

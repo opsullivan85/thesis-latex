@@ -1,7 +1,7 @@
 \section{Footstep Evaluation Network}
 \label{sec:results-footstep-evaluation-network}
 
-The results of the Footstep Evaluation Network are highly promising,
+The results of the footstep evaluation network are highly promising,
 with the model able to predict footstep candidate maps with strong
 accuracy. \autoref{fig:data-cn-typical-comparison} shows the model
 output alongside the ground truth for a typical data sample.
@@ -19,36 +19,36 @@ positions to generate candidate actions for the GaitNet policy.
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/typical-expected.png}
+    \includegraphics[width=\textwidth]{images/data/training/contactnet/typical-expected.png}
   \end{minipage}
   \hfill
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/typical-calculated.png}
+    \includegraphics[width=\textwidth]{images/data/training/contactnet/typical-calculated.png}
   \end{minipage}
   \hfill
 
   \caption{Typical data samples showing calculated (left) and
-  expected (right) quadruped images.}
+  expected (right) footstep cost maps.}
   \label{fig:data-cn-typical-comparison}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/challenging-expected.png}
+    \includegraphics[width=\textwidth]{images/data/training/contactnet/challenging-expected.png}
   \end{minipage}
   \hfill
-  \begin{minipage}[T]{0.45\textwidth}
+  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/challenging-calculated.png}
+    \includegraphics[width=\textwidth]{images/data/training/contactnet/challenging-calculated.png}
   \end{minipage}
   \hfill
 
   \caption{Particularly challenging data samples showing calculated (left) and
-  expected (right) quadruped images.}
+  expected (right) footstep cost maps.}
   \label{fig:data-cn-challenging-comparison}
 \end{figure}
