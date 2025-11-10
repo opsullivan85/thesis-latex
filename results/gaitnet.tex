@@ -18,7 +18,7 @@ dynamically varying step timing.
 
 Another important observation from \autoref{fig:data-swing-schedule}
 is the system's response to changing control inputs. Between
-0-7.5\,s, the robot is commanded to follow a slow input, and the
+0--7.5\,s, the robot is commanded to follow a slow input, and the
 system takes a cautious approach, moving one foot at a time. After
 7.5\,s, the input speed increases, prompting a more dynamic gait.
 During this faster phase, the robot occasionally executes two steps
@@ -33,11 +33,12 @@ further highlighting the system's flexibility in generating acyclic gaits.
   \label{fig:data-swing-schedule}
 \end{figure}
 
-To ensure the consistency of the training process, we trained GaitNet
-3 times. Due to compute limitations, the 700 step training curriculum
-needed to be split into multiple runs. The runs were typically 350
-steps long. This has the side-effect of resetting the distribution of
-terrain levels, which can cause dis-continuities in certian training metrics.
+To ensure the consistency of the training process, GaitNet was
+trained three times. Due to computational limitations, the 700-step
+training  curriculum needed to be split into multiple runs. The runs
+were typically  350 steps long. This has the side effect of resetting
+the distribution of terrain levels, which can cause discontinuities
+in certain training metrics.
 
 The mean episode reward during training is shown in
 \autoref{fig:data-training-mean-reward}. Each training instance shows a
@@ -46,9 +47,9 @@ navigate the terrain.
 
 Another important metric is the mean steps per second. Initially,
 with limited training, the model moves its legs very frequently,
-leading to unstable motion. In initial experiments, It was found that
-this issue does not resolve well  without guidance from the reward function.
-\autoref{sec:appendix-reward-function-analysis} goes into more detail
+leading to unstable motion. In initial experiments, it was found that
+this issue does not resolve well without guidance from the reward function.
+\autoref{sec:appendix-reward-function-analysis} provides more detail
 on this issue, but the results are shown in
 \autoref{fig:data-training-steps-per-second}. The mean steps per second
 starts high and decreases as the model learns to take more stable steps.
@@ -58,23 +59,23 @@ starts high and decreases as the model learns to take more stable steps.
   \begin{minipage}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/training/gaitnet/mean_reward_survival-curr.png}
-    \caption{Mean episode reward during GaitNet training. Each is a
-    different training instance.}
+    \caption{Mean episode reward during GaitNet training. Each color
+    represents a different training instance.}
     \label{fig:data-training-mean-reward}
   \end{minipage}
   \hfill
   \begin{minipage}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/training/gaitnet/steps_per_second_survival-curr.png}
-    \caption{Mean steps per second during GaitNet training. Each is a
-    different training instance.}
+    \caption{Mean steps per second during GaitNet training. Each color
+    represents a different training instance.}
     \label{fig:data-training-steps-per-second}
   \end{minipage}
   \hfill
 \end{figure}
 
 During training, the GaitNet model learns to adjust swing durations
-based on its input, as illustrated with
+based on its input, as illustrated in
 \autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
 The mean swing duration settles to 0.24\,s with a standard deviation
 of 0.034\,s, indicating that the model uses a wide range of its
@@ -88,7 +89,7 @@ varying conditions.
     \centering
     \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_mean_survival-curr.png}
     \caption{Mean swing duration across all environments during
-    GaitNet training. Each color is a different training instance.}
+    GaitNet training. Each color represents a different training instance.}
     \label{fig:data-duration-mean}
   \end{minipage}
   \hfill
@@ -96,8 +97,8 @@ varying conditions.
     \centering
     \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
     \caption{Swing duration standard deviation across all
-      environments during GaitNet training. Each color is a different
-    training instance.}
+      environments during GaitNet training. Each color represents a
+    different       training instance.}
     \label{fig:data-duration-std}
   \end{minipage}
   \hfill
@@ -105,20 +106,21 @@ varying conditions.
 
 A histogram of swing durations selected by GaitNet is shown in
 \autoref{fig:data-swing-duration-histogram}. This data was collected
-in the experiments described in \autoref{sec:results-baseline-comparison}.
-The distribution shows that GaitNet effectively optimizes the swing duration
-from the nominal value of 0.2\,s. The model also learns to select different
+in the experiments described in
+\autoref{sec:results-baseline-comparison}. The distribution shows
+that GaitNet effectively optimizes the swing duration from the
+nominal value of 0.2\,s. The model also learns to select different
 swing durations for the front and rear legs.
 
 \autoref{fig:data-swing-duration-histogram-easy-vs-hard} compares the
-swing duration distributions on easy (0\% terrain difficulty) and hard
-(40\% terrain difficulty) terrains. On harder terrain, the model
+swing duration distributions on easy (0\% terrain difficulty) and
+hard (40\% terrain difficulty) terrains. On harder terrain, the model
 selects slightly longer swing durations on average, indicating a more
 cautious gait. This adaptability demonstrates GaitNet's ability to
 modify its gait based on terrain difficulty.
 
 \begin{todo}
-  explore a per-leg analysis of swing durations
+  Explore a per-leg analysis of swing durations.
 \end{todo}
 
 \begin{figure}
@@ -126,7 +128,7 @@ modify its gait based on terrain difficulty.
   \begin{minipage}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/data/swing_duration_histogram.png}
-    \caption{Histogram of swing durations selected by GaitNet}
+    \caption{Histogram of swing durations selected by GaitNet.}
     \label{fig:data-swing-duration-histogram}
   \end{minipage}
   \hfill
@@ -134,7 +136,7 @@ modify its gait based on terrain difficulty.
     \centering
     \includegraphics[width=\textwidth]{images/data/swing_duration_histogram_easy_vs_hard.png}
     \caption{Comparison of swing durations on easy and hard terrain
-    (0\% vs 40\% terrain difficulty).}
+    (0\% versus 40\% terrain difficulty).}
     \label{fig:data-swing-duration-histogram-easy-vs-hard}
   \end{minipage}
 \end{figure}
