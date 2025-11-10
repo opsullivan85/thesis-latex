@@ -1,6 +1,6 @@
 \documentclass{report}
 % Set page size and margins % Replace `letterpaper' with `a4paper' %
-% % % % % % % for UK/EU standard size
+% % % % % % % % for UK/EU standard size
 \usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -84,50 +84,7 @@ left=4pt,   right=4pt,   top=4pt,   bottom=4pt }
 
 \begin{document}
 
-% Cover Page
-\begin{titlepage}
-  \centering
-  \vspace*{1cm}
-
-  \includegraphics[width=0.4\textwidth]{images/wpi-logo.png}\par\vspace{1cm}
-  % Adjust the width as needed
-
-  \Huge
-  \textbf{GaitNet: Greedy, Dynamic Quadruped Gait Generation}
-
-  \vspace{0.5cm}
-  \LARGE
-
-  \vspace{1.5cm}
-
-  \textbf{Owen Sullivan}
-
-  \vfill
-
-  \Large
-  Supervisors: \\   Prof. Mahdi Agheli
-
-  \vspace{0.8cm}
-
-  \Large
-  Worcester Polytechnic Institute \\   {\small \today}
-
-\end{titlepage}
-
-\newpage
-\pagenumbering{roman}
-\setcounter{page}{1}
-
-\newpage
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
-\include{list-of-abbreviations}
-\newpage
-\include{list-of-symbols}
+\include{header/header}
 
 \newpage
 % \begin{doublespacing}
