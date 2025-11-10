@@ -21,23 +21,17 @@ Beyond performance metrics, the findings carry broader implications
 for the design of locomotion systems. The success of the greedy
 planning strategy highlights the potential of lightweight,
 inference-efficient neural networks for real-time decision-making in
-high-dimensional control problems. Meanwhile, the observed
-limitations and ablation results underscore the importance of
-balanced modularity: while perception and candidate generation can
-benefit from structured learning, value estimation and motion
-selection appear to thrive under end-to-end reinforcement learning
-paradigms that capture full dynamical context.
+high-dimensional control problems.
 
 Equally important are the insights into learning dynamics and
 representation. The discovery that removing pre-computed cost terms
-improves performance challenges common assumptions about heuristic
-guidance in reinforcement learning. This suggests that hybrid
-controllers should not merely layer learned modules on top of
-existing heuristics, but rather allow networks to develop their own
-internal representations of value and risk through exploration. As
-such, the future of legged locomotion control may depend less on
-handcrafted structure and more on architectures that enable learned
-coordination within well-defined safety boundaries.
+improves performance suggests that hybrid controllers should not
+merely layer learned modules on top of existing heuristics, but
+rather allow networks to develop their own internal representations
+of value and risk through exploration. As such, the future of legged
+locomotion control may depend less on handcrafted structure and more
+on architectures that enable learned coordination within well-defined
+safety boundaries.
 
 In closing, this work contributes to the growing evidence that
 data-driven methods can coexist effectively with analytical control

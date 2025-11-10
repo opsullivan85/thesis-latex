@@ -63,10 +63,7 @@ ablation study, which demonstrates that removing the footstep
 candidate cost from GaitNet's input actually improves performance.
 Cost-Ablated-GaitNet achieves a \resCostAblatedSurvivalRate survival
 rate, representing an 8.3 percentage point improvement over the
-standard formulation. This result challenges conventional wisdom
-about hybrid architectures and suggests that learned heuristics from
-perception modules may constrain rather than enhance downstream
-reinforcement learning. The correlation analysis
+standard formulation. The correlation analysis
 (\autoref{fig:data-action-cost-correlation}) shows that while GaitNet
 initially relies heavily on the provided costs, this dependence
 decreases during training as the network learns to prioritize other
@@ -88,9 +85,7 @@ online control. Unlike MCTS-based or full trajectory optimization
 methods that require substantial computation for each decision,
 GaitNet performs a single forward pass through a relatively compact
 neural network to evaluate and rank discrete action candidates. This
-computational efficiency is achieved without sacrificing performance,
-as demonstrated by the system's superior results compared to more
-sophisticated but slower planning approaches from the literature.
+computational efficiency is achieved while maintaining robust performance.
 
 The hierarchical design successfully bridges learning-based and
 model-based control paradigms. By decomposing the problem into

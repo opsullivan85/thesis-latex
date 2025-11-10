@@ -23,10 +23,10 @@ to \resBaselineSurvivalRate for the baseline, demonstrates that the
 system's ability to coordinate multi-leg motions and adapt timing
 significantly improves robustness. This improvement is particularly
 pronounced at higher commanded velocities and terrain difficulties,
-where the baseline's fixed, sequential leg motion strategy fails. The
-performance gap narrows only in the easiest conditions (below 5\%
-terrain difficulty and 0.05~m/s velocity), suggesting that dynamic
-gait planning becomes increasingly valuable as task complexity increases.
+where the baseline's single leg motion strategy fails. The
+performance gap narrows only in the easiest conditions (at 0.05~m/s
+velocity), suggesting that dynamic gait planning becomes increasingly
+valuable as task complexity increases.
 
 The swing duration ablation study
 (\autoref{sec:results-swing-ablation-study}) yields a surprising
@@ -41,7 +41,7 @@ benefits. Second, the reward function may not adequately incentivize
 optimal swing duration selection, causing the network to default to
 near-constant timing regardless of capability. The observation that
 trained GaitNet naturally converges to a mean swing duration of
-\resGaitNetMeanSwingDuration~s with only modest variation (standard deviation of
+\resGaitNetMeanSwingDuration with only modest variation (standard deviation of
 \resGaitNetSTDSwingDuration) supports this interpretation. Future
 work in more dynamic environments or with revised reward structures
 may reveal greater utility for this feature.
@@ -68,7 +68,7 @@ Moreover, Cost-Ablated-GaitNet exhibits a naturally slower cadence
 redundant footsteps
 (\autoref{fig:data-action-cost-ablation-swing-duration}), indicating
 more deliberate and efficient gait patterns. This behavior emerges
-without explicit reward shaping, suggesting that the model better
+without different reward shaping, suggesting that the model better
 captures the underlying dynamics when not constrained by pre-computed
 costs. The slower initial learning observed in Cost-Ablated-GaitNet
 represents a worthwhile trade-off for superior final performance, as
@@ -92,11 +92,12 @@ The results also highlight opportunities for improvement. The
 relatively modest absolute performance (\resCostAblatedSurvivalRate
 best-case survival rate) indicates room for enhancement through
 reward function refinement, network architecture modifications, or
-extended training. The limited impact of dynamic swing duration
-suggests that either the feature requires more sophisticated use
-cases to demonstrate value, or the current implementation does not
-adequately expose its potential benefits. Future work incorporating
-prediction horizons or more complex terrain may better exploit this capability.
+improved low level control. The limited impact of dynamic swing
+duration suggests that either the feature requires more sophisticated
+use cases to demonstrate value, or the current implementation does
+not adequately expose its potential benefits. Future work
+incorporating prediction horizons or more complex terrain may better
+exploit this capability.
 
 Overall, this work demonstrates that greedy, neural network-based
 planners can generate effective dynamic gaits for quadruped robots.
