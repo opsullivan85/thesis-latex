@@ -35,8 +35,8 @@ further highlighting the system's flexibility in generating acyclic gaits.
 
 To ensure the consistency of the training process, GaitNet was
 trained three times. Due to computational limitations, the 700-step
-training  curriculum needed to be split into multiple runs. The runs
-were typically  350 steps long. This has the side effect of resetting
+training curriculum needed to be split into multiple runs. The runs
+were typically 350 steps long. This has the side effect of resetting
 the distribution of terrain levels, which can cause discontinuities
 in certain training metrics.
 
@@ -77,11 +77,11 @@ starts high and decreases as the model learns to take more stable steps.
 During training, the GaitNet model learns to adjust swing durations
 based on its input, as illustrated in
 \autoref{fig:data-duration-mean} and \autoref{fig:data-duration-std}.
-The mean swing duration settles to 0.24\,s with a standard deviation
-of 0.034\,s, indicating that the model uses a wide range of its
-allowable swing durations. These figures highlight how the model
-learns to effectively utilize dynamic swing durations to adapt to
-varying conditions.
+The mean swing duration settles to \resGaitNetMeanSwingDuration with
+a standard deviation of \resGaitNetSTDSwingDuration, indicating that
+the model uses a wide range of its allowable swing durations. These
+figures highlight how the model learns to effectively utilize dynamic
+swing durations to adapt to varying conditions.
 
 \begin{figure}[H]
   \centering
@@ -98,7 +98,7 @@ varying conditions.
     \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
     \caption{Swing duration standard deviation across all
       environments during GaitNet training. Each color represents a
-    different       training instance.}
+    different training instance.}
     \label{fig:data-duration-std}
   \end{minipage}
   \hfill
@@ -113,11 +113,12 @@ nominal value of 0.2\,s. The model also learns to select different
 swing durations for the front and rear legs.
 
 \autoref{fig:data-swing-duration-histogram-easy-vs-hard} compares the
-swing duration distributions on easy (0\% terrain difficulty) and
-hard (40\% terrain difficulty) terrains. On harder terrain, the model
-selects slightly longer swing durations on average, indicating a more
-cautious gait. This adaptability demonstrates GaitNet's ability to
-modify its gait based on terrain difficulty.
+swing duration distributions on easy (\expLowestDifficulty terrain
+difficulty) and hard (\expHighestDifficulty terrain difficulty)
+terrains. On harder terrain, the model selects slightly longer swing
+durations on average, indicating a more cautious gait. This
+adaptability demonstrates GaitNet's ability to modify its gait based
+on terrain difficulty.
 
 \begin{todo}
   Explore a per-leg analysis of swing durations.
@@ -136,7 +137,7 @@ modify its gait based on terrain difficulty.
     \centering
     \includegraphics[width=\textwidth]{images/data/swing_duration_histogram_easy_vs_hard.png}
     \caption{Comparison of swing durations on easy and hard terrain
-    (0\% versus 40\% terrain difficulty).}
+    (\expLowestDifficulty versus \expHighestDifficulty terrain difficulty).}
     \label{fig:data-swing-duration-histogram-easy-vs-hard}
   \end{minipage}
 \end{figure}

@@ -26,14 +26,14 @@ repetitive cycles.
 
 Comparative evaluation against a single leg motion planner baseline
 reveals substantial performance improvements. GaitNet achieves a
-69.4\% survival rate across diverse terrain difficulties and
-commanded velocities, compared to 25.6\% for the baseline method
-(\autoref{fig:data-experiments-survival-curr}
+\resGaitNetSurvivalRate survival rate across diverse terrain difficulties and
+commanded velocities, compared to \resBaselineSurvivalRate for the
+baseline method (\autoref{fig:data-experiments-survival-curr}
 and~\autoref{fig:data-experiments-baseline-method}). This improvement
 is particularly pronounced at higher speeds and on more challenging
 terrain, demonstrating the value of dynamic gait coordination. The
-baseline method's performance degrades rapidly above 0.05~m/s
-commanded velocity, while GaitNet maintains robust performance up to 0.15~m/s.
+baseline method's performance degrades rapidly above \expLowestSpeed
+commanded velocity, while GaitNet maintains robust performance up to 0.15\,m/s.
 
 The footstep evaluation network, adapted from ContactNet
 \cite{bratta_contactnet_2024}, successfully generates high-quality
@@ -46,9 +46,10 @@ in all scenarios, the network fulfills its role as a candidate
 generator, providing sufficient diversity for downstream selection.
 
 GaitNet learns to modulate swing durations based on environmental
-conditions, with mean swing duration of 0.24~s and standard deviation
-of 0.034~s during evaluation. The system selects longer swing
-durations on more challenging terrain
+conditions, with mean swing duration of \resGaitNetMeanSwingDuration
+and standard deviation of \resGaitNetSTDSwingDuration during
+evaluation. The system selects longer swing durations on more
+challenging terrain
 (\autoref{fig:data-swing-duration-histogram-easy-vs-hard}),
 indicating a more cautious gait strategy when stability is at greater
 risk. However, the swing duration ablation study reveals that this
@@ -60,15 +61,16 @@ the reward structure does not adequately incentivize optimal duration selection.
 Perhaps the most surprising finding emerges from the action cost
 ablation study, which demonstrates that removing the footstep
 candidate cost from GaitNet's input actually improves performance.
-Cost-Ablated-GaitNet achieves a 77.7\% survival rate, representing an
-8.3 percentage point improvement over the standard formulation. This
-result challenges conventional wisdom about hybrid architectures and
-suggests that learned heuristics from perception modules may
-constrain rather than enhance downstream reinforcement learning. The
-correlation analysis (\autoref{fig:data-action-cost-correlation})
-shows that while GaitNet initially relies heavily on the provided
-costs, this dependence decreases during training as the network
-learns to prioritize other state features.
+Cost-Ablated-GaitNet achieves a \resCostAblatedSurvivalRate survival
+rate, representing an 8.3 percentage point improvement over the
+standard formulation. This result challenges conventional wisdom
+about hybrid architectures and suggests that learned heuristics from
+perception modules may constrain rather than enhance downstream
+reinforcement learning. The correlation analysis
+(\autoref{fig:data-action-cost-correlation}) shows that while GaitNet
+initially relies heavily on the provided costs, this dependence
+decreases during training as the network learns to prioritize other
+state features.
 
 Cost-Ablated-GaitNet exhibits naturally more efficient behavior,
 taking fewer redundant steps and maintaining a lower overall cadence

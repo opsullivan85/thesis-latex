@@ -12,9 +12,10 @@ with a fixed swing duration.
 \end{todo}
 
 Now, we train the Duration-Ablated-GaitNet model, setting the swing
-duration to a constant 0.24\,s. The training process is identical to
-that of the standard GaitNet model, ensuring a fair comparison. The
-performance of both models is then evaluated using the same metrics outlined in
+duration to a constant \expDurationAblatedSwingDuration. The training
+process is identical to that of the standard GaitNet model, ensuring
+a fair comparison. The performance of both models is then evaluated
+using the same metrics outlined in
 \autoref{sec:results-baseline-comparison}.
 
 \begin{figure}[H]
@@ -23,9 +24,11 @@ performance of both models is then evaluated using the same metrics outlined in
   - swing-duration - 67.2 - individual.png}
   \caption{Evaluation of Duration-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
-    Overall survival rate of 67.2\%.     Mean success rate measured
-    as     the percentage of 50 episodes     which completed 20\,s
-    without     terminating, under the termination   conditions described in
+    Overall survival rate of \resDurationAblatedSurvivalRate. Mean
+    success rate measured as the percentage of
+    \expBenchmarkEpisodes episodes which completed
+    \expBenchmarkDuration without terminating, under the
+    termination conditions described in
   \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-duration-ablation-comparison}
 \end{figure}
@@ -33,9 +36,11 @@ performance of both models is then evaluated using the same metrics outlined in
 \autoref{fig:data-duration-ablation-comparison} presents the
 performance of the Duration-Ablated-GaitNet. The results indicates
 negligible performance changes over standard GaitNet formulation.
-GaitNet was able to achieve an overall survival rate of 69.4\%
+GaitNet was able to achieve an overall survival rate of
+\resGaitNetSurvivalRate
 (\autoref{fig:data-experiments-survival-curr}), while the
-Cost-Ablated-GaitNet achieved a survival rate of 67.2\%
+Cost-Ablated-GaitNet achieved a survival rate of
+\resDurationAblatedSurvivalRate
 (\autoref{fig:data-duration-ablation-comparison}). This suggests that
 GaitNet may not be using the dynamic swing duration feature
 effectively, or it may not be an important consideration in the

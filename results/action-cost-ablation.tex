@@ -24,8 +24,8 @@ be locked into a local minimum where it relies too heavily on this feature.
   \includegraphics[width=0.45\textwidth]{images/data/training/gaitnet/logit_cost_correlation_survival-curr.png}
   \caption{Correlation between negative footstep candidate cost and
     GaitNet output logits during training. Negative costs are used so
-    that   a costmap which perfectly captures optimal footstep
-  locations has a    correlation of +1.}
+    that a costmap which perfectly captures optimal footstep locations
+  has a correlation of +1.}
   \label{fig:data-action-cost-correlation}
 \end{figure}
 
@@ -42,19 +42,23 @@ the same metrics outlined in
   - footstep-cost - 77.7 - individual.png}
   \caption{Evaluation of Cost-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
-    Overall survival rate of 77.7\%.     Mean success rate measured
-    as     the percentage of 50 episodes     which completed 20\,s
-    without     terminating, under the termination   conditions described in
+    Overall survival rate of \resCostAblatedSurvivalRate. Mean
+    success rate measured as the percentage of
+    \expBenchmarkEpisodes episodes which completed
+    \expBenchmarkDuration     without terminating, under the
+    termination conditions described in
   \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-action-cost-ablation-comparison}
 \end{figure}
 
 \autoref{fig:data-action-cost-ablation-comparison} presents the
-performance of the Cost-Ablated-GaitNet. The results indicates  a
+performance of the Cost-Ablated-GaitNet. The results indicates a
 measurable performance over the standard GaitNet formulation. GaitNet
-was able to achieve an overall survival rate of 69.4\%
+was able to achieve an overall survival rate of
+\resGaitNetSurvivalRate
 (\autoref{fig:data-experiments-survival-curr}), while the
-Cost-Ablated-GaitNet achieved a survival rate of 77.7\%
+Cost-Ablated-GaitNet achieved a survival rate of
+\resCostAblatedSurvivalRate
 (\autoref{fig:data-action-cost-ablation-comparison}). This suggests
 that including the footstep candidate cost is detrimental to the
 training process.
@@ -111,7 +115,7 @@ steps\textemdash when the same foot is moved multiple times in succession.
   \label{fig:data-action-cost-ablation-swing-duration}
 \end{figure}
 
-These findings suggest that the footstep candidate cost is  hindering
+These findings suggest that the footstep candidate cost is hindering
 GaitNet's ability to learn an optimal gait policy. By relying on this
 cost term, GaitNet may be constrained in its exploration of the
 action space, leading to suboptimal performance. Removing this term
