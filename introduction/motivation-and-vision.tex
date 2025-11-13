@@ -2,15 +2,15 @@
 \label{sec:introduction-motivation-and-vision}
 
 Legged robots hold significant promise for enabling mobility in
-environments that are inaccessible or hazardous to wheeled and
-tracked systems. Their ability to traverse uneven, unstructured, and
+environments that are \hl{inaccessible or hazardous to wheeled and
+tracked systems}. Their ability to traverse uneven, unstructured, and
 unpredictable terrains—such as disaster zones, staircases, dense
 vegetation, and rocky landscapes—positions them as key enablers for
 future exploration, inspection, and rescue missions.
 
 Realizing this potential requires a robot to continuously and
 intelligently decide where and when to place its feet—a process known
-as contact planning. Unlike periodic gait patterns suitable for flat
+as \textit{contact planning}. Unlike periodic gait patterns suitable for flat
 or predictable surfaces, real-world locomotion often demands dynamic,
 acyclic, and adaptive footstep sequences. Even minor errors in
 contact selection can lead to instability or failure, whereas
@@ -19,13 +19,13 @@ well-chosen footholds enable efficient, agile, and robust movement.
 The generation of such contact plans in real time remains a
 formidable challenge. It requires the system to perceive its
 surroundings, anticipate the outcomes of possible actions, and select
-feasible contact points within tight temporal constraints. Existing
-methods often trade off between deliberative, computationally
+feasible contact points within tight temporal constraints. \hl{Existing
+methods} often trade off between deliberative, computationally
 intensive planning and fast, reactive control that lacks stability or
 generalization.
 
-The vision of this research is to develop a control architecture that
-bridges this divide. Specifically, this work aims to design a system
+\hl{The vision of this research is to develop a control architecture that
+bridges this divide}. Specifically, this work aims to design a system
 capable of producing non-gaited, dynamic footstep plans that retain
 both the responsiveness of learning-based approaches and the
 reliability of model-based control. The objective is to provide
