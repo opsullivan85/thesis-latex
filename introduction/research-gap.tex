@@ -19,7 +19,8 @@ sequences \cite{Chai2022survey, Fan2024survey} or encode discrete
 contact decisions within larger optimization structures
 \cite{winkler_gait_2018}. While effective in structured environments,
 these strategies constrain the robot's ability to exploit the full
-versatility of legged locomotion \hl{(How or Why?)}.
+versatility of legged locomotion by reducing the dimensionality of
+expressable states for the system.
 
 Neural network-based methods have emerged as an alternative,
 particularly with advances in deep reinforcement learning. These
@@ -33,31 +34,34 @@ flexibility, such methods generally lack formal guarantees of
 stability, require substantial training data, and often struggle to
 generalize beyond their training distribution \cite{Gurram2024survey}.
 
+% this needs to be earlier
 \hl{Hybrid approaches, which integrate learning-based modules within
-model-based control frameworks, have recently gained attention as a
+  model-based control frameworks, have recently gained attention as a
 potential middle ground}. In these systems, neural networks are
-typically employed to solve specific subproblems—such as \hl{contact
-selection or foothold prediction}—while the overall motion execution
-remains governed by a traditional controller \cite{Bao2024survey,
-Wang2022Oct}. This division of responsibilities enables learning to
-focus on the non-smooth or combinatorial components of locomotion,
-while preserving the interpretability, safety, and robustness
-inherent to model-based systems.
+typically employed to solve specific subproblems—such as dynamically
+switching between fixed gaits or greedily selecting individual
+footholds—while the overall motion execution remains governed by a
+traditional controller \cite{Bao2024survey, Wang2022Oct}. This
+division of responsibilities enables learning to focus on the
+non-smooth or combinatorial components of locomotion, while
+preserving the interpretability, safety, and robustness inherent to
+model-based systems.
 
-*make it more clear that this next paragraph is switching topics*
-
-Although hybrid control schemes have demonstrated promise, \hl{the
+Looking at how each of these categories handles the contact planning
+problem, hybrid control schemes have demonstrated promise, the
 challenge of contact and footstep planning continues to limit their
-performance}. Traditional optimization-based planners struggle with
-the discrete nature of contact transitions, resulting in \hl{high
-computational costs} that preclude real-time operation
+performance. Traditional optimization-based planners struggle with
+the discrete nature of contact transitions, resulting in high
+computational costs that preclude real-time operation
 \cite{winkler_gait_2018}. Alternatively, many rely on pre-specified
 gait patterns \cite{xie_glide_2023, grandia_perceptive_2022,
 lee_learning_2020, villarreal_fast_2019}, constraining adaptability
 to irregular or unpredictable terrain. Even more advanced approaches,
-such as \hl{MCTS}-based planners, have achieved impressive dynamic
-behaviors but remain computationally demanding
-\cite{amatucci_monte_2022, taouil_non-gaited_2025}.
+such as Monte Carlo Tree Search (MCTS)-based planners, have achieved
+impressive dynamic behaviors but remain computationally demanding
+\cite{amatucci_monte_2022, taouil_non-gaited_2025}. Finally, end to end
+learning methods solve these problems implicitly, but at the cost of
+control theory guarantees and interpretability.
 
 Despite recent progress, a clear research gap remains. Current hybrid
 methods do not yet achieve the balance between adaptability and
@@ -76,7 +80,7 @@ This motivates a central research question:
 
 \begin{emphasis}
   Can a hybrid control pipeline, which integrates a greedy,
-  neural-network-based planner with a traditional   model-based
-  controller, generate dynamic, acyclic gaits for robust   quadruped
+  neural-network-based planner with a traditional model-based
+  controller, generate dynamic, acyclic gaits for robust quadruped
   locomotion in challenging environments? \hl{what is not done yet?}
 \end{emphasis}
