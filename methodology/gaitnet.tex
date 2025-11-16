@@ -15,10 +15,10 @@ multiple feet can be in the swing phase simultaneously.
 \label{subsec:methodology-gaitnet-architecture}
 
 GaitNet is responsible for ranking footstep candidates based on the
-one-hot encoded leg index $\mathbf{f_c}^{\prime}$ and the robot state
+one-hot encoded leg index $\mathbf{f_c}^{\prime}$ and the GaitNet input
 $\mathbf{x_g}$:
 
-\[
+\begin{equation}
   \mathbf{x_g} =
   \begin{bmatrix}
     \mathbf p_{b,xy} \\
@@ -29,12 +29,13 @@ $\mathbf{x_g}$:
     \mathbf g \\
     \mathbf c
   \end{bmatrix}
-\]
+  \label{eq:gaitnet-x}
+\end{equation}
 
-Descriptions of $\mathbf p_{b,xy}$ and $\mathbf r_{w,z}$ can be found
+Descriptions of the first five terms can be found
 in \autoref{subsec:methodology-contactnet-architecture}. The
-additional terms, compared to the footstep evaluation network, are
-$\mathbf g$ and $\mathbf c$. Using $\mathbf{x_g}$ and
+additional terms, compared to the footstep evaluation network input (\ref{eq:contactnet-x}), are
+$\mathbf g$ and $\mathbf c$, being the gravity vector and contact state respectively. Using $\mathbf{x_g}$ and
 $\mathbf{f_c}^{\prime}$, GaitNet outputs a logit associated with each
 footstep and the desired swing duration if that step is selected.
 

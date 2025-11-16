@@ -16,9 +16,9 @@ described in detail below.
 \label{subsec:methodology-contactnet-architecture}
 
 The footstep evaluation network is responsible for generating a set
-of footstep candidates $\mathbf{f_c}$ based on the robot state $\mathbf{x_c}$:
+of footstep candidates $\mathbf{f_c}$ based on footstep evaluation network input $\mathbf x_c$:
 
-\[
+\begin{equation}
   \mathbf{x_c} =
   \begin{bmatrix}
     \mathbf p_{b,xy} \\
@@ -27,24 +27,25 @@ of footstep candidates $\mathbf{f_c}$ based on the robot state $\mathbf{x_c}$:
     \mathbf \omega_b \\
     \mathbf u
   \end{bmatrix}
-\]
+  \label{eq:contactnet-x}
+\end{equation}
 
 Here, $\mathbf p_{b,xy}$ represents the $x$ and $y$ positions of all
 end effectors in the base frame, stacked into a single vector, and
 $\mathbf r_{w,z}$ denotes the height of the robot's center of mass in
-the world frame. The inclusion of $\mathbf \omega_b$ distinguishes
+the world frame, $\mathbf v_b$ is linear velocity of the robot in the root frame, $\mathbf \omega_b$ is the angular velocity of the robot in the root frame, and $\mathbf u$ is the control input as a vector of $[v_x, v_y, \omega_z]$. The inclusion of $\mathbf \omega_b$ distinguishes
 this formulation from that in \cite{bratta_contactnet_2024}. This
 modification was intended to improve the model's performance in
 situations with high rotational velocities.
 
-The network is trained on heuristically computed footstep cost maps
+\hl{The network is trained on heuristically computed footstep cost maps
 (\autoref{fig:data-contactnet-costmap}), which estimate the cost of
 moving each foot to candidate positions given the current robot
 state. These maps are represented as four $5 \times 5$ grids, one for
 each leg. This choice also differs from the implementation in
 \cite{bratta_contactnet_2024}. This grid size was selected to provide
 more information for each foot, which is important later when
-sampling footstep candidates.
+sampling footstep candidates.}
 
 \begin{figure}[H]
   \centering
@@ -93,13 +94,13 @@ sufficient for data collection because the cost maps are masked based
 on terrain after inference (see
 \autoref{subsec:methodology-contactnet-post-processing}).
 
-During training, 100 robots are simulated in parallel, divided into
+\hl{During training, 100 robots are simulated in parallel, divided into
 four groups of 25. Each group tests a grid of footstep positions for
 one foot at a time; the front-left group is illustrated in
 \autoref{fig:figure-training-fl-sweep}. An \textit{iteration} is
 considered complete once all robots have either successfully
 completed or failed their assigned motions. Importantly, all robots
-begin each iteration from the same initial state.
+begin each iteration from the same initial state.}
 
 \begin{figure}[H]
   \centering
@@ -121,7 +122,7 @@ predefined maximum number of iterations is reached. To ensure data
 quality, iterations in which more than 50\% of the robots fall are
 discarded, along with their two parent nodes in the tree. This
 approach promotes the collection of diverse, yet successful, training
-data. This implementation differs in specific details from
+data. This implementation \hl{differs} in specific details from
 \cite{bratta_contactnet_2024}, while still remaining faithful
 to the overall methodology.
 
@@ -151,6 +152,8 @@ several aspects to better suit the output for footstep candidate sampling.
 factors used to construct the footstep candidate maps, and
 \autoref{fig:data-costmap-composition-combined} displays the
 resulting combined cost map. These factors are described below:
+
+\hl{NOTE: remove the bullet points below, label subfigures in Fig. 3.9 (a, b, c, d, ...), and then write the following bullet points as part of the plain text referring to the figure labels. Use the same labels to explain the figure caption as well. You might consider fig. 3.9a and 3.9b two separate figures (3.9 and 3.10)}
 
 \begin{itemize}
   \item \textit{lin\_vel\_z\_l2}\textemdash Penalizes high vertical
@@ -211,14 +214,14 @@ The primary purpose of the footstep evaluation network is to provide
 high-quality footstep candidates to the GaitNet model.
 \autoref{fig:diagram-costmap-processing} illustrates the processing pipeline.
 
-The raw cost map output from the footstep evaluation network
+\hl{The raw cost map output from the footstep evaluation network
 (\autoref{fig:diagram-costmap-processing-raw}) is first upsampled
 (\autoref{fig:diagram-costmap-processing-upsample}) to increase the
 resolution of possible footstep positions and to match the resolution
 of the terrain data. Next, noise is added
 (\autoref{fig:diagram-costmap-processing-noise}) to encourage
 exploration of a more diverse set of footstep positions; without this
-noise, all candidates would cluster in close proximity.
+noise, all candidates would cluster in close proximity.}
 
 \begin{todo}
   Update the number of candidates in text and diagram.

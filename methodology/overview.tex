@@ -12,10 +12,10 @@ state and terrain data to produce footstep commands for the robot controller.
 
 The first stage of the framework comprises a footstep evaluation
 network, similar to ContactNet from \cite{bratta_contactnet_2024},
-which estimates candidate footsteps $\mathbf{f_c}$. The second stage,
+which estimates candidate \hl{footsteps $\mathbf{f_c}$. The second stage,
 a gait generation network (GaitNet), receives these candidates
 $\mathbf{f_c}$, ranks them, and outputs the optimal footstep action
-$\mathbf{f_a}$ to the robot controller.
+$\mathbf{f_a}$ to the robot controller.}
 
 This hierarchical design enables strict control over the range of
 possible actions the robot can execute. Between the two stages,
