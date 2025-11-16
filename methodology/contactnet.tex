@@ -42,14 +42,14 @@ distinguishes this formulation from that in
 \cite{bratta_contactnet_2024}. This modification was intended to
 improve the model's performance in situations with high rotational velocities.
 
-\hl{The network is trained on heuristically computed footstep cost maps
+\hl{The} network is trained on heuristically computed footstep cost maps
   (\autoref{fig:data-contactnet-costmap}), which estimate the cost of
   moving each foot to candidate positions given the current robot
   state. These maps are represented as four $5 \times 5$ grids, one
   for each leg. This choice also differs from the implementation in
   \cite{bratta_contactnet_2024}. This grid size was selected to provide
   more information for each foot, which is important later when
-sampling footstep candidates.}
+sampling footstep candidates.
 
 \begin{figure}[H]
   \centering
@@ -285,14 +285,14 @@ The primary purpose of the footstep evaluation network is to
 provide high-quality footstep candidates to the GaitNet model.
 \autoref{fig:diagram-costmap-processing} illustrates the processing pipeline.
 
-\hl{The raw cost map output from the footstep evaluation network
+\hl{The} raw cost map output from the footstep evaluation network
 (\autoref{fig:diagram-costmap-processing-raw}) is first upsampled
 (\autoref{fig:diagram-costmap-processing-upsample}) to increase the
 resolution of possible footstep positions and to match the
 resolution of the terrain data. Next, noise is added
 (\autoref{fig:diagram-costmap-processing-noise}) to encourage
 exploration of a more diverse set of footstep positions; without
-this noise, all candidates would cluster in close proximity.}
+this noise, all candidates would cluster in close proximity.
 
 \begin{todo}
 Update the number of candidates in text and diagram.
