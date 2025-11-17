@@ -9,32 +9,29 @@
   abstract     = {We present a control architecture for fast quadruped locomotion over rough terrain. We approach the problem by decomposing it into many sub-systems, in which we apply state-of-the-art learning, planning, optimization, and control techniques to achieve robust, fast locomotion. Unique features of our control strategy include: (1) a system that learns optimal foothold choices from expert demonstration using terrain templates, (2) a body trajectory optimizer based on the {ZeroMoment} Point ({ZMP}) stability criterion, and (3) a ﬂoating-base inverse dynamics controller that, in conjunction with force control, allows for robust, compliant locomotion over unperceived obstacles. We evaluate the performance of our controller by testing it on the {LittleDog} quadruped robot, over a wide variety of rough terrains of varying difﬁculty levels. The terrain that the robot was tested on includes rocks, logs, steps, barriers, and gaps, with obstacle sizes up to the leg length of the robot. We demonstrate the generalization ability of this controller by presenting results from testing performed by an independent external test team on terrain that has never been shown to us.},
   pages        = {236--258},
   number       = {2},
+  year         = {2011},
   journaltitle = {The International Journal of Robotics Research},
   author       = {Kalakrishnan, Mrinal and Buchli, Jonas and Pastor, Peter and Mistry, Michael and Schaal, Stefan},
   urldate      = {2025-07-14},
   date         = {2011-02},
   langid       = {english},
+  journal      = {Int. J. Rob. Res.},
   note         = {Publisher: {SAGE} Publications},
   file         = {2011 - Learning, planning, and control for quadruped locomotion over challenging terrain.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2011 - Learning, planning, and control for quadruped locomotion over challenging terrain.pdf:application/pdf}
 }
 
 @article{zucker_optimization_2011,
-  title        = {Optimization and learning for rough terrain legged locomotion},
-  volume       = {30},
-  rights       = {https://journals.sagepub.com/page/policies/text-and-data-mining-license},
-  issn         = {0278-3649, 1741-3176},
-  url          = {https://journals.sagepub.com/doi/10.1177/0278364910392608},
-  doi          = {10.1177/0278364910392608},
-  abstract     = {We present a novel approach to legged locomotion over rough terrain that is thoroughly rooted in optimization. This approach relies on a hierarchy of fast, anytime algorithms to plan a set of footholds, along with the dynamic body motions required to execute them. Components within the planning framework coordinate to exchange plans, cost-to-go estimates, and “certiﬁcates” that ensure the output of an abstract high-level planner can be realized by lower layers of the hierarchy. The burden of careful engineering of cost functions to achieve desired performance is substantially mitigated by a simple inverse optimal control technique. Robustness is achieved by real-time re-planning of the full trajectory, augmented by reﬂexes and feedback control. We demonstrate the successful application of our approach in guiding the {LittleDog} quadruped robot over a variety of rough terrains. Other novel aspects of our past research eﬀorts include a variety of pioneering inverse optimal control techniques as well as a system for planning using arbitrary pre-recorded robot behaviors.},
-  pages        = {175--191},
-  number       = {2},
-  journaltitle = {The International Journal of Robotics Research},
-  author       = {Zucker, Matt and Ratliff, Nathan and Stolle, Martin and Chestnutt, Joel and Bagnell, J Andrew and Atkeson, Christopher G and Kuffner, James},
-  urldate      = {2025-07-14},
-  date         = {2011-02},
-  langid       = {english},
-  note         = {Publisher: {SAGE} Publications},
-  file         = {2011 - Optimization and Learning for Rough-Terrain Legged Locomotion.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2011 - Optimization and Learning for Rough-Terrain Legged Locomotion.pdf:application/pdf}
+	author = {Zucker, Matt and Ratliff, Nathan and Stolle, Martin and Chestnutt, Joel and Bagnell, J. Andrew and Atkeson, Christopher G. and Kuffner, James},
+	title = {{Optimization and learning for rough terrain legged locomotion}},
+	journal = {Int. J. Rob. Res.},
+	volume = {30},
+	number = {2},
+	pages = {175--191},
+	year = {2011},
+	month = jan,
+	issn = {0278-3649},
+	publisher = {SAGE Publications Ltd STM},
+	doi = {10.1177/0278364910392608}
 }
 
 @inproceedings{todorov_mujoco_2012,
@@ -55,65 +52,40 @@
 }
 
 @article{peng_deeploco_2017,
-  title        = {{DeepLoco}: dynamic locomotion skills using hierarchical deep reinforcement learning},
-  volume       = {36},
-  rights       = {https://www.acm.org/publications/policies/copyright\_policy\#Background},
-  issn         = {0730-0301, 1557-7368},
-  url          = {https://dl.acm.org/doi/10.1145/3072959.3073602},
-  doi          = {10.1145/3072959.3073602},
-  shorttitle   = {{DeepLoco}},
-  abstract     = {Learning physics-based locomotion skills is a difficult problem, leading to solutions that typically exploit prior knowledge of various forms. In this paper we aim to learn a variety of environment-aware locomotion skills with a limited amount of prior knowledge. We adopt a two-level hierarchical control framework. First, low-level controllers are learned that operate at a fine timescale and which achieve robust walking gaits that satisfy stepping-target and style objectives. Second, high-level controllers are then learned which plan at the timescale of steps by invoking desired step targets for the low-level controller. The high-level controller makes decisions directly based on high-dimensional inputs, including terrain maps or other suitable representations of the surroundings. Both levels of the control policy are trained using deep reinforcement learning. Results are demonstrated on a simulated 3D biped. Low-level controllers are learned for a variety of motion styles and demonstrate robustness with respect to force-based disturbances, terrain variations, and style interpolation. High-level controllers are demonstrated that are capable of following trails through terrains, dribbling a soccer ball towards a target location, and navigating through static or dynamic obstacles.},
-  pages        = {1--13},
-  number       = {4},
-  journaltitle = {{ACM} Transactions on Graphics},
-  shortjournal = {{ACM} Trans. Graph.},
-  author       = {Peng, Xue Bin and Berseth, Glen and Yin, Kangkang and Van De Panne, Michiel},
-  urldate      = {2025-07-14},
-  date         = {2017-08-31},
-  langid       = {english},
-  note         = {Publisher: Association for Computing Machinery ({ACM})},
-  file         = {2017 - DeepLoco Dynamic Locomotion Skills Using Hierarchical Deep Reinforcement Learning.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2017 - DeepLoco Dynamic Locomotion Skills Using Hierarchical Deep Reinforcement Learning.pdf:application/pdf}
+	author = {Peng, Xue Bin and Berseth, Glen and Yin, Kangkang and Van De Panne, Michiel},
+	title = {{DeepLoco: dynamic locomotion skills using hierarchical deep reinforcement learning}},
+	journal = {ACM Trans. Graph.},
+	volume = {36},
+	number = {4},
+	pages = {1--13},
+	year = {2017},
+	month = jul,
+	issn = {0730-0301},
+	publisher = {Association for Computing Machinery},
+	doi = {10.1145/3072959.3073602}
 }
 
 @article{winkler_gait_2018,
-  title        = {Gait and Trajectory Optimization for Legged Systems Through Phase-Based End-Effector Parameterization},
-  volume       = {3},
-  rights       = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/{IEEE}.html},
-  issn         = {2377-3766, 2377-3774},
-  url          = {http://ieeexplore.ieee.org/document/8283570/},
-  doi          = {10.1109/lra.2018.2798285},
-  abstract     = {We present a single Trajectory Optimization formulation for legged locomotion that automatically determines the gait-sequence, step-timings, footholds, swing-leg motions and 6D body motion over non-ﬂat terrain, without any additional modules. Our phase-based parameterization of feet motion and forces allows to optimize over the discrete gait sequence using only continuous decision variables. The system is represented using a simpliﬁed Centroidal dynamics model that is inﬂuenced by the feet’s location and forces. We explicitly enforce friction cone constraints, depending on the shape of the terrain. The {NLP} solver generates highly dynamic motion-plans with full ﬂight-phases for a variety of legged systems with arbitrary morphologies in an efﬁcient manner. We validate the feasibility of the generated plans in simulation and on the real quadruped robot {ANYmal}. Additionally, the entire solver software {TOWR} used to generate these motions is made freely available.},
-  pages        = {1560--1567},
-  number       = {3},
-  journaltitle = {{IEEE} Robotics and Automation Letters},
-  shortjournal = {{IEEE} Robot. Autom. Lett.},
-  author       = {Winkler, Alexander W. and Bellicoso, C. Dario and Hutter, Marco and Buchli, Jonas},
-  urldate      = {2025-07-14},
-  date         = {2018-07},
-  langid       = {english},
-  note         = {Publisher: Institute of Electrical and Electronics Engineers ({IEEE})},
-  file         = {2018 - Gait and Trajectory Optimization for Legged Systems through Phase-based End-Effector Parameterization.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2018 - Gait and Trajectory Optimization for Legged Systems through Phase-based End-Effector Parameterization.pdf:application/pdf}
+	author = {Winkler, Alexander W. and Bellicoso, C. Dario and Hutter, Marco and Buchli, Jonas},
+	title = {{Gait and Trajectory Optimization for Legged Systems Through Phase-Based End-Effector Parameterization}},
+	journal = {IEEE Rob. Autom. Lett.},
+	volume = {3},
+	number = {3},
+	pages = {1560--1567},
+	year = {2018},
+	month = feb,
+	publisher = {IEEE},
+	doi = {10.1109/LRA.2018.2798285}
 }
 
 @article{villarreal_fast_2019,
-  title        = {Fast and Continuous Foothold Adaptation for Dynamic Locomotion through {CNNs}},
-  volume       = {4},
-  issn         = {2377-3766, 2377-3774},
-  url          = {http://arxiv.org/abs/1809.09759},
-  doi          = {10.1109/LRA.2019.2899434},
-  abstract     = {Legged robots can outperform wheeled machines for most navigation tasks across unknown and rough terrains. For such tasks, visual feedback is a fundamental asset to provide robots with terrain-awareness. However, robust dynamic locomotion on difﬁcult terrains with real-time performance guarantees remains a challenge. We present here a real-time, dynamic foothold adaptation strategy based on visual feedback. Our method adjusts the landing position of the feet in a fully reactive manner, using only on-board computers and sensors. The correction is computed and executed continuously along the swing phase trajectory of each leg. To efﬁciently adapt the landing position, we implement a self-supervised foothold classiﬁer based on a Convolutional Neural Network ({CNN}). Our method results in an up to 200 times faster computation with respect to the full-blown heuristics. Our goal is to react to visual stimuli from the environment, bridging the gap between blind reactive locomotion and purely vision-based planning strategies. We assess the performance of our method on the dynamic quadruped robot {HyQ}, executing static and dynamic gaits (at speeds up to 0.5 m/s) in both simulated and real scenarios; the beneﬁt of safe foothold adaptation is clearly demonstrated by the overall robot behavior.},
-  pages        = {2140--2147},
-  number       = {2},
-  journaltitle = {{IEEE} Robotics and Automation Letters},
-  shortjournal = {{IEEE} Robot. Autom. Lett.},
-  author       = {Villarreal, Octavio and Barasuol, Victor and Camurri, Marco and Franceschi, Luca and Focchi, Michele and Pontil, Massimiliano and Caldwell, Darwin G. and Semini, Claudio},
-  urldate      = {2025-07-14},
-  date         = {2019-04},
-  langid       = {english},
-  eprinttype   = {arxiv},
-  eprint       = {1809.09759 [cs]},
-  keywords     = {Computer Science - Robotics},
-  file         = {2019 - Fast and Continuous Foothold Adaptation for Dynamic Locomotion through CNNs.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2019 - Fast and Continuous Foothold Adaptation for Dynamic Locomotion through CNNs.pdf:application/pdf}
+	author = {Villarreal, Octavio and Barasuol, Victor and Camurri, Marco and Franceschi, Luca and Focchi, Michele and Pontil, Massimiliano and Caldwell, Darwin G. and Semini, Claudio},
+	title = {{Fast and Continuous Foothold Adaptation for Dynamic Locomotion through CNNs}},
+	journal = {arXiv},
+	year = {2018},
+	month = sep,
+	eprint = {1809.09759},
+	doi = {10.1109/LRA.2019.2899434}
 }
 
 @misc{tsounis_deepgait_2020,
@@ -153,23 +125,13 @@
 }
 
 @article{lee_learning_2020,
-  title        = {Learning Quadrupedal Locomotion over Challenging Terrain},
-  volume       = {5},
-  issn         = {2470-9476},
-  url          = {http://arxiv.org/abs/2010.11251},
-  doi          = {10.1126/scirobotics.abc5986},
-  abstract     = {Some of the most challenging environments on our planet are accessible to quadrupedal animals but remain out of reach for autonomous machines. Legged locomotion can dramatically expand the operational domains of robotics. However, conventional controllers for legged locomotion are based on elaborate state machines that explicitly trigger the execution of motion primitives and reflexes. These designs have escalated in complexity while falling short of the generality and robustness of animal locomotion. Here we present a radically robust controller for legged locomotion in challenging natural environments. We present a novel solution to incorporating proprioceptive feedback in locomotion control and demonstrate remarkable zero-shot generalization from simulation to natural environments. The controller is trained by reinforcement learning in simulation. It is based on a neural network that acts on a stream of proprioceptive signals. The trained controller has taken two generations of quadrupedal {ANYmal} robots to a variety of natural environments that are beyond the reach of prior published work in legged locomotion. The controller retains its robustness under conditions that have never been encountered during training: deformable terrain such as mud and snow, dynamic footholds such as rubble, and overground impediments such as thick vegetation and gushing water. The presented work opens new frontiers for robotics and indicates that radical robustness in natural environments can be achieved by training in much simpler domains.},
-  number       = {47},
-  journaltitle = {Science Robotics},
-  shortjournal = {Sci. Robot.},
-  author       = {Lee, Joonho and Hwangbo, Jemin and Wellhausen, Lorenz and Koltun, Vladlen and Hutter, Marco},
-  urldate      = {2025-07-14},
-  date         = {2020-10-21},
-  langid       = {english},
-  eprinttype   = {arxiv},
-  eprint       = {2010.11251 [cs]},
-  keywords     = {Computer Science - Machine Learning, Computer Science - Robotics, Computer Science - Systems and Control, Electrical Engineering and Systems Science - Systems and Control},
-  file         = {2020 - Learning Quadrupedal Locomotion over Challenging T.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2020 - Learning Quadrupedal Locomotion over Challenging T.pdf:application/pdf}
+	author = {Lee, Joonho and Hwangbo, Jemin and Wellhausen, Lorenz and Koltun, Vladlen and Hutter, Marco},
+	title = {{Learning Quadrupedal Locomotion over Challenging Terrain}},
+	journal = {arXiv},
+	year = {2020},
+	month = oct,
+	eprint = {2010.11251},
+	doi = {10.1126/scirobotics.abc5986}
 }
 
 @inproceedings{zhu_off-road_2020,
@@ -225,24 +187,19 @@
   file       = {2021 - Blind Bipedal Stair Traversal via Sim-to-Real Rein.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2021 - Blind Bipedal Stair Traversal via Sim-to-Real Rein.pdf:application/pdf}
 }
 
-@inbook{xie_glide_2023,
-  location   = {Cham},
-  title      = {{GLiDE}: Generalizable Quadrupedal Locomotion in Diverse Environments with a Centroidal Model},
-  rights     = {https://www.springernature.com/gp/researchers/text-and-data-mining},
-  isbn       = {978-3-031-21089-1 978-3-031-21090-7},
-  url        = {https://link.springer.com/10.1007/978-3-031-21090-7_31},
-  shorttitle = {{GLiDE}},
-  abstract   = {Model-free reinforcement learning ({RL}) for legged locomotion commonly relies on a physics simulator that can accurately predict the behaviors of every degree of freedom of the robot. In contrast, approximate reduced-order models are often sufﬁcient for many model-based control strategies. In this work we explore how {RL} can be effectively used with a centroidal model to generate robust control policies for quadrupedal locomotion. Advantages over {RL} with a full-order model include a simple reward structure, reduced computational costs, and robust sim-to-real transfer. We further show the potential of the method by demonstrating stepping-stone locomotion, twolegged in-place balance, balance beam locomotion, and sim-toreal transfer without further adaptations. Additional Results: https://www.pair.toronto.edu/glide-quadruped/.},
-  pages      = {523--539},
-  booktitle  = {Springer Proceedings in Advanced Robotics},
-  publisher  = {Springer International Publishing},
-  bookauthor = {Xie, Zhaoming and Da, Xingye and Babich, Buck and Garg, Animesh and De Panne, Michiel Van},
-  urldate    = {2025-07-14},
-  date       = {2023},
-  langid     = {english},
-  doi        = {10.1007/978-3-031-21090-7_31},
-  note       = {{ISSN}: 2511-1256, 2511-1264},
-  file       = {2021 - GLiDE Generalizable Quadrupedal Locomotion in Diverse Environments with a Centroidal Model.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2021 - GLiDE Generalizable Quadrupedal Locomotion in Diverse Environments with a Centroidal Model.pdf:application/pdf}
+@incollection{xie_glide_2023,
+	author = {Xie, Zhaoming and Da, Xingye and Babich, Buck and Garg, Animesh and van de Panne, Michiel},
+	title = {{GLiDE: Generalizable Quadrupedal Locomotion in Diverse Environments with a Centroidal Model}},
+	booktitle = {{Algorithmic Foundations of Robotics XV}},
+	journal = {SpringerLink},
+	pages = {523--539},
+	year = {2022},
+	month = dec,
+	issn = {2511-1264},
+	isbn = {978-3-031-21090-7},
+	publisher = {Springer},
+	address = {Cham, Switzerland},
+	doi = {10.1007/978-3-031-21090-7_31}
 }
 
 @article{rudin_learning_nodate,
@@ -327,56 +284,36 @@
   file         = {2022 - RLOC Terrain-Aware Legged Locomotion using Reinforcement Learning and Optimal Control.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2022 - RLOC Terrain-Aware Legged Locomotion using Reinforcement Learning and Optimal Control.pdf:application/pdf}
 }
 
-@inproceedings{duan_sim--real_2022,
-  location   = {Philadelphia, {PA}, {USA}},
-  title      = {Sim-to-Real Learning of Footstep-Constrained Bipedal Dynamic Walking},
-  rights     = {https://doi.org/10.15223/policy-029},
-  url        = {https://ieeexplore.ieee.org/document/9812015/},
-  doi        = {10.1109/icra46639.2022.9812015},
-  abstract   = {Recently, work on reinforcement learning ({RL}) for bipedal robots has successfully learned controllers for a variety of dynamic gaits with robust sim-to-real demonstrations. In order to maintain balance, the learned controllers have full freedom of where to place the feet, resulting in highly robust gaits. In the real world however, the environment will often impose constraints on the feasible footstep locations, typically identiﬁed by perception systems. Unfortunately, most demonstrated {RL} controllers on bipedal robots do not allow for specifying and responding to such constraints. This missing control interface greatly limits the real-world application of current {RL} controllers. In this paper, we aim to maintain the robust and dynamic nature of learned gaits while also respecting footstep constraints imposed externally. We develop an {RL} formulation for training dynamic gait controllers that can respond to speciﬁed touchdown locations. We then successfully demonstrate simulation and sim-to-real performance on the bipedal robot Cassie. In addition, we use supervised learning to induce a transition model for accurately predicting the next touchdown locations that the controller can achieve given the robot’s proprioceptive observations. This model paves the way for integrating the learned controller into a full-order robot locomotion planner that robustly satisﬁes both balance and environmental constraints.},
-  eventtitle = {2022 {IEEE} International Conference on Robotics and Automation ({ICRA})},
-  pages      = {10428--10434},
-  booktitle  = {2022 International Conference on Robotics and Automation ({ICRA})},
-  publisher  = {{IEEE}},
-  author     = {Duan, Helei and Malik, Ashish and Dao, Jeremy and Saxena, Aseem and Green, Kevin and Siekmann, Jonah and Fern, Alan and Hurst, Jonathan},
-  urldate    = {2025-07-14},
-  date       = {2022-05-23},
-  langid     = {english},
-  file       = {2022 - Sim-to-Real Learning of Footstep-Constrained Bipedal Dynamic Walking.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2022 - Sim-to-Real Learning of Footstep-Constrained Bipedal Dynamic Walking.pdf:application/pdf}
+@incollection{duan_sim--real_2022,
+	author = {Duan, Helei and Malik, Ashish and Dao, Jeremy and Saxena, Aseem and Green, Kevin and Siekmann, Jonah},
+	title = {{Sim-to-Real Learning of Footstep-Constrained Bipedal Dynamic Walking}},
+	booktitle = {{2022 International Conference on Robotics and Automation (ICRA)}},
+	journal = {Published in: 2022 International Conference on Robotics and Automation (ICRA)},
+	pages = {23--27},
+  year = {2022},
+	publisher = {IEEE},
+	doi = {10.1109/ICRA46639.2022.9812015}
 }
 
 @article{omar_fast_2022,
-  title      = {Fast Convex Visual Foothold Adaptation for Quadrupedal Locomotion},
-  url        = {http://arxiv.org/abs/2307.14775},
-  doi        = {10.5281/zenodo.7531324},
-  abstract   = {This extended abstract provides a short introduction on our recently developed perception-based controller for quadrupedal locomotion. Compared to our previous approach based on Visual Foothold Adaptation ({VFA}) and Model Predictive Control ({MPC}), our new framework combines a fast approximation of the safe foothold regions based on Neural Network regression, followed by a convex decomposition routine in order to generate safe landing areas where the controller can freely optimize the footholds location. The aforementioned framework, which combines prediction, convex decomposition, and {MPC} solution, is tested in simulation on our 140kg hydraulic quadruped robot ({HyQReal}).},
-  author     = {Omar, Shafeef and Amatucci, Lorenzo and Turrisi, Giulio and Barasuol, Victor and Semini, Claudio},
-  urldate    = {2025-07-14},
-  date       = {2022-10-13},
-  langid     = {english},
-  eprinttype = {arxiv},
-  eprint     = {2307.14775 [cs]},
-  keywords   = {Computer Science - Robotics},
-  file       = {2023 - Fast Convex Visual Foothold Adaptation for Quadrupedal Locomotion.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2023 - Fast Convex Visual Foothold Adaptation for Quadrupedal Locomotion.pdf:application/pdf}
+	author = {Omar, Shafeef and Amatucci, Lorenzo and Turrisi, Giulio and Barasuol, Victor and Semini, Claudio},
+	title = {{Fast Convex Visual Foothold Adaptation for Quadrupedal Locomotion}},
+	journal = {arXiv},
+	year = {2023},
+	month = jul,
+	eprint = {2307.14775},
+	doi = {10.5281/zenodo.7531324}
 }
 
-@inproceedings{omar_safesteps_2023,
-  location   = {Austin, {TX}, {USA}},
-  title      = {{SafeSteps}: Learning Safer Footstep Planning Policies for Legged Robots via Model-Based Priors},
-  rights     = {https://doi.org/10.15223/policy-029},
-  url        = {https://ieeexplore.ieee.org/document/10375218/},
-  doi        = {10.1109/humanoids57100.2023.10375218},
-  shorttitle = {{SafeSteps}},
-  abstract   = {We present a footstep planning policy for quadrupedal locomotion that is able to directly take into consideration a-priori safety information in its decisions. At its core, a learning process analyzes terrain patches, classifying each landing location by its kinematic feasibility, shin collision, and terrain roughness. This information is then encoded into a small vector representation and passed as an additional state to the footstep planning policy, which furthermore proposes only safe footstep location by applying a masked variant of the Proximal Policy Optimization algorithm. The performance of the proposed approach is shown by comparative simulations and experiments on an electric quadruped robot walking in different rough terrain scenarios. We show that violations of the above safety conditions are greatly reduced both during training and the successive deployment of the policy, resulting in an inherently safer footstep planner. Furthermore, we show how, as a byproduct, fewer reward terms are needed to shape the behavior of the policy, which in return is able to achieve both better final performances and sample efficiency.},
-  eventtitle = {2023 {IEEE}-{RAS} 22nd International Conference on Humanoid Robots (Humanoids)},
-  pages      = {1--8},
-  booktitle  = {2023 {IEEE}-{RAS} 22nd International Conference on Humanoid Robots (Humanoids)},
-  publisher  = {{IEEE}},
-  author     = {Omar, Shafeef and Amatucci, Lorenzo and Barasuol, Victor and Turrisi, Giulio and Semini, Claudio},
-  urldate    = {2025-07-14},
-  date       = {2023-12-12},
-  langid     = {english},
-  file       = {2023 - SafeSteps Learning Safer Footstep Planning Policies for Legged Robots via Model-Based Priors.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2023 - SafeSteps Learning Safer Footstep Planning Policies for Legged Robots via Model-Based Priors.pdf:application/pdf}
+@incollection{omar_safesteps_2023,
+	author = {Omar, Shafeef and Amatucci, Lorenzo and Barasuol, Victor and Turrisi, Giulio and Semini, Claudio},
+	title = {{SafeSteps: Learning Safer Footstep Planning Policies for Legged Robots via Model-Based Priors}},
+	booktitle = {{2023 IEEE-RAS 22nd International Conference on Humanoid Robots (Humanoids)}},
+	journal = {Published in: 2023 IEEE-RAS 22nd International Conference on Humanoid Robots (Humanoids)},
+	pages = {12--14},
+  year = {2023},
+	publisher = {IEEE},
+	doi = {10.1109/Humanoids57100.2023.10375218}
 }
 
 @misc{shi_terrain-aware_2023,
@@ -448,57 +385,38 @@
   file       = {2024 - A Review of Nine Physics Engines for Reinforcement Learning Research.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2024 - A Review of Nine Physics Engines for Reinforcement Learning Research.pdf:application/pdf}
 }
 
-@inproceedings{bratta_contactnet_2024,
-  title      = {{ContactNet}: Online Multi-Contact Planning for Acyclic Legged Robot Locomotion},
-  url        = {http://arxiv.org/abs/2209.15566},
-  doi        = {10.1109/UR61395.2024.10597477},
-  shorttitle = {{ContactNet}},
-  abstract   = {The field of legged robots has seen tremendous progress in the last few years. Locomotion trajectories are commonly generated by optimization algorithms in a Model Predictive Control ({MPC}) loop. To achieve online trajectory optimization, the locomotion community generally makes use of heuristic-based contact planners due to their low computation times and high replanning frequencies. In this work, we propose {ContactNet}, a fast acyclic contact planner based on a multioutput regression neural network. {ContactNet} ranks discretized stepping locations, allowing to quickly choose the best feasible solution, even in complex environments. The low computation time, in the order of 1 ms, enables the execution of the contact planner concurrently with a trajectory optimizer in a {MPC} fashion. In addition, the computational time does not scale up with the configuration of the terrain. We demonstrate the effectiveness of the approach in simulation in different scenarios with the quadruped robot Solo12. To the best knowledge of the authors, this is the first time a contact planner is presented that does not exhibit an increasing computational time on irregular terrains with an increasing number of gaps.},
-  author     = {Bratta, Angelo and Meduri, Avadesh and Focchi, Michele and Righetti, Ludovic and Semini, Claudio},
-  urldate    = {2025-07-14},
-  date       = {2024-06-24},
-  langid     = {english},
-  eprinttype = {arxiv},
-  eprint     = {2209.15566 [cs]},
-  keywords   = {Computer Science - Robotics},
-  file       = {2024 - ContactNet Online Multi-Contact Planning for Acyclic Legged Robot Locomotion.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2024 - ContactNet Online Multi-Contact Planning for Acyclic Legged Robot Locomotion.pdf:application/pdf}
+@article{bratta_contactnet_2024,
+	author = {Bratta, Angelo and Meduri, Avadesh and Focchi, Michele and Righetti, Ludovic and Semini, Claudio},
+	title = {{ContactNet: Online Multi-Contact Planning for Acyclic Legged Robot Locomotion}},
+	journal = {arXiv},
+	year = {2022},
+	month = sep,
+	eprint = {2209.15566},
+	doi = {10.1109/UR61395.2024.10597477}
 }
 
-@inproceedings{gaspard_footstepnet_2024,
-  location   = {Abu Dhabi, United Arab Emirates},
-  title      = {{FootstepNet}: an Efficient Actor-Critic Method for Fast On-line Bipedal Footstep Planning and Forecasting},
-  rights     = {https://doi.org/10.15223/policy-029},
-  url        = {https://ieeexplore.ieee.org/document/10802320/},
-  doi        = {10.1109/iros58592.2024.10802320},
-  shorttitle = {{FootstepNet}},
-  abstract   = {Designing a humanoid locomotion controller is challenging and classically split up in sub-problems. Footstep planning is one of those, where the sequence of footsteps is defined. Even in simpler environments, finding a minimal sequence, or even a feasible sequence, yields a complex optimization problem. In the literature, this problem is usually addressed by search-based algorithms (e.g. variants of A*). However, such approaches are either computationally expensive or rely on hand-crafted tuning of several parameters. In this work, at first, we propose an efficient footstep planning method to navigate in local environments with obstacles, based on stateof-the art Deep Reinforcement Learning ({DRL}) techniques, with very low computational requirements for on-line inference. Our approach is heuristic-free and relies on a continuous set of actions to generate feasible footsteps. In contrast, other methods necessitate the selection of a relevant discrete set of actions. Second, we propose a forecasting method, allowing to quickly estimate the number of footsteps required to reach different candidates of local targets. This approach relies on inherent computations made by the actor-critic {DRL} architecture. We demonstrate the validity of our approach with simulation results, and by a deployment on a kid-size humanoid robot during the {RoboCup} 2023 competition.},
-  eventtitle = {2024 {IEEE}/{RSJ} International Conference on Intelligent Robots and Systems ({IROS})},
-  pages      = {13749--13756},
-  booktitle  = {2024 {IEEE}/{RSJ} International Conference on Intelligent Robots and Systems ({IROS})},
-  publisher  = {{IEEE}},
-  author     = {Gaspard, Clément and Passault, Grégoire and Daniel, Mélodie and Ly, Olivier},
-  urldate    = {2025-07-14},
-  date       = {2024-10-14},
-  langid     = {english},
-  file       = {2024 - FootstepNet an Efficient Actor-Critic Method for .pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2024 - FootstepNet an Efficient Actor-Critic Method for .pdf:application/pdf}
+@incollection{gaspard_footstepnet_2024,
+	author = {Gaspard, Cl{\ifmmode\acute{e}\else\'{e}\fi}ment and Passault, Gr{\ifmmode\acute{e}\else\'{e}\fi}goire and Daniel, M{\ifmmode\acute{e}\else\'{e}\fi}lodie and Ly, Olivier},
+	title = {{FootstepNet: an Efficient Actor-Critic Method for Fast On-line Bipedal Footstep Planning and Forecasting}},
+	booktitle = {{2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}},
+	journal = {Published in: 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+	pages = {14--18},
+	publisher = {IEEE},
+	doi = {10.1109/IROS58592.2024.10802320},
+	year = {2024}
 }
 
 @article{gao_global_2024,
-  title        = {Global footstep planning with greedy and heuristic optimization guided by velocity for biped robot},
-  volume       = {238},
-  rights       = {https://www.elsevier.com/tdm/userlicense/1.0/},
-  issn         = {0957-4174},
-  url          = {https://linkinghub.elsevier.com/retrieve/pii/S095741742302300X},
-  doi          = {10.1016/j.eswa.2023.121798},
-  abstract     = {In order to give full play to the unique movement capabilities of biped robots that are different from traditional mobile robots, and to improve the ability to adapt to the environment, planning an appropriate global footstep sequences is an important way. In this article, we proposed Greedy and Heuristic Quadratic Programming({GHQP}) based on the Quadratic Programming({QP}) method to achieve global footsteps for biped robots. Where {GH}-{QP} consists of greedy terms, heuristic terms and complementary terms. The heuristic term tries to minimize the number of steps in order to obtain the global optimal solution as quickly as possible. At the same time, we use the reference forward speed of the robot’s as the weight coefficient of the heuristic item to achieve the footsteps which is more in line with the walking trend. The greedy term minimizes the mutation caused by the heuristic term, making the footstep more inclined to the local optimum. The complementary term further enhances the greedy term to reduce the mutation between adjacent steps. We verify the effectiveness and high efficiency of our method through two sets of comparative tests. We experimentally validated our method on {BHR}-7P biped robot. The footstep sequences planned by our method adapts to the influence of velocity, and exerts the ability of the robot in the continuous planning process.},
-  pages        = {121798},
-  journaltitle = {Expert Systems with Applications},
-  author       = {Gao, Zhifa and Chen, Xuechao and Yu, Zhangguo and Li, Chao and Han, Lianqiang and Zhang, Runming},
-  urldate      = {2025-07-14},
-  date         = {2024-03},
-  langid       = {english},
-  note         = {Publisher: Elsevier {BV}},
-  file         = {2024 - Global footstep planning with greedy and heuristic optimization guided by velocity for biped robot.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2024 - Global footstep planning with greedy and heuristic optimization guided by velocity for biped robot.pdf:application/pdf}
+	author = {Gao, Zhifa and Chen, Xuechao and Yu, Zhangguo and Li, Chao and Han, Lianqiang and Zhang, Runming},
+	title = {{Global footstep planning with greedy and heuristic optimization guided by velocity for biped robot}},
+	journal = {Expert Syst. Appl.},
+	volume = {238},
+	pages = {121798},
+	year = {2024},
+	month = mar,
+	issn = {0957-4174},
+	publisher = {Pergamon},
+	doi = {10.1016/j.eswa.2023.121798}
 }
 
 @misc{asselmeier_hierarchical_2024,
@@ -559,25 +477,13 @@
 }
 
 @article{mittal_orbit_2023,
-  title        = {Orbit: A Unified Simulation Framework for Interactive Robot Learning Environments},
-  volume       = {8},
-  issn         = {2377-3766, 2377-3774},
-  url          = {http://arxiv.org/abs/2301.04195},
-  doi          = {10.1109/LRA.2023.3270034},
-  shorttitle   = {Orbit},
-  abstract     = {We present {ORBIT}, a unified and modular framework for robot learning powered by {NVIDIA} Isaac Sim. It offers a modular design to easily and efficiently create robotic environments with photo-realistic scenes and high-fidelity rigid and deformable body simulation. With {ORBIT}, we provide a suite of benchmark tasks of varying difficulty– from singlestage cabinet opening and cloth folding to multi-stage tasks such as room reorganization. To support working with diverse observations and action spaces, we include fixed-arm and mobile manipulators with different physically-based sensors and motion generators. {ORBIT} allows training reinforcement learning policies and collecting large demonstration datasets from hand-crafted or expert solutions in a matter of minutes by leveraging {GPU}-based parallelization. In summary, we offer an open-sourced framework that readily comes with 16 robotic platforms, 4 sensor modalities, 10 motion generators, more than 20 benchmark tasks, and wrappers to 4 learning libraries. With this framework, we aim to support various research areas, including representation learning, reinforcement learning, imitation learning, and task and motion planning. We hope it helps establish interdisciplinary collaborations in these communities, and its modularity makes it easily extensible for more tasks and applications in the future. For videos, documentation, and code: https://isaac-orbit.github.io/.},
-  pages        = {3740--3747},
-  number       = {6},
-  journaltitle = {{IEEE} Robotics and Automation Letters},
-  shortjournal = {{IEEE} Robot. Autom. Lett.},
-  author       = {Mittal, Mayank and Yu, Calvin and Yu, Qinxi and Liu, Jingzhou and Rudin, Nikita and Hoeller, David and Yuan, Jia Lin and Singh, Ritvik and Guo, Yunrong and Mazhar, Hammad and Mandlekar, Ajay and Babich, Buck and State, Gavriel and Hutter, Marco and Garg, Animesh},
-  urldate      = {2025-07-14},
-  date         = {2023-06},
-  langid       = {english},
-  eprinttype   = {arxiv},
-  eprint       = {2301.04195 [cs]},
-  keywords     = {Computer Science - Artificial Intelligence, Computer Science - Robotics},
-  file         = {2024 - ORBIT A Unified Simulation Framework for Interactive Robot Learning Environments.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2024 - ORBIT A Unified Simulation Framework for Interactive Robot Learning Environments.pdf:application/pdf}
+	author = {Mittal, Mayank and Yu, Calvin and Yu, Qinxi and Liu, Jingzhou and Rudin, Nikita and Hoeller, David and Yuan, Jia Lin and Singh, Ritvik and Guo, Yunrong and Mazhar, Hammad and Mandlekar, Ajay and Babich, Buck and State, Gavriel and Hutter, Marco and Garg, Animesh},
+	title = {{Orbit: A Unified Simulation Framework for Interactive Robot Learning Environments}},
+	journal = {arXiv},
+	year = {2023},
+	month = jan,
+	eprint = {2301.04195},
+	doi = {10.1109/LRA.2023.3270034}
 }
 
 @misc{asselmeier_steppability-informed_2024,
@@ -670,24 +576,17 @@
   file         = {2025 - Learning-based legged locomotion State of the art and future perspectives.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2025 - Learning-based legged locomotion State of the art and future perspectives.pdf:application/pdf}
 }
 
-@article{taouil_non-gaited_2025,
-  title        = {Non-Gaited Legged Locomotion With Monte-Carlo Tree Search and Supervised Learning},
-  volume       = {10},
-  rights       = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/{IEEE}.html},
-  issn         = {2377-3766, 2377-3774},
-  url          = {https://ieeexplore.ieee.org/document/10806593/},
-  doi          = {10.1109/lra.2024.3519908},
-  abstract     = {Legged robots are able to navigate complex terrains by continuously interacting with the environment through careful selection of contact sequences and timings. However, the combinatorial nature behind contact planning hinders the applicability of such optimization problems on hardware. In this work, we present a novel approach that optimizes gait sequences and respective timings for legged robots in the context of optimization-based controllers through the use of sampling-based methods and supervised learning techniques. We propose to bootstrap the search by learning an optimal value function in order to speed-up the gait planning procedure making it applicable in real-time. To validate our proposed method, we showcase its performance both in simulation and on hardware using a 22 kg electric quadruped robot. The method is assessed on different terrains, under external perturbations, and in comparison to a standard control approach where the gait sequence is ﬁxed a priori.},
-  pages        = {1265--1272},
-  number       = {2},
-  journaltitle = {{IEEE} Robotics and Automation Letters},
-  shortjournal = {{IEEE} Robot. Autom. Lett.},
-  author       = {Taouil, Ilyass and Amatucci, Lorenzo and Khadiv, Majid and Dai, Angela and Barasuol, Victor and Turrisi, Giulio and Semini, Claudio},
-  urldate      = {2025-07-14},
-  date         = {2025-02},
-  langid       = {english},
-  note         = {Publisher: Institute of Electrical and Electronics Engineers ({IEEE})},
-  file         = {2025 - Non-Gaited Legged Locomotion With Monte-Carlo Tree Search and Supervised Learning.pdf:C\:\\Users\\Owen\\OneDrive - Worcester Polytechnic Institute (wpi.edu)\\2025\\Thesis\\papers\\2025 - Non-Gaited Legged Locomotion With Monte-Carlo Tree Search and Supervised Learning.pdf:application/pdf}
+@article{taouil_non-gaited_2024,
+	author = {Taouil, Ilyass and Amatucci, Lorenzo and Khadiv, Majid and Dai, Angela and Barasuol, Victor and Turrisi, Giulio},
+	title = {{Non-Gaited Legged Locomotion With Monte-Carlo Tree Search and Supervised Learning}},
+	journal = {IEEE Rob. Autom. Lett.},
+	volume = {10},
+	number = {2},
+	pages = {1265--1272},
+	year = {2024},
+	month = dec,
+	publisher = {IEEE},
+	doi = {10.1109/LRA.2024.3519908}
 }
 
 @article{wang_walking_2025,
@@ -998,7 +897,26 @@
 	title = {{Footstep planning on uneven terrain with mixed-integer convex optimization}},
 	booktitle = {{2014 IEEE-RAS International Conference on Humanoid Robots}},
 	pages = {18--20},
+  year = {2014},
 	isbn = {978-1-4799-7174-9},
 	publisher = {IEEE},
 	doi = {10.1109/HUMANOIDS.2014.7041373}
+}
+
+@phdthesis{di_mini_cheetah_2020,
+	author = {Di Carlo, Jared(Jared J. )},
+	title = {{Software and control design for the MIT Cheetah quadruped robots}},
+	year = {2020},
+	school = {Massachusetts Institute of Technology},
+	url = {https://dspace.mit.edu/handle/1721.1/129877}
+}
+
+@misc{zhuang_rl_mpc_locomotion_2025,
+  author = {Yulun Zhuang},
+	title = {{rl-mpc-locomotion}},
+	journal = {GitHub},
+	year = {2025},
+	month = nov,
+	note = {[Online; accessed 17. Nov. 2025]},
+	url = {https://github.com/silvery107/rl-mpc-locomotion}
 }
