@@ -1,14 +1,20 @@
 \section{Optimization-Based Locomotion Strategies}
 \label{sec:background-optimization-based-locomotion-strategies}
 
-Optimization-based approaches explicitly plan footstep positions,
-contact sequences, and timing, offering fine-grained control over
-locomotion. Deits and Tedrake \cite{deits_footstep_2014} formulate
-footstep placement as a mixed-integer quadratic program over convex
-terrain regions, enabling robust bipedal foothold selection. However,
-their method does not optimize contact timing and is limited to
-sequential foot placement, restricting agility and generalization to
-more complex contact sequences.
+For the purpose of this thesis, we define traditional control
+approaches as those that rely on explicit optimization of footstep
+positions, contact sequences, and timing, often through mixed-integer
+programming or search-based methods. These approaches provide
+guarantees associated with control theory but often suffer from high
+computational costs and limited real-time applicability, especially
+for methods which attack the non-gaited footstep planning problem.
+
+Deits and Tedrake \cite{deits_footstep_2014} formulate footstep
+placement as a mixed-integer quadratic program over convex terrain
+regions, enabling robust bipedal foothold selection. However, their
+method does not optimize contact timing and is limited to sequential
+foot placement, restricting agility and generalization to more
+complex contact sequences.
 
 Extensions to this framework incorporate contact scheduling into the
 optimization itself. Winkler et al. \cite{winkler_gait_2018} fully
@@ -28,9 +34,14 @@ learned classifier to prune contact configurations and a “target
 adjustment network” to compensate for low-level control errors, but
 the approach is still computationally intensive.
 
-These optimization-based methods provide precise, globally consistent
+<<<<<<< Updated upstream:background/optimization-locomotion.tex These
+optimization-based methods provide precise, globally consistent
 locomotion plans, but high computational costs and limited real-time
 applicability restrict their use in dynamic, \hl{non-gaited}
 scenarios. This motivates approaches that combine optimization
 principles with learning-based or greedy strategies to achieve fast,
-terrain-adaptive footstep planning.
+terrain-adaptive footstep planning. ======= These methods provide
+precise, globally consistent locomotion plans, but high computational
+costs and limited real-time applicability restrict their use in
+dynamic, acyclic gait scenarios. >>>>>>> Stashed
+changes:background/traditional-control.tex
