@@ -42,7 +42,7 @@ distinguishes this formulation from that in
 \cite{bratta_contactnet_2024}. This modification was intended to
 improve the model's performance in situations with high rotational velocities.
 
-\hl{The} network is trained on heuristically computed footstep cost maps
+\hl{The network is trained on heuristically computed footstep cost maps}
   (\autoref{fig:data-contactnet-costmap}), which estimate the cost of
   moving each foot to candidate positions given the current robot
   state. These maps are represented as four $5 \times 5$ grids, one
@@ -187,9 +187,10 @@ predefined maximum number of iterations is reached. To ensure data
 quality, iterations in which more than 50\% of the robots fall are
 discarded, along with their two parent nodes in the tree. This
 approach promotes the collection of diverse, yet successful,
-training data. This implementation \hl{differs} in specific details from
-\cite{bratta_contactnet_2024}, while still remaining faithful
-to the overall methodology.
+training data. Collecting data as described in this section 
+captures the same information as the data collection plan
+described in \cite{bratta_contactnet_2024}, with the addition
+of a more broad range of commanded velocities.
 
 \autoref{fig:data-cn-training-distribution} illustrates the
 distribution of foot positions in the training dataset. Darker
@@ -283,9 +284,14 @@ for providing the upstream GaitNet model with maximal information.
 
 The primary purpose of the footstep evaluation network is to
 provide high-quality footstep candidates to the GaitNet model.
-\autoref{fig:diagram-costmap-processing} illustrates the processing pipeline.
+We found the $5\times 5$ grid overly restrictive masking invalid terrain. 
+Additionally, the $5\times 5$ grid 
+could only provide a very limited set of footstep candidates. To address
+both of these issues, we propose a post-processing pipeline to augment
+the output of the footstep evaluation network to provide more
+diverse footstep candidates for this application.
 
-\hl{The} raw cost map output from the footstep evaluation network
+The raw cost map output from the footstep evaluation network
 (\autoref{fig:diagram-costmap-processing-raw}) is first upsampled
 (\autoref{fig:diagram-costmap-processing-upsample}) to increase the
 resolution of possible footstep positions and to match the
