@@ -8,7 +8,9 @@ non-repetitive, dynamic gait in which the robot performs motions with
 up to two feet off the ground simultaneously. Swing durations are
 non-uniform, with some legs remaining in the swing phase longer than
 others. These results demonstrate that the system can synthesize a
-wide variety of actions, which are analyzed further below.
+wide variety of actions, which are analyzed further below. A video
+of GaitNet navigating challenging terrain can be seen 
+\href{https://youtu.be/vJ3QgSC8hrI}{here}.
 
 Examining \autoref{fig:data-swing-schedule}, a short step is observed
 for the front-left leg (green) at 3\,s, while the rear-right leg
@@ -38,12 +40,21 @@ trained three times. Due to computational limitations, the 700-step
 training curriculum needed to be split into multiple runs. The runs
 were typically 350 steps long. This has the side effect of resetting
 the distribution of terrain levels, which can cause discontinuities
-in certain training metrics.
+in certain training metrics. Resetting the simulations did not appear
+to have an adverse affect on the learning process.
 
 The mean episode reward during training is shown in
 \autoref{fig:data-training-mean-reward}. Each training instance shows a
 similar trend, with the reward increasing as the model learns to
 navigate the terrain.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/mean_reward_survival-curr.png}
+    \caption{Mean episode reward during GaitNet training. Each color
+    represents a different training instance.}
+    \label{fig:data-training-mean-reward}
+\end{figure}
 
 Another important metric is the mean steps per second. Initially,
 with limited training, the model moves its legs very frequently,
@@ -53,25 +64,16 @@ this issue does not resolve well without guidance from the reward function.
 on this issue, but the results are shown in
 \autoref{fig:data-training-steps-per-second}. The mean steps per second
 starts high and decreases as the model learns to take more stable steps.
-
+There was no specific target for an ideal steps per second, but the change
+during training shows that the model is correctly learning when and when
+not to step.
+  
 \begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/mean_reward_survival-curr.png}
-    \caption{Mean episode reward during GaitNet training. Each color
-    represents a different training instance.}
-    \label{fig:data-training-mean-reward}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/steps_per_second_survival-curr.png}
+    \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/steps_per_second_survival-curr.png}
     \caption{Mean steps per second during GaitNet training. Each color
     represents a different training instance.}
     \label{fig:data-training-steps-per-second}
-  \end{minipage}
-  \hfill
 \end{figure}
 
 During training, the GaitNet model learns to adjust swing durations
@@ -81,35 +83,34 @@ The mean swing duration settles to \resGaitNetMeanSwingDuration with
 a standard deviation of \resGaitNetSTDSwingDuration, indicating that
 the model uses a wide range of its allowable swing durations. These
 figures highlight how the model learns to effectively utilize dynamic
-swing durations to adapt to varying conditions.
+swing durations to adapt to varying conditions. Again, there was no
+specific target value for either of these metrics. They were chosen 
+to verify that GaitNet is capable of learning to utilize it's swing
+duration output.
 
 \begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_mean_survival-curr.png}
+    \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/duration_mean_survival-curr.png}
     \caption{Mean swing duration across all environments during
     GaitNet training. Each color represents a different training instance.}
     \label{fig:data-duration-mean}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.45\textwidth}
+\end{figure}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/data/training/gaitnet/duration_std_survival-curr.png}
+    \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/duration_std_survival-curr.png}
     \caption{Swing duration standard deviation across all
       environments during GaitNet training. Each color represents a
     different training instance.}
     \label{fig:data-duration-std}
-  \end{minipage}
-  \hfill
 \end{figure}
 
-A histogram of swing durations selected by GaitNet is shown in
-\autoref{fig:data-swing-duration-histogram}. This data was collected
-in the experiments described in
-\autoref{sec:results-baseline-comparison}. The distribution shows
-that GaitNet effectively optimizes the swing duration from the
-nominal value of 0.2\,s.
+We can see from the figures above that GaitNet is learning to use its swing
+duration output, but \autoref{fig:data-swing-duration-histogram} shows exactly
+what has been learned more clearly. For this histogram all swing durations from a GaitNet
+test described in \autoref{sec:results-baseline-comparison} were recorded. We can see a large peak between 0.225\,s and 0.25\,s, this indicates that the system uses swing durations in that range for normal motion. We also see a significant amount of swings all the way down to 0.125\,s.
+These seem to correspond to more situational motions, moving across tricky terrain, or
+attempting to recovery from a fall.
 
 \begin{figure}[H]
   \centering
@@ -117,3 +118,6 @@ nominal value of 0.2\,s.
   \caption{Histogram of swing durations selected by GaitNet.}
   \label{fig:data-swing-duration-histogram}
 \end{figure}
+
+
+\hl{It is not clear what parameters or specifications you are originally looking for and why. You present mean swing duration, mean reward, etc., but what are your metrics and how and why did you pick those metrics? What is the ideal scenario? Explain these in detail early in this subsection (4.2)}

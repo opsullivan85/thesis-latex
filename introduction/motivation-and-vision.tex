@@ -20,16 +20,16 @@ The generation of such contact plans in real time remains a
 formidable challenge. It requires the system to perceive its
 surroundings, anticipate the outcomes of possible actions, and select
 feasible contact points within tight temporal constraints.
-\hl{Existing methods} often trade off between deliberative,
-computationally intensive planning and fast, reactive control that
-lacks stability or generalization.
+Existing methods often fall into one of three categories, fully using
+traditional control\textemdash model predictive controllers, PD 
+controllers, optimization\textemdash using neural networks, or a
+mix of the two: hybrid methods. These three methods offer different 
+trade offs between deliberative, computationally intensive planning 
+and fast, reactive control that lacks stability or generalization.
 
-% discuss hybrid approaches before this. Unclear that hybrid %
-% approaches exist at this point. seems like I'm about to invent them
-
-\hl{The vision of this research is to develop a control architecture that
-bridges this divide}. Specifically, this work aims to design a system
-capable of producing non-gaited, dynamic footstep plans that retain
+The vision of this research is to develop a hybrid control 
+architecture that optimizes these trade offs. Specifically, this work aims 
+to design a system capable of producing non-gaited, dynamic footstep plans that retain
 both the responsiveness of learning-based approaches and the
 reliability of model-based control. The objective is to provide
 quadruped robots with the decision-making agility necessary for

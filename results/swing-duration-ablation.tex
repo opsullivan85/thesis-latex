@@ -5,7 +5,7 @@ In this section we present an ablation study to assess the impact of
 dynamic swing duration on GaitNet's performance. We compare two
 models: the standard GaitNet formulation as described in
 \autoref{sec:methodology-gaitnet}, and a Duration-Ablated-GaitNet trained
-with a fixed swing duration.
+with a fixed swing duration. \hl{was the swing duration relaxed/unconstrained in the standard GaitNet? Mention it here.}
 
 \begin{todo}
   tie back to the swing duration histogram
@@ -20,7 +20,7 @@ using the same metrics outlined in
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.45\textwidth]{images/data/experiments/Gaitnet
+  \includegraphics[width=\smallplotsize]{images/data/experiments/Gaitnet
   - swing-duration - 67.2 - individual.png}
   \caption{Evaluation of Duration-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
@@ -55,7 +55,7 @@ comparably to the standard GaitNet, despite the lack of dynamic swing duration.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.45\textwidth]{images/data/training/gaitnet/mean_reward_survival-curr_vs_swing-duration.png}
+  \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/mean_reward_survival-curr_vs_swing-duration.png}
   \caption{Mean episode reward during training for GaitNet and
   Duration-Ablated-GaitNet.}
   \label{fig:data-duration-ablation-reward}
@@ -67,4 +67,4 @@ However, it is important to note that this conclusion may not hold in
 more complex or dynamic environments, where the ability to adjust
 swing duration could provide a significant advantage. Future work
 should explore the impact of dynamic swing duration in a wider range
-of environments and conditions
+of environments and conditions. \hl{What other conclusions can you make from this? Why is GaitNet not reacting to this seemingly important factor?}
