@@ -4,8 +4,9 @@
 In this section we present an ablation study to assess the impact of
 the footstep candidate cost on GaitNet's performance. We compare two
 models: the standard GaitNet formulation as described in
-\autoref{sec:methodology-gaitnet}, and a Cost-Ablated-GaitNet trained \hl{with the
-the footstep candidate ($f_c$) zeroed out in the input.} 
+\autoref{sec:methodology-gaitnet}, and a Cost-Ablated-GaitNet trained
+\hl{with the
+the footstep candidate ($f_c$) zeroed out in the input.}
 
 During training, the GaitNet model quickly learns to correlate the
 lower cost candidates with higher value logits. After this initial
@@ -21,7 +22,7 @@ be locked into a local minimum where it relies too heavily on this feature.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\smallplotsize]{images/data/training/gaitnet/logit_cost_correlation_survival-curr.png}
+  \includegraphics[width=\smallplotsize{}]{images/data/training/gaitnet/logit_cost_correlation_survival-curr.png}
   \caption{Correlation between negative footstep candidate cost and
     GaitNet output logits during training. Negative costs are used so
     that a costmap which perfectly captures optimal footstep locations
@@ -38,14 +39,14 @@ the same metrics outlined in
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\smallplotsize]{images/data/experiments/Gaitnet
+  \includegraphics[width=\smallplotsize{}]{images/data/experiments/Gaitnet
   - footstep-cost - 77.7 - individual.png}
   \caption{Evaluation of Cost-Ablated-GaitNet
     across various terrain difficulties and commanded velocities.
-    Overall survival rate of \resCostAblatedSurvivalRate. Mean
+    Overall survival rate of \resCostAblatedSurvivalRate{}. Mean
     success rate measured as the percentage of
-    \expBenchmarkEpisodes episodes which completed
-    \expBenchmarkDuration     without terminating, under the
+    \expBenchmarkEpisodes{} episodes which completed
+    \expBenchmarkDuration{}     without terminating, under the
     termination conditions described in
   \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-action-cost-ablation-comparison}
@@ -55,10 +56,10 @@ the same metrics outlined in
 performance of the Cost-Ablated-GaitNet. The results indicates a
 measurable performance over the standard GaitNet formulation. GaitNet
 was able to achieve an overall survival rate of
-\resGaitNetSurvivalRate
+\resGaitNetSurvivalRate{}
 (\autoref{fig:data-experiments-survival-curr}), while the
 Cost-Ablated-GaitNet achieved a survival rate of
-\resCostAblatedSurvivalRate
+\resCostAblatedSurvivalRate{}
 (\autoref{fig:data-action-cost-ablation-comparison}). This suggests
 that including the footstep candidate cost is detrimental to the
 training process.

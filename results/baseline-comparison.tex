@@ -20,12 +20,12 @@ with characteristics matching the sub-terrains used in training
 (\autoref{sec:methodology-simulation-environment}). The space of
 terrain difficulties and commanded forward velocities is
 systematically explored with a grid search, evaluating the success
-rate of each method over \expBenchmarkEpisodes trials of
-\expBenchmarkDuration each. An episode is considered successful if
-the robot is able to complete the full \expBenchmarkDuration without
-terminating according to the conditions described in
+rate of each method over \expBenchmarkEpisodes{} trials of
+\expBenchmarkDuration{} each. An episode is considered successful if
+the robot is able to complete the full \expBenchmarkDuration{}
+without terminating according to the conditions described in
 \autoref{sec:appendix-termination-functions}. Briefly, these
-conditions amount to terminating if the robot falls over or has its 
+conditions amount to terminating if the robot falls over or has its
 foot slip into the holes in the ground.
 
 \begin{figure}[H]
@@ -48,7 +48,10 @@ baseline in most scenarios, particularly on more challenging terrains
 and at higher commanded speeds. This demonstrates the effectiveness
 of GaitNet in generating robust gaits capable of adapting to varying conditions.
 
-\hl{You should explain what success and failure mean and how they are measured here. You kind of mention it but you need to elaborate and clarify. Also, you need to clarify what you mean by increasing the "Terrain Difficulty". }
+\hl{You should explain what success and failure mean and how they are
+  measured here. You kind of mention it but you need to elaborate and
+  clarify. Also, you need to clarify what you mean by increasing the
+"Terrain Difficulty". }
 
 A closer examination of the graphs reveals that GaitNet maintains
 strong performance when the commanded velocity is below 0.15\,m/s or
@@ -59,29 +62,29 @@ GaitNet's superior performance in these scenarios underscores the
 benefits of its dynamic, acyclic gait generation capabilities.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\smallplotsize]{images/data/experiments/Gaitnet
-    - survival-curr - 69.4 - individual.png}
-    \caption{GaitNet Evaluation. Overall survival rate of
-      \resGaitNetSurvivalRate.
-      Mean success rate measured as the percentage of
-      \expBenchmarkEpisodes trials       which completed
-      \expBenchmarkDuration without terminating, under the
-      termination conditions described in
-      \autoref{sec:appendix-termination-functions}.   Data point shapes
-    denote different training instances.}
-    \label{fig:data-experiments-survival-curr}
+  \centering
+  \includegraphics[width=\smallplotsize{}]{images/data/experiments/Gaitnet
+  - survival-curr - 69.4 - individual.png}
+  \caption{GaitNet Evaluation. Overall survival rate of
+    \resGaitNetSurvivalRate{}.
+    Mean success rate measured as the percentage of
+    \expBenchmarkEpisodes{} trials       which completed
+    \expBenchmarkDuration{} without terminating, under the
+    termination conditions described in
+    \autoref{sec:appendix-termination-functions}.   Data point shapes
+  denote different training instances.}
+  \label{fig:data-experiments-survival-curr}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\smallplotsize]{images/data/experiments/Contactnet
-    - baseline-method - 25.6 - individual.png}
-    \caption{Single Leg Motion Planner Evaluation. Overall survival
-      rate of \resBaselineSurvivalRate. Mean success rate measured as
-      the percentage of \expBenchmarkEpisodes trials which completed
-      \expBenchmarkDuration without terminating, under the
-      termination conditions described in
-    \autoref{sec:appendix-termination-functions}.}
-    \label{fig:data-experiments-baseline-method}
+  \centering
+  \includegraphics[width=\smallplotsize{}]{images/data/experiments/Contactnet
+  - baseline-method - 25.6 - individual.png}
+  \caption{Single Leg Motion Planner Evaluation. Overall survival
+    rate of \resBaselineSurvivalRate{}. Mean success rate measured as
+    the percentage of \expBenchmarkEpisodes{} trials which completed
+    \expBenchmarkDuration{} without terminating, under the
+    termination conditions described in
+  \autoref{sec:appendix-termination-functions}.}
+  \label{fig:data-experiments-baseline-method}
 \end{figure}
