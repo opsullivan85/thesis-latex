@@ -11,7 +11,8 @@ excluding the noise post-processing step
 one candidate in the selection step
 (\autoref{fig:diagram-costmap-processing-topk}). The lowest cost
 candidate is then used as the footstep target for that leg, with a
-200ms swing duration.
+200ms swing duration. A video of this planner can be seen 
+\href{https://youtu.be/ZxixFLJDpjs}{here}.
 
 In order to benchmark the two methods, a custom test environment is
 created (\autoref{fig:figure-test-environment}). This environment has
@@ -95,12 +96,12 @@ pronounced at higher commanded velocities and terrain difficulties,
 where the baseline's single leg motion strategy fails.
 
 A closer examination of the graphs reveals that GaitNet maintains
-strong performance when the commanded velocity is below 0.15\,m/s or
-terrain difficulty is under 5\%. In contrast, ContactNet's
+strong performance when the commanded velocity is below 0.15\,m/s. 
+In contrast, the baseline's 
 performance begins to degrade for commanded velocities above
 0.05\,m/s and deteriorates further as terrain difficulty increases.
 The performance gap narrows only in the easiest conditions (at
-0.05~m/s velocity), suggesting that dynamic gait planning becomes
+0.05\,m/s velocity), suggesting that dynamic gait planning becomes
 increasingly valuable as task complexity increases. GaitNet's
 superior performance in these scenarios underscores the benefits of
 its dynamic, acyclic gait generation capabilities.
