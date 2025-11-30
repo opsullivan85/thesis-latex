@@ -68,7 +68,12 @@ for footstep and motion planning, yet its coarse terrain input and
 biped focus limit dynamic adaptability. Other approaches separate the
 planning concerns: DeepGait \cite{tsounis_deepgait_2020} separates
 footstep planning from motion optimization, enabling modularity but
-relying on static gaits.
+relying on static gaits. RLOC \cite{gangapurwala_rloc_2022} uses
+a convolutional encoder to pass terrain data embeddings to multiple
+RL modules before generating joint torques with a traditional whole
+body controller. One of these RL modules is a footstep planner,
+but the system uses a fixed gait schedule and the footstep planner
+is only evaluated once at the beginning of each cycle.
 
 A key challenge is moving beyond fixed gaits while maintaining
 stability. ContactNet \cite{bratta_contactnet_2024} uses a CNN to

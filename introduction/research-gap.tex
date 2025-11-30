@@ -9,8 +9,9 @@ Traditional approaches typically rely on model predictive control
 (MPC) frameworks for motion optimization, supported by lower-level
 controllers to track desired trajectories
 \cite{Kim2019highly-dynamic}. Many aspects of quadruped
-locomotion—such as joint torques and ground reaction forces—are
-smooth and well-suited to continuous optimization techniques
+locomotion\textemdash such as joint torques and ground reaction
+forces\textemdash are smooth and well-suited to continuous
+optimization techniques
 \cite{Wensing2022Nov}. However, these methods become less tractable
 when discrete contact states are introduced into the optimization
 problem \cite{Geisert2019contact-planning}. To manage this
@@ -34,18 +35,17 @@ flexibility, such methods generally lack formal guarantees of
 stability, require substantial training data, and often struggle to
 generalize beyond their training distribution \cite{Gurram2024survey}.
 
-% this needs to be earlier
-\hl{Hybrid approaches, which integrate learning-based modules within
-  model-based control frameworks, have recently gained attention as a
-potential middle ground}. In these systems, neural networks are
-typically employed to solve specific subproblems—such as dynamically
-switching between fixed gaits or greedily selecting individual
-footholds—while the overall motion execution remains governed by a
-traditional controller \cite{Bao2024survey, Wang2022Oct}. This
-division of responsibilities enables learning to focus on the
-non-smooth or combinatorial components of locomotion, while
-preserving the interpretability, safety, and robustness inherent to
-model-based systems.
+Hybrid approaches, which integrate learning-based modules within
+model-based control frameworks, have recently gained attention as a
+potential middle ground. In these systems, neural networks are
+typically employed to solve specific subproblems\textemdash such as
+dynamically switching between fixed gaits or greedily selecting
+individual footholds\textemdash while the overall motion execution
+remains governed by a traditional controller \cite{Bao2024survey,
+Wang2022Oct}. This division of responsibilities enables learning to
+focus on the non-smooth or combinatorial components of locomotion,
+while preserving the interpretability, safety, and robustness
+inherent to model-based systems.
 
 Looking at how each of these categories handles the contact planning
 problem, hybrid control schemes have demonstrated promise, the
@@ -59,7 +59,7 @@ lee_learning_2020, villarreal_fast_2019}, constraining adaptability
 to irregular or unpredictable terrain. Even more advanced approaches,
 such as Monte Carlo Tree Search (MCTS)-based planners, have achieved
 impressive dynamic behaviors but remain computationally demanding
-\cite{amatucci_monte_2022, taouil_non-gaited_2025}. Finally, end to end
+\cite{amatucci_monte_2022, taouil_non-gaited_2024}. Finally, end to end
 learning methods solve these problems implicitly, but at the cost of
 control theory guarantees and interpretability.
 
@@ -72,9 +72,9 @@ approaches while retaining the formal guarantees and reliability of
 traditional control frameworks \cite{Meng2023Mar, Wensing2022Nov}.
 Recent work, such as ContactNet \cite{bratta_contactnet_2024}, has
 demonstrated the potential of machine learning for footstep planning;
-however, its design—restricted to single-leg motions with fixed
-timing—still falls short of the \hl{dynamic, non-gaited behaviors}
-exhibited by end-to-end learning systems. \hl{keywords?}
+however, its design\textemdash restricted to single-leg motions with
+fixed timing\textemdash still falls short of the dynamic, non-gaited
+behaviors exhibited by end-to-end learning systems.
 
 This motivates a central research question:
 
@@ -82,5 +82,5 @@ This motivates a central research question:
   Can a hybrid control pipeline, which integrates a greedy,
   neural-network-based planner with a traditional model-based
   controller, generate dynamic, acyclic gaits for robust quadruped
-  locomotion in challenging environments? \hl{what is not done yet?}
+  locomotion in challenging environments?
 \end{emphasis}

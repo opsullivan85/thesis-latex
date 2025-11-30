@@ -11,7 +11,8 @@ excluding the noise post-processing step
 one candidate in the selection step
 (\autoref{fig:diagram-costmap-processing-topk}). The lowest cost
 candidate is then used as the footstep target for that leg, with a
-200ms swing duration.
+200ms swing duration. A video of this planner can be seen 
+\href{https://youtu.be/ZxixFLJDpjs}{here}.
 
 In order to benchmark the two methods, a custom test environment is
 created (\autoref{fig:figure-test-environment}). This environment has
@@ -20,11 +21,24 @@ with characteristics matching the sub-terrains used in training
 (\autoref{sec:methodology-simulation-environment}). The space of
 terrain difficulties and commanded forward velocities is
 systematically explored with a grid search, evaluating the success
-rate of each method over \expBenchmarkEpisodes trials of
-\expBenchmarkDuration each. An episode is considered successful if
-the robot is able to complete the full \expBenchmarkDuration without
-terminating according to the conditions described in
-\autoref{sec:appendix-termination-functions}.
+rate of each method over \expBenchmarkEpisodes{} trials of
+\expBenchmarkDuration{} each. The terrain difficulty
+is a value between 0\% and 100\% represents the percent of terrain
+which can be stepped on. A checkerboard pattern (with alternating
+holes and valid terrain) would have a terrain difficulty of 50\%,
+though in these tests the terrain is randomly distributed, so a
+checkerboard pattern is unlikely. The chosen range of terrain
+difficulties \{0.0\%, 0.05\%, 0.1\%, \dots, 0.4\%\} and command
+velocities \{0.05\,m/s, 0.1\,m/s, 0.15\,m/s, 0.2\,m/s\} were chosen
+to represent a wide variety of situations while not straying too far
+from what any method is capable of.
+
+An episode is considered successful if the robot is able to complete
+the full \expBenchmarkDuration{} without terminating according to the
+conditions described in
+\autoref{sec:appendix-termination-functions}. Briefly, these
+conditions amount to terminating if the robot falls over or has its
+foot slip into the holes in the ground.
 
 \begin{figure}[H]
   \centering
@@ -40,48 +54,54 @@ terminating according to the conditions described in
 \autoref{fig:data-experiments-survival-curr} and
 \autoref{fig:data-experiments-baseline-method}
 illustrate the performance of GaitNet and the baseline method,
-respectively, across a range of terrain difficulties and commanded
-velocities. The results indicate that GaitNet outperforms the
-baseline in most scenarios, particularly on more challenging terrains
-and at higher commanded speeds. This demonstrates the effectiveness
-of GaitNet in generating robust gaits capable of adapting to varying conditions.
-
-A closer examination of the graphs reveals that GaitNet maintains
-strong performance when the commanded velocity is below 0.15\,m/s or
-terrain difficulty is under 5\%. In contrast, ContactNet's
-performance begins to degrade for commanded velocities above
-0.05\,m/s and deteriorates further as terrain difficulty increases.
-GaitNet's superior performance in these scenarios underscores the
-benefits of its dynamic, acyclic gait generation capabilities.
+respectively, across a range of terrain difficulties and commanded velocities.
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/data/experiments/Gaitnet
-    - survival-curr - 69.4 - individual.png}
-    \caption{GaitNet Evaluation. Overall survival rate of
-      \resGaitNetSurvivalRate.
-      Mean success rate measured as the percentage of
-      \expBenchmarkEpisodes trials       which completed
-      \expBenchmarkDuration without terminating, under the
-      termination conditions described in
-      \autoref{sec:appendix-termination-functions}.   Data point shapes
-    denote different training instances.}
-    \label{fig:data-experiments-survival-curr}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/data/experiments/Contactnet
-    - baseline-method - 25.6 - individual.png}
-    \caption{Single Leg Motion Planner Evaluation. Overall survival
-      rate of \resGaitNetSurvivalRate. Mean success rate measured as
-      the percentage of \expBenchmarkEpisodes trials which completed
-      \expBenchmarkDuration without terminating, under the
-      termination conditions described in
-    \autoref{sec:appendix-termination-functions}.}
-    \label{fig:data-experiments-baseline-method}
-  \end{minipage}
-  \hfill
+  \includegraphics[width=\smallplotsize{}]{images/data/experiments/Gaitnet
+  - survival-curr - 69.4 - individual.png}
+  \caption{GaitNet Evaluation. Overall survival rate of
+    \resGaitNetSurvivalRate{}.
+    Mean success rate measured as the percentage of
+    \expBenchmarkEpisodes{} trials which completed
+    \expBenchmarkDuration{} without terminating, under the
+    termination conditions described in
+    \autoref{sec:appendix-termination-functions}. Data point shapes
+  denote different training instances.}
+  \label{fig:data-experiments-survival-curr}
 \end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\smallplotsize{}]{images/data/experiments/Contactnet
+  - baseline-method - 25.6 - individual.png}
+  \caption{Single Leg Motion Planner Evaluation. Overall survival
+    rate of \resBaselineSurvivalRate{}. Mean success rate measured as
+    the percentage of \expBenchmarkEpisodes{} trials which completed
+    \expBenchmarkDuration{} without terminating, under the
+    termination conditions described in
+  \autoref{sec:appendix-termination-functions}.}
+  \label{fig:data-experiments-baseline-method}
+\end{figure}
+
+\subsection{Discussion}
+
+GaitNet's performance relative to the single leg motion planner
+baseline reveals the clear advantage of dynamic gait generation. The
+\resGaitNetSurvivalRate{} survival rate achieved by GaitNet, compared
+to \resBaselineSurvivalRate{} for the baseline, demonstrates that the
+system's ability to coordinate multi-leg motions and adapt timing
+significantly improves robustness. This improvement is particularly
+pronounced at higher commanded velocities and terrain difficulties,
+where the baseline's single leg motion strategy fails.
+
+A closer examination of the graphs reveals that GaitNet maintains
+strong performance when the commanded velocity is below 0.15\,m/s. 
+In contrast, the baseline's 
+performance begins to degrade for commanded velocities above
+0.05\,m/s and deteriorates further as terrain difficulty increases.
+The performance gap narrows only in the easiest conditions (at
+0.05\,m/s velocity), suggesting that dynamic gait planning becomes
+increasingly valuable as task complexity increases. GaitNet's
+superior performance in these scenarios underscores the benefits of
+its dynamic, acyclic gait generation capabilities.
