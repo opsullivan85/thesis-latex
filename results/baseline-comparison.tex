@@ -21,7 +21,11 @@ with characteristics matching the sub-terrains used in training
 terrain difficulties and commanded forward velocities is
 systematically explored with a grid search, evaluating the success
 rate of each method over \expBenchmarkEpisodes{} trials of
-\expBenchmarkDuration{} each. An episode is considered successful if
+\expBenchmarkDuration{} each. The terrain difficulty
+is a value between 0\% and 100\% represents the percent of 
+terrain which can be stepped on. A checkerboard pattern (with alternating holes and valid terrain) would have a terrain difficulty of 50\%, though in these tests the terrain is randomly distributed, so a checkerboard pattern is unlikely. The chosen range of terrain difficulties \{0.0\%, 0.05\%, 0.1\%, \dots, 0.4\%\} and command velocities \{0.05\,m/s, 0.1\,m/s, 0.15\,m/s, 0.2\,m/s\} were chosen to represent a wide variety of situations while not straying too far from what any method is capable of.
+
+An episode is considered successful if
 the robot is able to complete the full \expBenchmarkDuration{}
 without terminating according to the conditions described in
 \autoref{sec:appendix-termination-functions}. Briefly, these
@@ -47,11 +51,6 @@ velocities. The results indicate that GaitNet outperforms the
 baseline in most scenarios, particularly on more challenging terrains
 and at higher commanded speeds. This demonstrates the effectiveness
 of GaitNet in generating robust gaits capable of adapting to varying conditions.
-
-\hl{You should explain what success and failure mean and how they are
-  measured here. You kind of mention it but you need to elaborate and
-  clarify. Also, you need to clarify what you mean by increasing the
-"Terrain Difficulty". }
 
 A closer examination of the graphs reveals that GaitNet maintains
 strong performance when the commanded velocity is below 0.15\,m/s or

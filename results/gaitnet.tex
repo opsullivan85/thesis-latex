@@ -85,8 +85,9 @@ indicating that the model uses a wide range of its allowable swing
 durations. These figures highlight how the model learns to
 effectively utilize dynamic swing durations to adapt to varying
 conditions. Again, there was no specific target value for either of
-these metrics. They were chosen to verify that GaitNet is capable of
-learning to utilize it's swing duration output.
+these metrics. They are presented only to verify that GaitNet is capable of
+learning to utilize its swing duration output, which we can see by the graphs
+trending in the same directions across different training instances.
 
 \begin{figure}[H]
   \centering
@@ -114,7 +115,7 @@ from a GaitNet test described in
 large peak between 0.225\,s and 0.25\,s, this indicates that the
 system uses swing durations in that range for normal motion. We also
 see a significant amount of swings all the way down to 0.125\,s.
-These seem to correspond to more situational motions, moving across
+These correspond to more situational motions, moving across
 tricky terrain, or attempting to recovery from a fall.
 
 \begin{figure}[H]
@@ -123,9 +124,3 @@ tricky terrain, or attempting to recovery from a fall.
   \caption{Histogram of swing durations selected by GaitNet.}
   \label{fig:data-swing-duration-histogram}
 \end{figure}
-
-\hl{It is not clear what parameters or specifications you are
-  originally looking for and why. You present mean swing duration, mean
-  reward, etc., but what are your metrics and how and why did you pick
-  those metrics? What is the ideal scenario? Explain these in detail
-early in this subsection (4.2)}
