@@ -5,13 +5,14 @@ In this section we present an ablation study to assess the impact of
 the footstep candidate cost on GaitNet's performance. We compare two
 models: the standard GaitNet formulation as described in
 \autoref{sec:methodology-gaitnet}, and a Cost-Ablated-GaitNet trained with the
-the footstep candidate ($\mathbf f_c$) zeroed out in the input. In the 
-GaitNet formulation described previously, we pass the estimated heuristic
-cost of a footstep action into the model ($\mathbf f_c^\prime$ in \autoref{fig:diagram-gaitnet-architecture}), that is, the expected cost of taking the action
-if it were the only motion the robot was performing. For this ablation study
-we replace that value with a zero during the training and evaluation process
-to see how it affects the network without changing the shape of the network
-at all.
+the footstep candidate ($\mathbf f_c$) zeroed out in the input. In
+the GaitNet formulation described previously, we pass the estimated
+heuristic cost of a footstep action into the model ($\mathbf
+f_c^\prime$ in \autoref{fig:diagram-gaitnet-architecture}), that is,
+the expected cost of taking the action if it were the only motion the
+robot was performing. For this ablation study we replace that value
+with a zero during the training and evaluation process to see how it
+affects the network without changing the shape of the network at all.
 
 During training, the GaitNet model quickly learns to correlate the
 lower cost candidates with higher value logits. After this initial
@@ -51,7 +52,7 @@ the same metrics outlined in
     Overall survival rate of \resCostAblatedSurvivalRate{}. Mean
     success rate measured as the percentage of
     \expBenchmarkEpisodes{} episodes which completed
-    \expBenchmarkDuration{}     without terminating, under the
+    \expBenchmarkDuration{} without terminating, under the
     termination conditions described in
   \autoref{sec:appendix-termination-functions}.}
   \label{fig:data-action-cost-ablation-comparison}
@@ -65,9 +66,7 @@ was able to achieve an overall survival rate of
 (\autoref{fig:data-experiments-survival-curr}), while the
 Cost-Ablated-GaitNet achieved a survival rate of
 \resCostAblatedSurvivalRate{}
-(\autoref{fig:data-action-cost-ablation-comparison}). This suggests
-that including the footstep candidate cost is detrimental to the
-training process.
+(\autoref{fig:data-action-cost-ablation-comparison}).
 
 Looking at the mean episode reward in
 \autoref{fig:data-action-cost-ablation-reward}, we see a similar
@@ -75,11 +74,7 @@ trend. The Cost-Ablated-GaitNet achieves a higher mean episode reward
 during training compared to the standard GaitNet. This does come at
 the cost of initially slower learning, where the Cost-Ablated-GaitNet
 trails the performance of the standard GaitNet for the first
-\ $\sim$75 iterations. Intuitively this makes sense, as the footstep
-cost term included in the standard GaitNet model provides information
-about the robot dynamics, learned from the Footstep Evaluation
-Network. Without this information, the Cost-Ablated-GaitNet must
-learn the robot dynamics from scratch, leading to slower initial learning.
+\ $\sim$75 iterations.
 
 \begin{figure}[H]
   \centering
@@ -91,12 +86,7 @@ learn the robot dynamics from scratch, leading to slower initial learning.
 
 Interestingly, the Cost-Ablated-GaitNet also demonstrates a slower
 cadence during training, as shown in
-\autoref{fig:data-action-cost-ablation-steps-per-second}. With the
-Cost-Ablated-GaitNet naturally taking fewer steps, it is likely that
-a more optimal reward function could be designed. As is described in
-\autoref{sec:appendix-reward-function-analysis}, the current reward
-is designed to avoid un-necessary footsteps, which could be further
-limiting the performance of this Cost-Ablated-GaitNet model.
+\autoref{fig:data-action-cost-ablation-steps-per-second}.
 
 \begin{figure}[H]
   \centering
@@ -121,8 +111,35 @@ steps\textemdash when the same foot is moved multiple times in succession.
   \label{fig:data-action-cost-ablation-swing-duration}
 \end{figure}
 
-These findings suggest that the footstep candidate cost is hindering
-GaitNet's ability to learn an optimal gait policy. By relying on this
-cost term, GaitNet may be constrained in its exploration of the
-action space, leading to suboptimal performance. Removing this term
-allows for more freedom to explore and learn effective gait policies.
+\subsection{Discussion}
+
+The action cost ablation study provides perhaps the most significant
+insight. Counterintuitively, removing the footstep candidate cost
+from GaitNet's input improves performance from \resGaitNetSurvivalRate{} to
+\resCostAblatedSurvivalRate{} survival rate. This result challenges the initial
+assumption that providing the learned heuristic costs would
+accelerate training and improve final performance. Several factors
+likely contribute to this outcome. The correlation analysis
+(\autoref{fig:data-action-cost-correlation}) shows that while GaitNet
+initially relies heavily on the cost term (correlation near 0.8),
+this dependence decreases during training, suggesting the network
+learns to prioritize other state features. The inclusion of the cost
+term may constrain exploration, biasing the network toward locally
+optimal solutions that align with the footstep evaluation network's
+heuristics but prevent discovery of globally better strategies.
+
+Intuitively this makes sense, as the footstep cost term included in
+the standard GaitNet model provides information about the robot
+dynamics, learned from the Footstep Evaluation Network. Without this
+information, the Cost-Ablated-GaitNet must learn the robot dynamics
+from scratch, leading to slower initial learning. However, as noted,
+this allows for more freedom to explore. Moreover,
+Cost-Ablated-GaitNet exhibits a naturally slower cadence
+(\autoref{fig:data-action-cost-ablation-steps-per-second}) and fewer
+redundant footsteps
+(\autoref{fig:data-action-cost-ablation-swing-duration}), indicating
+more deliberate and efficient gait patterns. This behavior emerges
+without different reward shaping, suggesting that the model better
+captures the underlying dynamics when not constrained by pre-computed
+costs. The slower initial learning observed in Cost-Ablated-GaitNet
+represents a worthwhile trade-off for superior final performance.

@@ -49,15 +49,14 @@ generator, providing sufficient diversity for downstream selection.
 GaitNet learns to modulate swing durations based on environmental
 conditions, with mean swing duration of
 \resGaitNetMeanSwingDuration{} and standard deviation of
-\resGaitNetSTDSwingDuration{} during evaluation. The system selects
-longer swing durations on more challenging terrain
-(\autoref{fig:data-swing-duration-histogram-easy-vs-hard}),
-indicating a more cautious gait strategy when stability is at greater
-risk. However, the swing duration ablation study reveals that this
-feature provides only marginal performance benefits (2.2\% difference
-in survival rate) in the tested environments, suggesting either that
-the current scenarios do not fully exploit this capability or that
-the reward structure does not adequately incentivize optimal duration selection.
+\resGaitNetSTDSwingDuration{} during evaluation. The system generally
+selects swing durations between 0.225\,s and 0.25\,s, but
+occasionally selects shorter swing durations when needed. However,
+the swing duration ablation study reveals that this feature provides
+only marginal performance benefits (2.2\% difference in survival
+rate) in the tested environments, suggesting either that the current
+scenarios do not fully exploit this capability or that the reward
+structure does not adequately incentivize optimal duration selection.
 
 Perhaps the most surprising finding emerges from the action cost
 ablation study, which demonstrates that removing the footstep

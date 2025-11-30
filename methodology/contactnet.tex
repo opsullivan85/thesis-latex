@@ -3,23 +3,25 @@
 
 The purpose of the footstep evaluation network is to generate
 footstep candidates for the GaitNet model. These footstep candidates
-allow the remainder of the system to work in a discrete space, only choosing
-from a set of these footstep candidates instead of optimizing over the whole
-space. Because of this, the precise
-output of this network is not critical; rather, it is essential that
-the network provides high-quality candidates when sampled. It
-achieves this by estimating the cost associated with potential
-footsteps given the current robot state. The network's architecture
-and training process are largely based on ContactNet
+allow the remainder of the system to work in a discrete space, only
+choosing from a set of these footstep candidates instead of
+optimizing over the whole space. Because of this, the precise output
+of this network is not critical; rather, it is essential that the
+network provides high-quality candidates when sampled. It achieves
+this by estimating the cost associated with potential footsteps given
+the current robot state. The network's architecture and training
+process are largely based on ContactNet
 \cite{bratta_contactnet_2024}, with several key modifications
 described in the following section.
 
-The primary reason for the differences between this Footstep Evaluation Network
-and ContactNet \cite{bratta_contactnet_2024} is because of their slightly different
-use cases. ContactNet was designed to provide a single action at each evaluation,
-whereas the Footstep Evaluation Network needs to provide multiple feasible candidate
-actions to be narrowed down later. Despite this different use case, ContactNet still
-provides much of the guidance for this implementation.
+The primary reason for the differences between this Footstep
+Evaluation Network and ContactNet \cite{bratta_contactnet_2024} is
+because of their slightly different use cases. ContactNet was
+designed to provide a single action at each evaluation, whereas the
+Footstep Evaluation Network needs to provide multiple feasible
+candidate actions to be narrowed down later. Despite this different
+use case, ContactNet still provides much of the guidance for this
+implementation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architecture}
@@ -53,16 +55,17 @@ distinguishes this formulation from that in
 improve the model's performance in situations with high rotational velocities.
 
 A set of footstep candidates is referred to as a footstep cost map
-(\autoref{fig:data-contactnet-costmap}), which stores
-the expected cost of different actions the robot could take with
-its feet. These maps are represented as four $5 \times 5$ grids, one for
-each leg. This choice differs from the implementation in
+(\autoref{fig:data-contactnet-costmap}), which stores the expected
+cost of different actions the robot could take with its feet. These
+maps are represented as four $5 \times 5$ grids, one for each leg.
+This choice differs from the implementation in
 \cite{bratta_contactnet_2024}, a larger grid size was selected to provide
 more information for each foot, which is important later when
 sampling footstep candidates. Ground truth footstep cost maps are
-generated as described in \autoref{subsec:methodology-contactnet-training},
-then the network is trained to replicate the ground truths. After this
-the network is able to quickly generate a footstep cost map based on $\mathbf x_c$.
+generated as described in
+\autoref{subsec:methodology-contactnet-training}, then the network is
+trained to replicate the ground truths. After this the network is
+able to quickly generate a footstep cost map based on $\mathbf x_c$.
 
 \begin{figure}[H]
   \centering
@@ -87,9 +90,10 @@ the convolutional layer was used. These modifications were found to
 provide better results for the $5 \times 5$ output grid.
 
 To produce the four footstep candidate maps, this network is
-replicated four times—once per leg—with weights not shared between
-legs. This design allows the network to learn leg-specific behaviors,
-accommodating potential asymmetries in the robot's dynamics.
+replicated four times\textemdash once per leg\textemdash with weights
+not shared between legs. This design allows the network to learn
+leg-specific behaviors, accommodating potential asymmetries in the
+robot's dynamics.
 
 \begin{figure}[H]
   \centering
