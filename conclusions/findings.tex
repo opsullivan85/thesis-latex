@@ -31,10 +31,10 @@ commanded velocities, compared to \resBaselineSurvivalRate{} for the
 baseline method (\autoref{fig:data-experiments-survival-curr}
 and~\autoref{fig:data-experiments-baseline-method}). This improvement
 is particularly pronounced at higher speeds and on more challenging
-terrain, demonstrating the value of dynamic gait coordination. The
-baseline method's performance degrades rapidly above
-\expLowestSpeed{} commanded velocity, while GaitNet maintains robust
-performance up to 0.15\,m/s.
+terrain, demonstrating the value of dynamic gait coordination. 
+% The baseline method's performance degrades rapidly above
+% \expLowestSpeed{} commanded velocity, while GaitNet maintains robust
+% performance up to 0.15\,m/s.
 
 The footstep evaluation network, adapted from ContactNet
 \cite{bratta_contactnet_2024}, successfully generates high-quality
@@ -53,8 +53,8 @@ conditions, with mean swing duration of
 selects swing durations between 0.225\,s and 0.25\,s, but
 occasionally selects shorter swing durations when needed. However,
 the swing duration ablation study reveals that this feature provides
-only marginal performance benefits (2.2\% difference in survival
-rate) in the tested environments, suggesting either that the current
+negligible performance benefits in the tested environments, suggesting 
+either that the current
 scenarios do not fully exploit this capability or that the reward
 structure does not adequately incentivize optimal duration selection.
 
