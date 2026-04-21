@@ -1,129 +1,48 @@
-\documentclass[12pt]{report}
-% Set page size and margins % Replace `letterpaper' with `a4paper' %
-% % % % % % % % % % % % % for UK/EU standard size
-\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
-\usepackage{amsmath}
+\documentclass[10pt]{article}
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage{setspace}   %Allows double spacing with the \doublespacing command
 \usepackage{float}
-\usepackage{gensymb}   % gives \degree symbol
 \usepackage{multirow}
-\usepackage{pdfpages}
 \usepackage{caption}
-\usepackage{courier}
 \usepackage{subcaption}
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{soul}
-\usepackage{ulem}
-% \usepackage{minted} % Code formatting
-\usepackage{etoolbox}
-\usepackage{comment}
-\usepackage[most]{tcolorbox}
-\usepackage{import}
-\usepackage{amssymb}
-% \usepackage{refcheck} % uncomment and check log for "Unused label"
-% % % \usepackage[inline]{showlabels} % shows labels for easier referencing
-\usepackage{changepage} % provides adjustwidth
-\usepackage{tikz}
-\usetikzlibrary{positioning}
-\usepackage{adjustbox}
-\usepackage{tablefootnote}
-
+\usepackage{tcolorbox}
+\usepackage{booktabs}
 \usepackage{subfiles}
-\usepackage{titlesec}
-\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{1em}{}
-
-\newcommand\blfootnote[1]{%
-  \begingroup
-  \renewcommand\thefootnote{}\footnote{#1}%
-  \addtocounter{footnote}{-1}%
-  \endgroup
-}
-
-\newtoggle{outline_toggle}
-\toggletrue{outline_toggle}  % Enable
-\togglefalse{outline_toggle}  % Disable
-
-\newtoggle{todo_toggle}
-\toggletrue{todo_toggle}  % Enable
-\togglefalse{todo_toggle} % Disable
-
-\newtcolorbox{emphasis}{
-  colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=4pt, left=4pt,
-right=4pt, top=4pt, bottom=4pt }
-
-\newtcolorbox{todo_box}{
-  colback=yellow!20, colframe=yellow!70, boxrule=0.5pt, arc=4pt,
-left=4pt, right=4pt, top=4pt, bottom=4pt }
-
-\iftoggle{todo_toggle}{
-  \newlength{\todoshift}%
-  \setlength{\todoshift}{2cm} % change this to control how far into
-  % the margin it sticks
-  \newenvironment{todo}
-  {%
-    \begin{adjustwidth}{-\todoshift}{0pt}%
-      \begin{todo_box}\noindent\textbf{TODO:}\quad
-      } {%
-      \end{todo_box}
-    \end{adjustwidth}\par
-} }{
-  \excludecomment{todo}
-}
-
-\iftoggle{outline_toggle}{
-  \newenvironment{outline}
-  {
-  \begin{emphasis}\noindent\textbf{Outline:}}
-    {
-  \end{emphasis}\par}
-}{
-  \excludecomment{outline}
-}
+\usepackage{import}
+\usepackage{adjustbox}
 
 \definecolor{captionblue}{rgb}{0.0, 0.0, 0.3}
-\captionsetup{
-  font={small,color=captionblue},
-  labelfont={small,color=captionblue}
-}
+\captionsetup{font={small,color=captionblue},labelfont={small,color=captionblue}}
 
 \begin{document}
 
-\input{constants.tex}
+\title{Continuous Footstep Optimization for Quadruped Robots via Projected Gradient Ascent}
+\author{Your Name}
+\date{}
+\maketitle
 
-\include{header/header}
+\begin{abstract}
+Quadruped locomotion in unstructured environments remains a significant challenge. This paper proposes a novel method for generating non-gaited, dynamic footstep plans using GaitNet, which evaluates and selects the most appropriate actions. By directly exploring the output space through projected gradient ascent, GaitNet optimizes spatial footstep coordinates over its own reward surface. We formulate the problem with 4 parallel tracks and 4 steps of projected gradient ascent per foot. Our system is evaluated on a physical Unitree Go1 robot navigating complex terrain, demonstrating improvements over state-of-the-art model predictive control baselines.
+\end{abstract}
 
-\newpage
-% \begin{doublespacing}
-\pagenumbering{arabic}
-\setcounter{page}{1}
+\input{introduction/corl_introduction}
 
-\newpage
-\subfile{introduction/introduction}
+\section{Methodology}
+\label{sec:methodology}
+\input{methodology/corl_methodology}
 
-\newpage
-\subfile{background/background}
+\section{Experimental Results}
+\label{sec:results}
+\input{results/corl_results}
 
-\newpage
-\subfile{methodology/methodology}
+\section{Conclusion}
+\label{sec:conclusion}
+\input{conclusions/corl_conclusions}
 
-\newpage
-\subfile{results/results}
-
-\newpage
-\subfile{conclusions/conclusions}
-
-% \end{doublespacing}
-
-\addcontentsline{toc}{chapter}{References}
-\renewcommand{\bibname}{References}
 \bibliographystyle{ieeetr}
 \bibliography{refs}
-
-\newpage
-\subfile{appendices/appendices}
 
 \end{document}
