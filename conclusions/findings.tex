@@ -26,15 +26,16 @@ repetitive cycles.
 
 Comparative evaluation against a physical Legged Perceptive Stack baseline
 reveals substantial performance improvements. GaitNet achieves a higher
-survival rate across diverse unstructured hardware terrain difficulties. This improvement
+survival rate across diverse unstructured hardware terrain
+difficulties. This improvement
 is particularly pronounced at higher speeds and on more challenging
-terrain, demonstrating the value of continuous output space optimization 
-and dynamic gait coordination. 
+terrain, demonstrating the value of continuous output space optimization
+and dynamic gait coordination.
 
 The projected gradient ascent formulation over the output space
-successfully generates high-quality footstep candidates without relying 
-on discrete sampling grids. The system demonstrates strong generalization 
-across diverse robot states, accurately converging onto optimal foothold regions 
+successfully generates high-quality footstep candidates without relying
+on discrete sampling grids. The system demonstrates strong generalization
+across diverse robot states, accurately converging onto optimal foothold regions
 even in challenging configurations.
 
 GaitNet learns to modulate swing durations based on environmental
@@ -44,7 +45,7 @@ conditions, with mean swing duration of
 selects swing durations between 0.225\,s and 0.25\,s, but
 occasionally selects shorter swing durations when needed. However,
 the swing duration ablation study reveals that this feature provides
-negligible performance benefits in the tested environments, suggesting 
+negligible performance benefits in the tested environments, suggesting
 either that the current
 scenarios do not fully exploit this capability or that the reward
 structure does not adequately incentivize optimal duration selection.

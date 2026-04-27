@@ -123,12 +123,21 @@ behaviors exhibited by end-to-end learning systems.
 This motivates a central research question:
 
 \begin{quote}
-\textbf{Can a hybrid control pipeline, which integrates a greedy,
-  neural-network-based planner with a traditional model-based
-  controller, generate dynamic, acyclic gaits for robust quadruped
+  \textbf{Can a hybrid control pipeline, which integrates a greedy,
+    neural-network-based planner with a traditional model-based
+    controller, generate dynamic, acyclic gaits for robust quadruped
   locomotion in challenging environments?}
 \end{quote}
 \section{Approach}
 \label{sec:introduction-approach}
 
-The proposed approach bypasses traditional discrete sampling or candidate generation networks entirely. Instead, a novel single-network architecture, \textit{GaitNet}, is used to evaluate and select the most appropriate action at each time step. By directly exploring the output space through projected gradient ascent, GaitNet optimizes spatial footstep coordinates directly over its own reward surface. By integrating this continuous optimization planner within a traditional model-based control framework, we harness the advantages of rapid learning-based evaluation and robust model-based stabilization, yielding an adaptable quadruped locomotion system.
+The proposed approach bypasses traditional discrete sampling or
+candidate generation networks entirely. Instead, a novel
+single-network architecture, \textit{GaitNet}, is used to evaluate
+and select the most appropriate action at each time step. By directly
+exploring the output space through projected gradient ascent, GaitNet
+optimizes spatial footstep coordinates directly over its own reward
+surface. By integrating this continuous optimization planner within a
+traditional model-based control framework, we harness the advantages
+of rapid learning-based evaluation and robust model-based
+stabilization, yielding an adaptable quadruped locomotion system.
