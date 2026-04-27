@@ -1,0 +1,48 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{subfiles}
+\usepackage{import}
+\usepackage{adjustbox}
+
+\definecolor{captionblue}{rgb}{0.0, 0.0, 0.3}
+\captionsetup{font={small,color=captionblue},labelfont={small,color=captionblue}}
+
+\begin{document}
+
+\title{Continuous Footstep Optimization for Quadruped Robots via Projected Gradient Ascent}
+\author{Your Name}
+\date{}
+\maketitle
+
+\begin{abstract}
+Quadruped locomotion in unstructured environments remains a significant challenge. This paper proposes a novel method for generating non-gaited, dynamic footstep plans using GaitNet, which evaluates and selects the most appropriate actions. By directly exploring the output space through projected gradient ascent, GaitNet optimizes spatial footstep coordinates over its own reward surface. We formulate the problem with 4 parallel tracks and 4 steps of projected gradient ascent per foot. Our system is evaluated on a physical Unitree Go1 robot navigating complex terrain, demonstrating improvements over state-of-the-art model predictive control baselines.
+\end{abstract}
+
+\input{corl/introduction}
+
+\section{Methodology}
+\label{sec:methodology}
+\input{corl/methodology}
+
+\section{Experimental Results}
+\label{sec:results}
+\input{corl/results}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{corl/conclusions}
+
+\bibliographystyle{ieeetr}
+\bibliography{refs}
+
+\end{document}
